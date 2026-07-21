@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050607">
+<title>The Studio — Super Duper Techno</title>
+<meta name="description" content="The crew behind Super Duper Techno — origin, values, and how to reach us.">
+<link rel="stylesheet" href="css/base.css">
+<style>
+  header.hero{min-height:44vh;display:flex;flex-direction:column;justify-content:center;padding:140px 0 40px;}
+  .hero h1{font-size:clamp(34px,6vw,58px);max-width:780px;}
+  .hero p.tagline{font-size:15.5px;max-width:580px;margin-top:16px;color:var(--dim);}
+
+  .val-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(min-width:700px){.val-grid{grid-template-columns:repeat(2,1fr);}}
+  .val-card{background:var(--void);padding:24px;}
+  .val-card h4{font-size:15.5px;margin-bottom:8px;}
+  .val-card p{font-size:12.5px;}
+
+  .team-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(min-width:640px){.team-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(min-width:980px){.team-grid{grid-template-columns:repeat(4,1fr);}}
+  .team-card{background:var(--void);padding:26px;text-align:center;cursor:pointer;}
+  .team-card .avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:18px;color:var(--void);margin:0 auto 14px;font-family:'IBM Plex Mono';}
+  .team-card h4{font-size:14px;margin-bottom:4px;}
+  .team-card .role{font-family:'IBM Plex Mono';font-size:10px;color:var(--dim-2);margin-bottom:10px;}
+  .team-card .fun{font-family:'IBM Plex Mono';font-size:12px;color:var(--cool);opacity:0;max-height:0;overflow:hidden;transition:.25s;}
+  .team-card.flipped .fun{opacity:1;max-height:60px;margin-top:6px;}
+  .team-card .hint{font-family:'IBM Plex Mono';font-size:9px;color:var(--dim-2);margin-top:10px;opacity:0.6;}
+
+  .contact-block{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(min-width:760px){.contact-block{grid-template-columns:1.2fr 1fr;}}
+  .contact-copy{background:var(--void);padding:36px;}
+  .contact-links{background:var(--void);padding:36px;}
+  .contact-links a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:14.5px;transition:.2s;}
+  .contact-links a:last-child{border-bottom:none;}
+  .contact-links a:hover{color:var(--hot);}
+
+  /* ============ ARCADE (merged) ============ */
+  .game-wrap{max-width:840px;margin:0 auto;}
+  .game-shell{position:relative;border:1px solid var(--line-strong);border-radius:var(--radius);overflow:hidden;background:#020304;}
+  .game-hud{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;
+    font-family:'IBM Plex Mono';font-size:12px;border-bottom:1px solid var(--line);text-transform:uppercase;letter-spacing:0.04em;
+    background:rgba(13,16,18,0.9);position:relative;z-index:3;}
+  .game-hud .hp-bar{display:flex;gap:4px;}
+  .game-hud .hp-bar span{width:16px;height:8px;background:var(--hot);border-radius:1px;}
+  .game-hud .hp-bar span.lost{background:var(--line);}
+  #gameCanvas{display:block;width:100%;height:min(480px, 68vh);min-height:320px;touch-action:none;cursor:none;}
+  .game-overlay{position:absolute;inset:0;top:45px;background:rgba(2,3,4,0.94);display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:16px;text-align:center;padding:30px;z-index:5;}
+  .game-overlay h3{font-size:24px;}
+  .game-overlay p{font-size:13.5px;max-width:340px;}
+  .kbd-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px;}
+  .kbd{font-family:'IBM Plex Mono';font-size:10.5px;border:1px solid var(--line-strong);border-radius:4px;padding:5px 10px;color:var(--dim);}
+  .controls-note{text-align:center;margin-top:22px;font-family:'IBM Plex Mono';font-size:11.5px;color:var(--dim-2);}
+
+  .goodluck{text-align:center;padding:40px 0 10px;font-family:'IBM Plex Mono';font-size:11px;color:var(--dim-2);letter-spacing:0.04em;}
+</style>
+</head>
+<body data-theme="studio">
+
+<main>
+<header class="hero">
+  <div class="wrap">
+    <span class="freq-num reveal in">FROM THE CHANNEL TO THE STUDIO</span>
+    <h1 class="reveal in">The people actually doing this.</h1>
+    <p class="tagline reveal in">Small crew, wide scope. Founder-led, independent, and still figuring plenty of it out in real time.</p>
+  </div>
+</header>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="freq-num">THE ORIGIN, IN FULL</span>
+      <h2>From talking about worlds to building them.</h2>
+      <p class="lede">Super Duper Techno started as a YouTube channel in 2016 — gaming and superhero commentary, a place to talk about other people's worlds. That turned into a drive to build one of its own: not a copy, not a formula, something that actually felt like SDT's. It grew into a studio spanning games, software, hardware, media, and original storytelling — eight divisions, one signal. Every product still runs on the principle it started with: creativity and fun over standard edition.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="freq-num" style="color:var(--volt);">WHAT ACTUALLY GUIDES THE WORK</span>
+      <h2>Core values.</h2>
+    </div>
+    <div class="val-grid">
+      <div class="val-card reveal"><h4>Creativity first</h4><p>Every idea starts from imagination, not imitation. If it's been done before, SDT looks for the angle that hasn't.</p></div>
+      <div class="val-card reveal"><h4>Fun-driven</h4><p>Fun is the design brief, not an afterthought. If a project stops being fun to build, it's not being built right.</p></div>
+      <div class="val-card reveal"><h4>Original by default</h4><p>Own characters, own universe, own tech. Nothing here is a copy — everything is made to stand on its own.</p></div>
+      <div class="val-card reveal"><h4>Unashamedly bold</h4><p>A shared universe, an in-house engine, original hardware — treated as the plan, not as "too ambitious."</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="freq-num" style="color:var(--cool);">CORE TEAM</span>
+      <h2>The four people actually doing this.</h2>
+      <p class="lede">Small crew, wide scope. Click a card.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal" data-fun="Also plays every build before anyone else does.">
+        <div class="avatar" style="background:var(--volt);">HG</div><h4>Hardhip G</h4><div class="role">Founder &amp; CEO</div>
+        <div class="fun"></div><div class="hint">tap for a fun fact</div>
+      </div>
+      <div class="team-card reveal" data-fun="Keeps the whole build from falling over.">
+        <div class="avatar" style="background:var(--cool);">NS</div><h4>Niranjan Shri P V</h4><div class="role">Core Team</div>
+        <div class="fun"></div><div class="hint">tap for a fun fact</div>
+      </div>
+      <div class="team-card reveal" data-fun="Somehow always mid-refactor.">
+        <div class="avatar" style="background:var(--hot);">RV</div><h4>Roshan Vikram A V</h4><div class="role">Core Team</div>
+        <div class="fun"></div><div class="hint">tap for a fun fact</div>
+      </div>
+      <div class="team-card reveal" data-fun="Has opinions about every pixel, and is usually right.">
+        <div class="avatar" style="background:var(--deep);">AA</div><h4>Akthas Ahmed S</h4><div class="role">Core Team</div>
+        <div class="fun"></div><div class="hint">tap for a fun fact</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="arcade">
+  <div class="wrap">
+    <div class="head reveal" style="margin:0 auto 36px;text-align:center;">
+      <span class="freq-num" style="color:var(--hot);">TAKE A BREAK</span>
+      <h2>Signal Defense.</h2>
+      <p class="lede" style="margin-left:auto;margin-right:auto;">GDA interference drones are jamming the tower frequency. Move, aim, and shoot them down before the signal drops. Green blips are allies — don't fire on friendlies.</p>
+    </div>
+    <div class="game-wrap">
+      <div class="game-shell reveal">
+        <div class="game-hud">
+          <span>SCORE: <span id="gScore">0</span></span>
+          <span>WAVE: <span id="gWave">1</span></span>
+          <div class="hp-bar" id="hpBar"></div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+
+        <div class="game-overlay" id="gStart">
+          <h3>Tune the defense grid.</h3>
+          <p>Move with WASD or arrow keys. Aim with your mouse. Click or press space to fire. Survive as many waves as you can.</p>
+          <div class="kbd-row">
+            <span class="kbd">W A S D — move</span>
+            <span class="kbd">MOUSE — aim</span>
+            <span class="kbd">CLICK / SPACE — fire</span>
+          </div>
+          <button class="btn pri" id="gStartBtn" style="margin-top:8px;">Start</button>
+        </div>
+
+        <div class="game-overlay" id="gOver" style="display:none;">
+          <h3 id="gRank">Signal Lost</h3>
+          <p id="gFinal">Final score: 0</p>
+          <button class="btn pri" id="gRetryBtn">Try again</button>
+        </div>
+      </div>
+      <p class="controls-note reveal">Also playable with touch — drag to move, tap to fire.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="freq-num" style="color:var(--hot);">SEND A SIGNAL</span>
+      <h2>Got a project in mind?</h2>
+      <p class="lede">We'd genuinely love to hear it — client work, collaboration, or just questions about anything above.</p>
+    </div>
+    <div class="contact-block reveal">
+      <div class="contact-copy">
+        <p style="font-size:14.5px;">Whether it's outside development work through SDN, a question about any of the games, or something else entirely — reach out directly. It's a small team, so you'll hear from an actual person.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:superdupertechno@gmail.com">superdupertechno@gmail.com</a>
+        <a href="tel:+919345842711">+91 93458 42711</a>
+        <a href="https://www.youtube.com/@SuperDuperTechno-sdgamer" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://instagram.com/super.duper.techno" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://x.com/Superduper26319" target="_blank" rel="noopener">X</a>
+        <a href="https://linkedin.com/company/super-duper-techno" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="goodluck reveal">// that's everything on this page. good luck finding the easter eggs.</p>
+</main>
+
+<script src="js/shared.js"></script>
+<script>
+  document.querySelectorAll('.team-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      const flipped = card.classList.toggle('flipped');
+      const fun = card.querySelector('.fun');
+      fun.textContent = flipped ? card.dataset.fun : '';
+    });
+  });
+
+  /* ============ SIGNAL DEFENSE (merged arcade game) ============ */
+  (function(){
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('gScore');
+    const waveEl = document.getElementById('gWave');
+    const hpBar = document.getElementById('hpBar');
+    const startOv = document.getElementById('gStart');
+    const overOv = document.getElementById('gOver');
+    const rankEl = document.getElementById('gRank');
+    const finalEl = document.getElementById('gFinal');
+
+    let W, H, dpr;
+    function size(){
+      dpr = Math.min(window.devicePixelRatio||1, 2);
+      W = canvas.clientWidth; H = canvas.clientHeight;
+      canvas.width = W*dpr; canvas.height = H*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    window.addEventListener('resize', size);
+
+    const MAX_HP = 5;
+    let state = 'idle';
+    let score = 0, wave = 1, hp = MAX_HP;
+    let player, bullets, enemyBullets, enemies, particles, keys, mouse, waveTimer, spawnQueue, t;
+
+    function resetHpBar(){
+      hpBar.innerHTML = '';
+      for(let i=0;i<MAX_HP;i++) hpBar.appendChild(document.createElement('span'));
+      updateHpBar();
+    }
+    function updateHpBar(){
+      [...hpBar.children].forEach((s,i)=> s.classList.toggle('lost', i >= hp));
+    }
+
+    function reset(){
+      size();
+      player = { x: W/2, y: H-56, r: 13, speed: 3.6, cooldown: 0 };
+      bullets = []; enemyBullets = []; enemies = []; particles = [];
+      keys = {}; mouse = { x: W/2, y: H/2, down:false };
+      score = 0; wave = 1; hp = MAX_HP; t = 0;
+      scoreEl.textContent = '0'; waveEl.textContent = '1';
+      resetHpBar();
+      queueWave();
+    }
+
+    function queueWave(){
+      const count = 4 + wave * 2;
+      spawnQueue = [];
+      for(let i=0;i<count;i++){
+        const isAlly = Math.random() < 0.16;
+        spawnQueue.push({ delay: i * (46 - Math.min(wave*2, 26)), isAlly, hp: isAlly ? 1 : (1 + Math.floor(wave/3)) });
+      }
+      waveTimer = 0;
+    }
+
+    function spawnEnemy(cfg){
+      enemies.push({
+        x: 40 + Math.random()*(W-80), y: -30,
+        vx: (Math.random()-0.5)*0.6, vy: 0.55 + Math.random()*0.35 + wave*0.05,
+        r: cfg.isAlly ? 14 : 16, isAlly: cfg.isAlly, hp: cfg.hp, maxHp: cfg.hp,
+        shootCd: 60 + Math.random()*80, phase: Math.random()*Math.PI*2,
+      });
+    }
+
+    function popParticles(x,y,color,n){
+      for(let i=0;i<n;i++){
+        const a = Math.random()*Math.PI*2, sp = 1+Math.random()*3;
+        particles.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:24+Math.random()*14,color});
+      }
+    }
+
+    function shoot(){
+      const dx = mouse.x - player.x, dy = mouse.y - player.y;
+      const d = Math.hypot(dx,dy) || 1;
+      bullets.push({ x: player.x, y: player.y, vx: dx/d*8, vy: dy/d*8, r:3.5 });
+      if(window.SFX) SFX.shoot();
+    }
+
+    function update(){
+      t++;
+      let mx=0,my=0;
+      if(keys['w']||keys['arrowup']) my -= 1;
+      if(keys['s']||keys['arrowdown']) my += 1;
+      if(keys['a']||keys['arrowleft']) mx -= 1;
+      if(keys['d']||keys['arrowright']) mx += 1;
+      const mlen = Math.hypot(mx,my) || 1;
+      player.x += (mx/mlen)*player.speed;
+      player.y += (my/mlen)*player.speed;
+      player.x = Math.max(16, Math.min(W-16, player.x));
+      player.y = Math.max(H*0.45, Math.min(H-20, player.y));
+
+      if(player.cooldown>0) player.cooldown--;
+      if((mouse.down || keys[' ']) && player.cooldown<=0){ shoot(); player.cooldown = 8; }
+
+      if(spawnQueue.length){
+        waveTimer++;
+        while(spawnQueue.length && spawnQueue[0].delay <= waveTimer) spawnEnemy(spawnQueue.shift());
+      } else if(enemies.length===0 && state==='playing'){
+        wave++; waveEl.textContent = wave; queueWave();
+      }
+
+      bullets.forEach(b=>{ b.x+=b.vx; b.y+=b.vy; });
+      bullets = bullets.filter(b=> b.x>-10 && b.x<W+10 && b.y>-10 && b.y<H+10);
+      enemyBullets.forEach(b=>{ b.x+=b.vx; b.y+=b.vy; });
+      enemyBullets = enemyBullets.filter(b=> b.x>-10 && b.x<W+10 && b.y>-10 && b.y<H+10);
+
+      enemies.forEach(e=>{
+        e.phase += 0.05;
+        e.x += e.vx + Math.sin(e.phase)*0.4;
+        e.y += e.vy;
+        e.x = Math.max(20, Math.min(W-20, e.x));
+        if(!e.isAlly){
+          e.shootCd--;
+          if(e.shootCd<=0 && e.y>0 && e.y<H*0.75){
+            const dx=player.x-e.x, dy=player.y-e.y, d=Math.hypot(dx,dy)||1;
+            enemyBullets.push({x:e.x,y:e.y,vx:dx/d*3.4,vy:dy/d*3.4,r:3});
+            e.shootCd = 90 + Math.random()*70 - wave*3;
+          }
+        }
+      });
+      enemies = enemies.filter(e=>{
+        if(e.y > H+30){
+          if(!e.isAlly){ hp--; updateHpBar(); popParticles(e.x, H-20, '#ff3348', 10); if(window.SFX) SFX.hit(); if(hp<=0) endGame(); }
+          return false;
+        }
+        return true;
+      });
+
+      for(let i=enemies.length-1;i>=0;i--){
+        const e = enemies[i];
+        for(let j=bullets.length-1;j>=0;j--){
+          const b = bullets[j];
+          if(Math.hypot(b.x-e.x,b.y-e.y) < e.r+b.r){
+            bullets.splice(j,1);
+            if(e.isAlly){
+              score = Math.max(0, score-30);
+              popParticles(e.x,e.y,'#3fe08a',14);
+              enemies.splice(i,1);
+              if(window.SFX) SFX.hit();
+            } else {
+              e.hp--;
+              popParticles(b.x,b.y,'#ffc233',5);
+              if(e.hp<=0){
+                score += 10 * wave;
+                popParticles(e.x,e.y,'#ff3348',16);
+                enemies.splice(i,1);
+                if(window.SFX) SFX.explode();
+              }
+            }
+            scoreEl.textContent = score;
+            break;
+          }
+        }
+      }
+
+      for(let j=enemyBullets.length-1;j>=0;j--){
+        const b = enemyBullets[j];
+        if(Math.hypot(b.x-player.x,b.y-player.y) < player.r+b.r){
+          enemyBullets.splice(j,1);
+          hp--; updateHpBar();
+          popParticles(player.x,player.y,'#ff3348',14);
+          if(window.SFX) SFX.hit();
+          if(hp<=0) endGame();
+        }
+      }
+
+      particles.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vx*=0.94; p.vy*=0.94; p.life--; });
+      particles = particles.filter(p=>p.life>0);
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      ctx.strokeStyle = 'rgba(238,241,238,0.04)';
+      ctx.lineWidth = 1;
+      for(let x=0;x<W;x+=40){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+      for(let y=0;y<H;y+=40){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+      particles.forEach(p=>{
+        ctx.globalAlpha = Math.max(p.life/30,0);
+        ctx.fillStyle = p.color;
+        ctx.beginPath(); ctx.arc(p.x,p.y,2.2,0,Math.PI*2); ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+
+      ctx.fillStyle = '#ff3348';
+      enemyBullets.forEach(b=>{ ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fill(); });
+
+      ctx.fillStyle = '#ffc233';
+      bullets.forEach(b=>{ ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fill(); });
+
+      enemies.forEach(e=>{
+        ctx.save();
+        ctx.translate(e.x,e.y);
+        if(e.isAlly){
+          ctx.strokeStyle = '#3fe08a'; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.arc(0,0,e.r,0,Math.PI*2); ctx.stroke();
+          ctx.fillStyle = 'rgba(63,224,138,0.15)'; ctx.fill();
+          ctx.fillStyle = '#3fe08a'; ctx.font = '14px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+          ctx.fillText('◆', 0, 1);
+        } else {
+          const pulse = 1 + Math.sin(t*0.2+e.phase)*0.06;
+          ctx.rotate(t*0.03);
+          ctx.strokeStyle = '#ff3348'; ctx.lineWidth = 2;
+          ctx.beginPath();
+          for(let i=0;i<6;i++){
+            const a = (i/6)*Math.PI*2;
+            const rr = e.r*pulse;
+            const px = Math.cos(a)*rr, py = Math.sin(a)*rr;
+            i===0? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+          }
+          ctx.closePath(); ctx.stroke();
+          ctx.fillStyle = 'rgba(255,51,72,0.15)'; ctx.fill();
+          if(e.maxHp>1){
+            ctx.fillStyle = '#ff3348'; ctx.font='10px monospace'; ctx.textAlign='center'; ctx.textBaseline='middle';
+            ctx.rotate(-t*0.03);
+            ctx.fillText(e.hp, 0, 0);
+          }
+        }
+        ctx.restore();
+      });
+
+      const ang = Math.atan2(mouse.y-player.y, mouse.x-player.x);
+      ctx.save();
+      ctx.translate(player.x, player.y);
+      ctx.rotate(ang);
+      ctx.fillStyle = '#eef1ee';
+      ctx.beginPath();
+      ctx.moveTo(16,0); ctx.lineTo(-10,9); ctx.lineTo(-5,0); ctx.lineTo(-10,-9);
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = '#2ea8ff'; ctx.lineWidth=1.5; ctx.stroke();
+      ctx.restore();
+
+      ctx.strokeStyle = 'rgba(46,168,255,0.6)'; ctx.lineWidth=1.3;
+      ctx.beginPath(); ctx.arc(mouse.x,mouse.y,9,0,Math.PI*2); ctx.stroke();
+    }
+
+    function loop(){
+      if(state==='playing'){ update(); draw(); }
+      requestAnimationFrame(loop);
+    }
+
+    function endGame(){
+      state = 'over';
+      let rank = 'Static Cadet';
+      if(score>=1200) rank='Frequency Legend';
+      else if(score>=600) rank='Signal Ace';
+      else if(score>=250) rank='Field Operator';
+      rankEl.textContent = rank;
+      finalEl.textContent = `Final score: ${score} — reached wave ${wave}`;
+      overOv.style.display = 'flex';
+    }
+
+    function start(){
+      reset();
+      state = 'playing';
+      startOv.style.display = 'none';
+      overOv.style.display = 'none';
+    }
+
+    window.addEventListener('keydown', e=>{ keys[e.key.toLowerCase()]=true; if(e.key===' ') e.preventDefault(); });
+    window.addEventListener('keyup', e=>{ keys[e.key.toLowerCase()]=false; });
+    canvas.addEventListener('mousemove', e=>{
+      const r = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    });
+    canvas.addEventListener('mousedown', ()=> mouse.down = true);
+    window.addEventListener('mouseup', ()=> mouse.down = false);
+    canvas.addEventListener('touchmove', e=>{
+      e.preventDefault();
+      const r = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      mouse.x = touch.clientX - r.left; mouse.y = touch.clientY - r.top;
+      player && (player.x = mouse.x, player.y = Math.min(mouse.y, H-20));
+    }, {passive:false});
+    canvas.addEventListener('touchstart', ()=>{ mouse.down = true; }, {passive:true});
+    canvas.addEventListener('touchend', ()=> mouse.down = false);
+
+    document.getElementById('gStartBtn').addEventListener('click', start);
+    document.getElementById('gRetryBtn').addEventListener('click', start);
+
+    size();
+    resetHpBar();
+    requestAnimationFrame(loop);
+  })();
+</script>
+</body>
+</html>

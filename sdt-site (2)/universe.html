@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050607">
+<title>Volta Chronicles — Super Duper Techno</title>
+<meta name="description" content="Volta Chronicles — SDT's original superhero universe. Two centuries of history, the War, Hope, and New Eras in full, and the present-day Despair Era, kept sealed.">
+<link rel="stylesheet" href="css/base.css">
+<style>
+  body[data-theme="universe"]{--u-glow: rgba(124,107,255,0.16);}
+  header.hero{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:140px 24px 50px;text-align:center;background:radial-gradient(ellipse at 50% 0%, var(--u-glow), transparent 62%);}
+  .hero .mark{width:88px;height:auto;margin:0 auto 22px;filter:drop-shadow(0 0 22px rgba(124,107,255,0.55));}
+  .hero .eyebrow{font-family:'IBM Plex Mono';font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--deep);margin-bottom:14px;}
+  .hero h1{font-size:clamp(42px,7.6vw,80px);margin-bottom:16px;
+    background:linear-gradient(90deg,var(--deep),var(--paper) 45%,var(--volt));
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero p.lede{max-width:640px;margin:0 auto 10px;font-size:16px;line-height:1.75;color:var(--dim);}
+  .names-cycle{font-family:'IBM Plex Mono';font-size:15px;color:var(--volt);margin-top:18px;min-height:22px;}
+  .rebrand-note{margin-top:28px;display:inline-flex;align-items:center;gap:12px;font-family:'IBM Plex Mono';font-size:12px;color:var(--dim);
+    border:1px dashed var(--line-strong);padding:11px 20px;border-radius:99px;max-width:90%;}
+
+  /* era timeline — full detail, each era gets its own color identity */
+  .era-block{padding:56px 0 56px 26px;border-bottom:1px solid var(--line);
+    border-left:3px solid var(--ecolor, var(--line-strong));
+    background:linear-gradient(90deg, color-mix(in srgb, var(--ecolor, transparent) 10%, transparent), transparent 55%);
+    transition:border-color .3s;}
+  .era-block .yr-big{font-family:'IBM Plex Mono';font-size:13px;color:var(--ecolor, var(--volt));letter-spacing:0.06em;display:block;margin-bottom:10px;font-weight:700;}
+  .era-block h3{font-size:clamp(24px,3.6vw,34px);margin-bottom:18px;text-shadow:3px 3px 0 var(--ecolor, rgba(0,0,0,0.4));}
+  .era-grid{display:grid;grid-template-columns:1fr;gap:28px;}
+  @media(min-width:860px){.era-grid{grid-template-columns:1fr 1fr;}}
+  .era-grid p{font-size:14.5px;margin-bottom:14px;}
+  .era-grid p:last-child{margin-bottom:0;}
+  .era-side{border-left:2px solid var(--ecolor, var(--line-strong));padding-left:22px;}
+  .era-side .fact{margin-bottom:16px;}
+  .era-side .fact .k{font-family:'IBM Plex Mono';font-size:10px;letter-spacing:0.06em;color:var(--ecolor, var(--dim-2));text-transform:uppercase;display:block;margin-bottom:4px;font-weight:700;}
+  .era-side .fact .v{font-size:13.5px;}
+
+  /* despair era — sealed treatment, purple ties it to Volta Chronicles' own cosmic identity */
+  .despair{padding:76px 0;background:linear-gradient(180deg, rgba(124,107,255,0.07), transparent);border-bottom:1px solid var(--line);}
+  .despair-panel{border:1px solid rgba(124,107,255,0.32);background:rgba(124,107,255,0.05);border-radius:var(--radius);padding:36px;position:relative;overflow:hidden;}
+  .despair-panel::before{content:'SEALED';position:absolute;top:16px;right:-34px;transform:rotate(35deg);
+    background:var(--deep);color:var(--void);font-family:'IBM Plex Mono';font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 40px;}
+  .despair-panel h3{font-size:clamp(24px,3.6vw,32px);color:var(--deep);margin-bottom:16px;text-shadow:3px 3px 0 rgba(124,107,255,0.35);}
+  .despair-panel p{font-size:14.5px;max-width:680px;}
+  .despair-fade{margin-top:20px;font-family:'IBM Plex Mono';font-size:11px;color:var(--dim-2);letter-spacing:0.04em;}
+
+  /* factions */
+  .world-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(min-width:640px){.world-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(min-width:1020px){.world-grid{grid-template-columns:repeat(4,1fr);}}
+  .world-card{background:var(--void);padding:26px;}
+  .world-card h3{font-size:18px;margin-bottom:10px;}
+  .world-card p{font-size:13px;}
+  .world-card .bar{width:30px;height:3px;border-radius:2px;margin-bottom:16px;}
+
+  /* cast */
+  .cast-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(min-width:640px){.cast-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(min-width:980px){.cast-grid{grid-template-columns:repeat(4,1fr);}}
+  .dossier{background:var(--void);padding:0 0 22px;position:relative;overflow:hidden;}
+  .dossier-placeholder{border:1px dashed rgba(255,51,72,0.4);}
+  .dossier-placeholder .portrait-wrap img{filter:grayscale(0.3) brightness(0.85);}
+  .dossier-placeholder h3{color:var(--dim);}
+  .dossier .portrait-wrap{position:relative;width:100%;height:250px;overflow:hidden;background:var(--panel);}
+  .dossier .portrait-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+    filter:saturate(1.05);transition:transform .4s ease;}
+  .dossier:hover .portrait-wrap img{transform:scale(1.05);}
+  .dossier .portrait-wrap::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(to bottom, transparent 35%, var(--void) 94%);}
+  .dossier .body{padding:16px 22px 0;}
+  .dossier .stamp{position:absolute;top:14px;right:-30px;transform:rotate(35deg);background:var(--deep);color:var(--void);
+    font-family:'IBM Plex Mono';font-size:9px;letter-spacing:0.08em;padding:3px 34px;font-weight:700;z-index:3;}
+  .dossier h3{font-size:16.5px;margin-bottom:4px;}
+  .dossier .alias{font-family:'IBM Plex Mono';font-size:10px;color:var(--dim-2);margin-bottom:10px;}
+  .dossier p{font-size:12.5px;margin:0 0 10px;}
+  .redacted{background:var(--paper);color:var(--paper);border-radius:3px;padding:0 4px;user-select:none;cursor:not-allowed;}
+  .dossier .hook{font-family:'IBM Plex Mono';font-size:10.5px;color:var(--hot);border-top:1px dashed var(--line);padding-top:10px;margin-top:10px;}
+
+  .format-list{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px;}
+  .format-list span{font-family:'IBM Plex Mono';font-size:12px;padding:9px 16px;border:1px solid var(--line-strong);border-radius:99px;}
+</style>
+</head>
+<body data-theme="universe">
+
+<main>
+<header class="hero">
+  <img class="mark reveal in" src="assets/chronicles-mark.png" alt="Volta Chronicles mark">
+  <div class="eyebrow reveal in">Original IP · Two centuries of history</div>
+  <h1 class="reveal in">Volta Chronicles</h1>
+  <p class="lede reveal in">SDT's connected superhero universe. A world rebuilt from the ashes of a tragedy nobody meant to cause — and quietly, slowly, becoming something its founders might not recognize.</p>
+  <p class="lede reveal in" style="font-size:14px;opacity:0.65;">In this world, superhumans are called <strong>supes</strong> — public, branded, impossible to ignore.</p>
+  <div class="names-cycle mono" id="namesCycle"></div>
+  <div class="rebrand-note reveal in"><img src="assets/accord-mark.png" alt="Volta Accord seal" style="width:26px;height:26px;flex:none;">It used to be called Chronicles. It rebranded for public view as <strong>&nbsp;The Volta Accord.</strong></div>
+</header>
+
+<section style="padding-bottom:0;">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="freq-num" style="color:var(--deep);">SIGNAL ORIGIN</span>
+      <h2>It starts with a tragedy nobody meant to cause.</h2>
+      <p class="lede">In 1798, an experimental weapon detonated over the Russian city of Kimzha. Nearly every adult exposed to the blast died. A handful of children didn't — and what happened to their bodies, nobody could explain.</p>
+      <p class="lede">General Rickensaw Volta saw potential where everyone else saw a tragedy. He funded Doctor Artyom to run <strong>Project Volta</strong>: take whatever those children had become, and use it to end the wars that were killing everyone else. Thirty-two children entered the program. Eighteen survived it. Seven came out stable — the Perfect Subjects. Volta Chronicles is the two-century story of what happened after.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WAR ERA -->
+<div class="wrap"><div class="era-block reveal" style="--ecolor:var(--hot);">
+  <span class="yr-big mono">1798 – 1907</span>
+  <h3>The War Era</h3>
+  <div class="era-grid">
+    <div>
+      <p>The seven stable Perfect Subjects — Tamara, Vera, Boris, and four others — became the public face of the fight against three global tyrants: Henry Richard, Karl Malkovich, and Adolf Dillon. Tamara fought under her first identity, <strong>Flying Queen</strong>.</p>
+      <p>Dillon was the greatest threat of the three. His personal assassin, known only as <strong>The Hunter</strong>, murdered Tamara's brother Dimitri partway through the war. Consumed by grief, Tamara hunted the Hunter down herself and killed him. Volta didn't let him stay dead — they resurrected him as <strong>D.M.W.</strong>, Dead Man Walking, and he has been fighting under that name ever since.</p>
+      <p>The dictators fell. The war finally ended. But of the original seven Perfect Subjects, only three — Tamara, Vera, and Boris — lived to see it.</p>
+    </div>
+    <div class="era-side">
+      <div class="fact"><span class="k">Identity</span><span class="v">Tamara as Flying Queen</span></div>
+      <div class="fact"><span class="k">Enemies defeated</span><span class="v">Henry Richard · Karl Malkovich · Adolf Dillon</span></div>
+      <div class="fact"><span class="k">Personal loss</span><span class="v">Brother Dimitri, killed by The Hunter</span></div>
+      <div class="fact"><span class="k">Survivors of the Seven</span><span class="v">Tamara · Vera · Boris</span></div>
+      <div class="fact"><span class="k">Aftermath</span><span class="v">The Hunter resurrected by Volta as D.M.W.</span></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- HOPE ERA -->
+<div class="wrap"><div class="era-block reveal" style="--ecolor:var(--charge);">
+  <span class="yr-big mono">1907 – 1972</span>
+  <h3>The Hope Era</h3>
+  <div class="era-grid">
+    <div>
+      <p>Project Volta formally became <strong>Volta Chronicles</strong> — an organization dedicated to rebuilding instead of fighting. Tamara retired the Flying Queen identity and became <strong>Sister Justice</strong>. Her closest friend Vera became Lady Justice, and together they spent decades rebuilding cities and inspiring nations by hand.</p>
+      <p>It was during this era that Volta's scientists discovered the <strong>K-Gene</strong> — the reason ordinary people occasionally develop weaker superhuman abilities of their own, a discovery that would eventually put superhumans into the public everyday world instead of keeping them mythic and distant.</p>
+      <p>The era ends in tragedy: Vera is assassinated near its close, under circumstances nobody has ever fully explained. Tamara never uses the name Sister Justice again — a promise to her closest friend that she has kept for over fifty years.</p>
+    </div>
+    <div class="era-side">
+      <div class="fact"><span class="k">Identity</span><span class="v">Tamara as Sister Justice</span></div>
+      <div class="fact"><span class="k">Org rebrand</span><span class="v">Project Volta → Volta Chronicles</span></div>
+      <div class="fact"><span class="k">Key discovery</span><span class="v">The K-Gene — origin of minor superhuman abilities in ordinary people</span></div>
+      <div class="fact"><span class="k">Closest friend</span><span class="v">Vera, as Lady Justice</span></div>
+      <div class="fact"><span class="k">Era-ending event</span><span class="v">Vera's assassination — cause still unresolved</span></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- NEW ERA -->
+<div class="wrap"><div class="era-block reveal" style="--ecolor:var(--cool);">
+  <span class="yr-big mono">1973 – 2006</span>
+  <h3>The New Era</h3>
+  <div class="era-grid">
+    <div>
+      <p>Tamara becomes <strong>Lady Liberty</strong>. The world enters a period of unprecedented technological growth, and superhumans stop being distant, mythic figures — they go fully public, becoming celebrities, soldiers, and emergency responders. The <strong>Global Defense Agency (GDA)</strong> is founded specifically to regulate them.</p>
+      <p>Not everyone trusts where the GDA is heading. A GDA commander known only as <strong>Boss</strong> resigns rather than watch the agency get political, and founds <strong>D.Dogs</strong> — a private military organization built around protecting people instead of governments or profit.</p>
+      <p>Meanwhile Volta itself formally expands into <strong>the Volta Accord</strong>, becoming the single most influential organization on Earth. By the era's end, the company that once toppled three dictators looks uncomfortably close to becoming one of its own.</p>
+    </div>
+    <div class="era-side">
+      <div class="fact"><span class="k">Identity</span><span class="v">Tamara as Lady Liberty</span></div>
+      <div class="fact"><span class="k">New institution</span><span class="v">The GDA — founded to regulate superhumans</span></div>
+      <div class="fact"><span class="k">Breakaway founding</span><span class="v">Boss resigns from the GDA, founds D.Dogs</span></div>
+      <div class="fact"><span class="k">Corporate rebrand</span><span class="v">Volta Chronicles → the Volta Accord</span></div>
+      <div class="fact"><span class="k">Era-ending tension</span><span class="v">Volta's influence starts resembling the systems it once destroyed</span></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- DESPAIR ERA — SEALED -->
+<section class="despair">
+  <div class="wrap">
+    <div class="despair-panel reveal">
+      <span class="freq-num" style="color:var(--deep);">2006 — PRESENT</span>
+      <h3>The Despair Era.</h3>
+      <p>Tamara becomes <strong>Golden Star</strong>. On the surface, the modern world looks peaceful. Underneath, every major institution is fractured — and this is the era almost everything SDT is currently making is set inside.</p>
+      <p>This is the live wire. The one still being written. We're not spoiling it — not because there's nothing here, but because this is the part you're meant to find out by playing, reading, and watching as it ships.</p>
+      <div class="despair-fade mono">// current arc status: <span class="redacted">redacted</span> — check back as SDG titles release</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="freq-num" style="color:var(--volt);">THE FACTIONS</span>
+      <h2>Four sides. Nobody's clean.</h2>
+      <p class="lede">No heroes, no villains — just power, and what it costs whoever's holding it.</p>
+    </div>
+    <div class="world-grid">
+      <div class="world-card reveal"><div class="bar" style="background:var(--volt);"></div><h3><img src="assets/accord-mark.png" alt="" style="width:18px;height:18px;display:inline-block;vertical-align:-3px;margin-right:6px;opacity:0.9;">The Volta Accord</h3><p>Once just called Chronicles — rebranded for public view. Controls much of the world's technology and hero infrastructure now. Impossible to opt out of.</p></div>
+      <div class="world-card reveal"><div class="bar" style="background:#c9c9d8;"></div><h3>The GDA</h3><p>The Global Defense Agency. Founded to regulate superhumans. Once respected. Increasingly, quietly, something else.</p></div>
+      <div class="world-card reveal"><div class="bar" style="background:var(--cool);"></div><h3>D.Dogs</h3><p>Founded by a GDA commander who walked away from the politics. One of the few organizations ordinary people still trust.</p></div>
+      <div class="world-card reveal"><div class="bar" style="background:var(--hot);"></div><h3>AFP</h3><p>The anti-superhuman movement. Rose in response to everything above. If power like this can't be trusted with anyone, why let anyone keep it?</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="freq-num" style="color:var(--hot);">CLASSIFIED · PARTIAL FILE</span>
+      <h2>Who you'll meet.</h2>
+      <p class="lede">A taste of the cast — names, vibes, and just enough to make you curious. The rest stays sealed until it ships.</p>
+    </div>
+    <div class="cast-grid">
+      <div class="dossier reveal">
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Golden Star" loading="lazy"></div>
+        <span class="stamp">ASSET</span>
+        <div class="body">
+          <h3>Golden Star</h3>
+          <div class="alias">Real name: Tamara · one of the Original Seven</div>
+          <p>Born in Kimzha, 1798. Been through four hero names and two centuries and never once got to pick either. Quiet. Reserved. Everyone assumes she's Volta's most compliant asset.</p>
+          <div class="hook">CURRENT ARC: <span class="redacted">that changes soon</span></div>
+        </div>
+      </div>
+      <div class="dossier reveal">
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Richard Volta" loading="lazy"></div>
+        <span class="stamp">HANDLER</span>
+        <div class="body">
+          <h3>Richard Volta</h3>
+          <div class="alias">Descendant of the founder</div>
+          <p>Started idealistic. Started believing peace needed control somewhere along the way. Calls Golden Star "Auntie." The charm is real — that's what makes it work.</p>
+          <div class="hook">FILE STATUS: <span class="redacted">watching closely</span></div>
+        </div>
+      </div>
+      <div class="dossier reveal">
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Madam Volta" loading="lazy"></div>
+        <span class="stamp">???</span>
+        <div class="body">
+          <h3>Madam Volta</h3>
+          <div class="alias">Richard's wife</div>
+          <p>Present in every room that matters, gone the second things get warm. One of Golden Star's oldest friends. There's a whole story in how she got that name.</p>
+          <div class="hook">FILE STATUS: <span class="redacted">history sealed</span></div>
+        </div>
+      </div>
+      <div class="dossier reveal">
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Ange" loading="lazy"></div>
+        <span class="stamp">OUTSIDER</span>
+        <div class="body">
+          <h3>Ange</h3>
+          <div class="alias">CS student · extraordinary hacker · no powers</div>
+          <p>No money, no combat training, no business being anywhere near this world — and somehow right in the middle of it anyway. Doesn't know his own surname.</p>
+          <div class="hook">FILE STATUS: <span class="redacted">more than he looks</span></div>
+        </div>
+      </div>
+      <div class="dossier reveal">
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Tiger Striker" loading="lazy"></div>
+        <span class="stamp">SHOWCASE</span>
+        <div class="body">
+          <h3>Tiger Striker</h3>
+          <div class="alias">Volta's newest public supe</div>
+          <p>Built from the same biology as Golden Star. Optimistic, charismatic, a true believer — the next generation of hero, at least on paper.</p>
+          <div class="hook">FILE STATUS: <span class="redacted">loyalty untested</span></div>
+        </div>
+      </div>
+      <div class="dossier reveal">
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Boss" loading="lazy"></div>
+        <span class="stamp">FOUNDER</span>
+        <div class="body">
+          <h3>Boss</h3>
+          <div class="alias">Former GDA commander</div>
+          <p>Resigned from the GDA during the New Era, rather than watch the agency get political. Founded D.Dogs the same year. Doesn't take jobs motivated by politics or profit — rare, in this world.</p>
+          <div class="hook">CURRENT STATUS: <span class="redacted">past deeper than it looks</span></div>
+        </div>
+      </div>
+      <div class="dossier reveal">
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Vera" loading="lazy"></div>
+        <span class="stamp">LEGACY</span>
+        <div class="body">
+          <h3>Vera</h3>
+          <div class="alias">Hero name: Lady Justice</div>
+          <p>One of the Original Seven Perfect Subjects. Golden Star's closest friend — helped rebuild the world by hand after the Great War. Assassinated near the end of the Hope Era. Her death is the reason "Sister Justice" was never used again.</p>
+          <div class="hook">FILE STATUS: <span class="redacted">closed, 1972</span></div>
+        </div>
+      </div>
+      <div class="dossier reveal">
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="D.M.W." loading="lazy"></div>
+        <span class="stamp">ANCIENT</span>
+        <div class="body">
+          <h3>D.M.W.</h3>
+          <div class="alias">Formerly "The Hunter"</div>
+          <p>Adolf Dillon's personal assassin during the War Era — the one who killed Golden Star's brother, Dimitri. Golden Star hunted him down and killed him in return. Volta brought him back. He's been Dead Man Walking ever since, and doesn't age anymore.</p>
+          <div class="hook">CURRENT STATUS: <span class="redacted">friend or enemy — undetermined</span></div>
+        </div>
+      </div>
+      <div class="dossier reveal dossier-placeholder">
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="File pending"></div>
+        <span class="stamp" style="background:var(--hot);">CLASSIFIED</span>
+        <div class="body">
+          <h3>??? ???</h3>
+          <div class="alias">File status: under construction</div>
+          <p>This dossier isn't cleared for release yet. Every cast page starts here before it gets a name, a face, and a reason you should care.</p>
+          <div class="hook">FILE STATUS: <span class="redacted">next reveal — soon</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="text-align:center;">
+  <div class="wrap">
+    <div class="head reveal" style="margin:0 auto;text-align:center;">
+      <span class="freq-num" style="color:var(--volt);">ONE WORLD, EVERY FORMAT</span>
+      <h2>Told across everything SDT makes.</h2>
+    </div>
+    <div class="format-list reveal">
+      <span>🎮 Games</span><span>📖 Novel — Subject Zero</span><span>🎬 Future animation</span><span>🎵 Original music</span><span>🗺️ Original lore</span>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap">
+    <h2 class="reveal">The games are how it starts.</h2>
+    <a class="btn pri" href="work.html">See what's in development →</a>
+  </div>
+</div>
+</main>
+
+<script src="js/shared.js"></script>
+<script>
+  const names = ['Flying Queen', '→ Sister Justice', '→ Lady Liberty', '→ Golden Star', "\"I don't get a vote.\""];
+  let ni = 0;
+  const cycleEl = document.getElementById('namesCycle');
+  if(cycleEl) setInterval(()=>{ cycleEl.textContent = names[ni % names.length]; ni++; }, 1700);
+</script>
+</body>
+</html>
