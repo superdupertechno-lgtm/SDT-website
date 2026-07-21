@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050607">
+<title>Super Duper Techno — You're Tuned In</title>
+<meta name="description" content="Super Duper Techno (SDT) — an independent studio broadcasting games, software, hardware, and AI, anchored by an original universe called Volta Chronicles.">
+<link rel="stylesheet" href="css/base.css">
+<style>
+  header.hero{min-height:94vh;min-height:94svh;display:flex;flex-direction:column;justify-content:center;padding:130px 0 50px;position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-inner{position:relative;z-index:1;}
+  .on-air{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono';font-size:11px;letter-spacing:0.1em;
+    color:var(--hot);border:1px solid rgba(255,51,72,0.4);padding:6px 14px;border-radius:99px;margin-bottom:24px;}
+  .on-air .blink{width:6px;height:6px;border-radius:50%;background:var(--hot);animation:blink 1.4s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.15;}}
+  .hero h1{font-size:clamp(40px,7.4vw,84px);max-width:920px;}
+  .hero h1 .accent{color:var(--volt);}
+  .hero p.tagline{font-size:clamp(15.5px,1.7vw,18px);max-width:600px;margin-top:22px;color:var(--dim);}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+  .scan-hint{position:absolute;bottom:28px;left:26px;font-family:'IBM Plex Mono';font-size:10.5px;color:var(--dim-2);
+    display:flex;align-items:center;gap:10px;}
+  .scan-hint .bar{width:1px;height:26px;background:linear-gradient(var(--dim-2),transparent);animation:scanDown 1.8s ease-in-out infinite;}
+  @keyframes scanDown{0%{opacity:0;transform:translateY(-6px);}50%{opacity:1;}100%{opacity:0;transform:translateY(6px);}}
+
+  /* origin strip */
+  .origin-strip{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(min-width:760px){.origin-strip{grid-template-columns:repeat(4,1fr);}}
+  .origin-cell{background:var(--void);padding:26px 22px;}
+  .origin-cell .yr{font-family:'IBM Plex Mono';font-size:11px;color:var(--volt);display:block;margin-bottom:10px;}
+  .origin-cell p{font-size:13px;}
+
+  .yt-card{display:grid;grid-template-columns:1fr;gap:0;margin-top:16px;border:1px solid var(--line-strong);
+    border-radius:var(--radius);overflow:hidden;background:var(--panel);transition:transform .25s ease, border-color .25s;}
+  @media(min-width:700px){.yt-card{grid-template-columns:1fr 1fr;}}
+  .yt-card:hover{transform:translateY(-3px);border-color:var(--hot);}
+  .yt-thumb{position:relative;overflow:hidden;aspect-ratio:16/9;background:#000;}
+  .yt-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+  .yt-card:hover .yt-thumb img{transform:scale(1.04);}
+  .yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;
+    background:rgba(255,51,72,0.92);display:flex;align-items:center;justify-content:center;color:#fff;
+    box-shadow:0 0 0 0 rgba(255,51,72,0.5);animation:ytPlayPulse 2.2s ease-in-out infinite;transition:transform .2s;}
+  .yt-card:hover .yt-play{transform:translate(-50%,-50%) scale(1.1);}
+  @keyframes ytPlayPulse{0%{box-shadow:0 0 0 0 rgba(255,51,72,0.5);}70%{box-shadow:0 0 0 16px rgba(255,51,72,0);}100%{box-shadow:0 0 0 0 rgba(255,51,72,0);}}
+  .yt-meta{padding:24px;display:flex;flex-direction:column;justify-content:center;gap:10px;}
+  .yt-meta h4{font-size:19px;}
+  .yt-meta p{font-size:12.5px;color:var(--dim);}
+
+  /* doors grid */
+  .doors{display:grid;grid-template-columns:1fr;gap:14px;}
+  @media(min-width:700px){.doors{grid-template-columns:repeat(2,1fr);}}
+  @media(min-width:1040px){.doors{grid-template-columns:repeat(3,1fr);}}
+  @media(min-width:1280px){.doors{grid-template-columns:repeat(5,1fr);}}
+  .door{padding:26px 22px;min-height:170px;display:flex;flex-direction:column;justify-content:space-between;}
+  .door h3{font-size:18px;margin-bottom:8px;}
+  .door p{font-size:12.5px;}
+  .door .go{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.05em;color:var(--cool);margin-top:14px;display:block;}
+
+  /* divisions constellation */
+  .const-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(min-width:700px){.const-grid{grid-template-columns:repeat(4,1fr);}}
+  .const-cell{background:var(--void);padding:20px;}
+  .const-cell .code{font-family:'IBM Plex Mono';font-size:10px;font-weight:600;color:var(--volt);}
+  .const-cell h4{font-size:14px;margin:8px 0 5px;}
+  .const-cell p{font-size:11.5px;}
+
+  /* universe teaser */
+  section.universe-teaser{background:radial-gradient(ellipse at 50% 0%, rgba(124,107,255,0.12), transparent 60%);}
+  .ut-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:center;}
+  @media(min-width:900px){.ut-grid{grid-template-columns:1fr 1fr;}}
+  .ut-copy h2{font-size:clamp(28px,4.6vw,46px);background:linear-gradient(90deg,var(--deep),var(--paper) 60%,var(--volt));
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .ut-copy p.lede{margin-top:16px;max-width:520px;}
+  .names-cycle{font-family:'IBM Plex Mono';font-size:14px;color:var(--deep);margin-top:18px;min-height:20px;}
+  .ut-panel{border:1px solid rgba(124,107,255,0.3);background:rgba(124,107,255,0.04);padding:26px;border-radius:var(--radius);}
+  .ut-panel .era-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:12.5px;}
+  .ut-panel .era-row:last-child{border-bottom:none;}
+  .ut-panel .era-row .yr{font-family:'IBM Plex Mono';color:var(--dim-2);font-size:11px;}
+  .ut-panel .era-row.now{color:var(--deep);}
+
+  .cta-band{background:var(--panel-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:64px 0;text-align:center;}
+  .cta-band h2{font-size:clamp(24px,4.5vw,38px);margin-bottom:22px;}
+
+  /* ============ TUNING + CINEMATIC INTRO (autoplay, plays before hero) ============ */
+  #intro{position:fixed;inset:0;z-index:9999;background:var(--void);overflow:hidden;
+    transition:opacity .7s ease, visibility .7s ease;}
+  #intro.hide{opacity:0;visibility:hidden;pointer-events:none;}
+  #intro canvas.bg-static{position:absolute;inset:0;width:100%;height:100%;}
+  .intro-stage{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;}
+  .intro-stage.active{display:flex;}
+  .intro-core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;}
+  .intro-mark-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+  .intro-rings{position:absolute;top:50%;left:50%;width:0;height:0;pointer-events:none;}
+  .intro-rings .ring{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid rgba(255,51,72,0.3);
+    transform:translate(-50%,-50%);opacity:0;animation:ringFadeIn 1s ease forwards, ringSpin linear infinite;}
+  .intro-rings .r1{width:230px;height:230px;animation-duration:1s, 9s;animation-delay:.2s, 0s;border-color:rgba(255,51,72,0.35);}
+  .intro-rings .r2{width:310px;height:310px;animation-duration:1s, 14s;animation-delay:.35s, 0s;border-color:rgba(46,168,255,0.28);animation-direction:normal,reverse;}
+  .intro-rings .r3{width:390px;height:390px;animation-duration:1s, 20s;animation-delay:.5s, 0s;border-color:rgba(255,194,51,0.2);border-style:dashed;}
+  @media(max-width:480px){
+    .intro-rings .r1{width:150px;height:150px;}
+    .intro-rings .r2{width:210px;height:210px;}
+    .intro-rings .r3{width:270px;height:270px;}
+    .intro-mark{width:110px;}
+  }
+  @keyframes ringFadeIn{to{opacity:1;}}
+  @keyframes ringSpin{to{transform:translate(-50%,-50%) rotate(360deg);}}
+  .intro-mark{width:150px;height:auto;opacity:0;transform:scale(0.85);animation:introMarkIn 1s ease forwards, markPulse 2.2s ease-in-out infinite;animation-delay:.15s, 1.2s;
+    filter:drop-shadow(0 0 24px rgba(255,51,72,0.5));}
+  @keyframes markPulse{0%,100%{filter:drop-shadow(0 0 18px rgba(255,51,72,0.4));}50%{filter:drop-shadow(0 0 32px rgba(46,168,255,0.55));}}
+  @keyframes introMarkIn{to{opacity:1;transform:scale(1);}}
+  .intro-word{margin-top:26px;font-family:'Rajdhani';font-weight:700;font-size:15px;letter-spacing:0.5em;text-transform:uppercase;
+    color:var(--paper);opacity:0;animation:introWordIn .6s ease forwards;animation-delay:.5s;}
+  @keyframes introWordIn{to{opacity:1;}}
+  .intro-freq{margin-top:16px;font-family:'IBM Plex Mono';font-size:11px;color:var(--dim-2);letter-spacing:0.08em;
+    opacity:0;animation:introWordIn .6s ease forwards;animation-delay:.8s;display:flex;gap:10px;align-items:center;}
+  .intro-freq .num{color:var(--hot);}
+  .intro-bar{width:220px;height:1px;background:var(--line-strong);margin-top:22px;position:relative;overflow:hidden;
+    opacity:0;animation:introWordIn .6s ease forwards;animation-delay:1s;}
+  .intro-bar::after{content:'';position:absolute;left:0;top:0;bottom:0;width:0%;background:var(--hot);animation:introBarFill 1.6s ease forwards;animation-delay:1.1s;}
+  @keyframes introBarFill{to{width:100%;}}
+  #introSkip{position:absolute;bottom:calc(30px + env(safe-area-inset-bottom,0));right:calc(30px + env(safe-area-inset-right,0));z-index:20;font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--dim-2);border:1px solid var(--line-strong);border-radius:99px;padding:9px 16px;transition:.2s;}
+  #introSkip:hover{color:var(--paper);border-color:var(--paper);}
+  #intro.locking .intro-core{animation:introLockShake .35s;}
+  @keyframes introLockShake{0%,100%{transform:translate(0,0);}25%{transform:translate(-2px,1px);}50%{transform:translate(2px,-1px);}75%{transform:translate(-1px,0);}}
+
+  .cine-progress{position:absolute;top:32px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:6;}
+  .cine-progress .seg{width:52px;height:2px;background:var(--line-strong);border-radius:2px;overflow:hidden;position:relative;}
+  .cine-progress .seg .fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:var(--paper);transition:width linear;}
+  .cine-progress .seg.done .fill{width:100% !important;}
+  .cine-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;
+    transition:opacity .5s ease;pointer-events:none;overflow:hidden;}
+  .cine-slide.active{opacity:1;}
+  .cine-slide canvas{position:absolute;inset:0;width:100%;height:100%;}
+  .cine-text{position:relative;z-index:2;text-align:center;max-width:840px;padding:0 26px;
+    transform:scale(0.94) translateY(10px);transition:transform .7s cubic-bezier(.2,.8,.2,1);}
+  .cine-slide.active .cine-text{transform:scale(1) translateY(0);}
+  .cine-text .k{font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;display:block;margin-bottom:18px;}
+  .cine-text h2{font-size:clamp(32px,7vw,90px);line-height:0.98;}
+  .cine-text p{font-size:clamp(13.5px,1.7vw,16px);margin-top:20px;max-width:520px;margin-left:auto;margin-right:auto;color:var(--dim);}
+  .cine-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:6;font-family:'IBM Plex Mono';
+    font-size:10.5px;color:var(--dim-2);letter-spacing:0.06em;}
+</style>
+</head>
+<body data-theme="home">
+
+<div id="intro">
+  <canvas class="bg-static" id="introCanvas"></canvas>
+
+  <div class="intro-stage active" id="stageTuning">
+    <div class="intro-core">
+      <div class="intro-mark-wrap">
+        <div class="intro-rings">
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <div class="ring r3"></div>
+        </div>
+        <img class="intro-mark" src="assets/sdt-color.png" alt="SDT">
+      </div>
+      <div class="intro-word">SUPER DUPER TECHNO</div>
+      <div class="intro-freq mono"><span id="introStatus">TUNING</span> <span class="num" id="introPct">0%</span></div>
+      <div class="intro-bar"></div>
+    </div>
+  </div>
+
+  <div class="intro-stage" id="stageCinematic">
+    <div class="cine-progress" id="cineProgress"></div>
+    <div class="cine-slide" data-color="#ff3348">
+      <canvas></canvas>
+      <div class="cine-text"><span class="k" style="color:#ff3348;">01 — SDG</span><h2>GAMES<br>THAT COMMIT.</h2><p>THROWN. For the Volta. Golden Star. Three titles, one universe, built by a studio that started as a channel talking about somebody else's.</p></div>
+    </div>
+    <div class="cine-slide" data-color="#2ea8ff">
+      <canvas></canvas>
+      <div class="cine-text"><span class="k" style="color:#2ea8ff;">02 — SDS / SDN / SDAI</span><h2>SYSTEMS<br>WITH AN IDENTITY.</h2><p>An OS that boots straight into a console. A mesh network that needs no internet. An assistant built in from day one, not bolted on after.</p></div>
+    </div>
+    <div class="cine-slide" data-color="#7c6bff">
+      <canvas></canvas>
+      <div class="cine-text"><span class="k" style="color:#7c6bff;">03 — VOLTA CHRONICLES</span><h2>TWO CENTURIES.<br>ZERO CLEAN HANDS.</h2><p>A universe built from a tragedy nobody meant to cause — and an era right now that we're not telling you about yet.</p></div>
+    </div>
+    <div class="cine-slide" data-color="#ffc233">
+      <canvas></canvas>
+      <div class="cine-text"><span class="k" style="color:#ffc233;">04 — SDT</span><h2>ONE SIGNAL.<br>EIGHT CHANNELS.</h2><p>Creativity and fun over standard edition. That's the whole rule. It hasn't changed since 2016.</p></div>
+    </div>
+    <div class="cine-hint">tuning in...</div>
+  </div>
+
+  <button id="introSkip">Skip →</button>
+</div>
+
+<main>
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="on-air reveal in"><span class="blink"></span>ON AIR — SINCE 2016</div>
+    <h1 class="reveal in">You didn't find a website.<br>You found a <span class="accent">frequency.</span></h1>
+    <p class="tagline reveal in">Super Duper Techno is an independent, founder-led studio working across games, software, hardware, networks, AI, and original storytelling — eight divisions broadcasting on one signal. Every product still answers to the same rule it started with: creativity and fun over standard edition.</p>
+    <div class="hero-meta reveal in">
+      <span class="tag"><span class="dot"></span>8 divisions</span>
+      <span class="tag" style="color:var(--hot);"><span class="dot" style="background:var(--hot);"></span>3 games in motion</span>
+      <span class="tag" style="color:var(--deep);"><span class="dot" style="background:var(--deep);"></span>1 connected universe</span>
+    </div>
+    <div class="cta-row reveal in">
+      <a class="btn pri" href="work.html">See what we're building</a>
+      <a class="btn ghost" href="universe.html">Enter Volta Chronicles</a>
+    </div>
+  </div>
+  <div class="scan-hint reveal in"><div class="bar"></div>scroll to tune further</div>
+</header>
+
+<div class="waveform-wrap"><span class="waveform-label">// origin</span><canvas></canvas></div>
+
+<section style="padding-top:56px;">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="freq-num">CH. 01 — WHERE THIS STARTED</span>
+      <h2>A channel that outgrew talking about it.</h2>
+      <p class="lede">SDT wasn't founded in a boardroom. It was a YouTube channel first — gaming and superhero discussion, a place to talk about other people's worlds. The itch to build one of SDT's own is the entire reason any of this exists.</p>
+    </div>
+    <div class="origin-strip">
+      <div class="origin-cell reveal"><span class="yr mono">2016</span><p>SDT starts as a YouTube channel — gaming and superhero commentary. Talking about other people's worlds, not yet building one.</p></div>
+      <div class="origin-cell reveal"><span class="yr mono">the itch</span><p>Commentary turns into ambition. Not a copy of what's already out there — something that actually feels like SDT's own signal.</p></div>
+      <div class="origin-cell reveal"><span class="yr mono">the sprawl</span><p>One idea becomes eight — games, software, hardware, media, AI, and original IP, all broadcasting under a single identity.</p></div>
+      <div class="origin-cell reveal"><span class="yr mono">today</span><p>Founder-led, still independent, still small. Every division answers to the same original principle: fun first, standard edition never.</p></div>
+    </div>
+
+    <a class="yt-card reveal" href="https://www.youtube.com/@SuperDuperTechno-sdgamer" target="_blank" rel="noopener">
+      <div class="yt-thumb">
+        <img src="assets/placeholders/yt-placeholder.jpg" alt="SDT YouTube channel">
+        <span class="yt-play"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      </div>
+      <div class="yt-meta">
+        <span class="tag" style="color:var(--hot);"><span class="dot" style="background:var(--hot);"></span>Where it all started</span>
+        <h4>Catch the channel on YouTube →</h4>
+        <p>Still posting. Still the same energy that started this whole thing back in 2016.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<div class="waveform-wrap"><span class="waveform-label">// tune in</span><canvas></canvas></div>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="freq-num">CH. 02 — PICK A CHANNEL</span>
+      <h2>Five doors. Same signal.</h2>
+    </div>
+    <div class="doors">
+      <a class="door panel reveal" href="work.html">
+        <div><h3>The Work</h3><p>Every division, why it exists, and exactly what's live right now — no separating the org chart from the output.</p></div>
+        <span class="go">→ See it all</span>
+      </a>
+      <a class="door panel reveal" href="universe.html">
+        <div><h3>Universe</h3><p>Volta Chronicles — two centuries of history, four factions, and the era nobody's talking about yet.</p></div>
+        <span class="go">→ Step inside</span>
+      </a>
+      <a class="door panel reveal" href="studio.html">
+        <div><h3>The Studio</h3><p>The small crew actually behind all of this, why it exists, and how to reach us.</p></div>
+        <span class="go">→ Meet the crew</span>
+      </a>
+      <a class="door panel reveal" href="onair.html">
+        <div><h3>On Air</h3><p>Every live project across every division, broadcasting right now — no roadmap fluff, just what's shipping.</p></div>
+        <span class="go">→ See what's live</span>
+      </a>
+      <a class="door panel reveal" href="studio.html#arcade">
+        <div><h3>Arcade</h3><p>A real mini shooting game, tucked into the Studio page. No sign-up, no catch — just don't shoot the allies.</p></div>
+        <span class="go">→ Play now</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="waveform-wrap"><span class="waveform-label">// eight divisions</span><canvas></canvas></div>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="freq-num">CH. 03 — THE FULL BAND</span>
+      <h2>Eight divisions. All of them matter.</h2>
+      <p class="lede">Gaming is the loudest channel. It isn't the only one.</p>
+    </div>
+    <div class="const-grid">
+      <div class="const-cell reveal"><span class="code mono">SDG</span><h4>Gaming</h4><p>Games across every platform.</p></div>
+      <div class="const-cell reveal"><span class="code mono">SDS</span><h4>Softwares</h4><p>Operating systems &amp; tools.</p></div>
+      <div class="const-cell reveal"><span class="code mono">SDPD</span><h4>Product Dev</h4><p>Hardware, long-term.</p></div>
+      <div class="const-cell reveal"><span class="code mono">SDSM</span><h4>Studios &amp; Media</h4><p>Film, animation, music.</p></div>
+      <div class="const-cell reveal"><span class="code mono">SDN</span><h4>Networks</h4><p>Cloud, servers, mesh tech.</p></div>
+      <div class="const-cell reveal"><span class="code mono">SDAI</span><h4>AI</h4><p>Intelligence, built in.</p></div>
+      <div class="const-cell reveal"><span class="code mono">SDE</span><h4>Entertainment</h4><p>Every original story &amp; world.</p></div>
+      <div class="const-cell reveal"><span class="code mono">SDRD</span><h4>Research &amp; Dev</h4><p>What comes next.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:26px;">
+      <a class="btn ghost sm reveal" href="work.html">Full breakdown of every division →</a>
+    </div>
+  </div>
+</section>
+
+<section class="universe-teaser">
+  <div class="wrap">
+    <div class="ut-grid">
+      <div class="ut-copy reveal">
+        <span class="freq-num" style="color:var(--deep);">CH. 04 — A DIFFERENT FREQUENCY</span>
+        <h2>Volta Chronicles.</h2>
+        <p class="lede">SDT's original superhero universe. Two centuries of history, rebuilt from a tragedy nobody meant to cause, run by an organization that started as heroes and slowly became something else entirely. One idea holds the whole thing together: power costs something, and nobody in it has clean hands.</p>
+        <div class="names-cycle mono" id="namesCycle"></div>
+        <div class="cta-row" style="margin-top:26px;"><a class="btn ghost" href="universe.html" style="border-color:rgba(124,107,255,0.4);">Enter the universe →</a></div>
+      </div>
+      <div class="ut-panel reveal">
+        <div class="era-row"><span>1798–1907</span><span class="yr">The War Era</span></div>
+        <div class="era-row"><span>1907–1972</span><span class="yr">The Hope Era</span></div>
+        <div class="era-row"><span>1973–2006</span><span class="yr">The New Era</span></div>
+        <div class="era-row now"><span>2006–Present</span><span class="yr">The Despair Era — sealed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap">
+    <h2 class="reveal">Got a project in mind? We'd genuinely love to hear it.</h2>
+    <a class="btn pri" href="studio.html#contact">Get in touch</a>
+  </div>
+</div>
+</main>
+
+<script src="js/shared.js"></script>
+<script>
+  // (hero ambient particles removed — the global page background now
+  // covers this with the brighter, cheaper blob+particle system)
+
+  const names = ['Flying Queen', '→ Sister Justice', '→ Lady Liberty', '→ Golden Star', "\"I don't get a vote.\""];
+  let ni = 0;
+  const cycleEl = document.getElementById('namesCycle');
+  if(cycleEl) setInterval(()=>{ cycleEl.textContent = names[ni % names.length]; ni++; }, 1700);
+
+  /* ============ INTRO SEQUENCE: tuning static → autoplay cinematic → hero ============ */
+  (function(){
+    const intro = document.getElementById('intro');
+    const skipBtn = document.getElementById('introSkip');
+    const pctEl = document.getElementById('introPct');
+    const staticCanvas = document.getElementById('introCanvas');
+    const sctx = staticCanvas.getContext('2d');
+    const stageTuning = document.getElementById('stageTuning');
+    const stageCinematic = document.getElementById('stageCinematic');
+    const slides = [...stageCinematic.querySelectorAll('.cine-slide')];
+    const progressHost = document.getElementById('cineProgress');
+    const played = sessionStorage.getItem('sdt_intro_played');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const SLIDE_MS = 2800;
+
+    function sizeStatic(){ staticCanvas.width = window.innerWidth; staticCanvas.height = window.innerHeight; }
+    sizeStatic(); window.addEventListener('resize', sizeStatic);
+    let staticRunning = true;
+    let introActive = true;
+    function staticFrame(){
+      if(!staticRunning) return;
+      sctx.clearRect(0,0,staticCanvas.width,staticCanvas.height);
+      sctx.globalAlpha = 0.05;
+      for(let i=0;i<220;i++){
+        sctx.fillStyle = Math.random()>0.5 ? '#eef1ee' : '#000';
+        sctx.fillRect(Math.random()*staticCanvas.width, Math.random()*staticCanvas.height, 2, 2);
+      }
+      sctx.globalAlpha = 1;
+      requestAnimationFrame(staticFrame);
+    }
+    staticFrame();
+
+    // build progress segments + per-slide particle canvases
+    slides.forEach((slide, i) => {
+      const seg = document.createElement('div');
+      seg.className = 'seg';
+      seg.innerHTML = '<div class="fill"></div>';
+      progressHost.appendChild(seg);
+
+      const canvas = slide.querySelector('canvas');
+      const ctx = canvas.getContext('2d');
+      const color = slide.dataset.color;
+      let W,H,dpr;
+      function size(){
+        dpr = Math.min(window.devicePixelRatio||1,2);
+        W = window.innerWidth; H = window.innerHeight;
+        canvas.width = W*dpr; canvas.height = H*dpr;
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+      }
+      size(); window.addEventListener('resize', size);
+      const dots = Array.from({length:40}, ()=>({
+        x:Math.random()*1400, y:Math.random()*900, r:0.8+Math.random()*2.2,
+        vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3, a:0.12+Math.random()*0.4
+      }));
+      function draw(){
+        if(!introActive){ return; } // stop permanently once intro is dismissed — these ran forever before
+        ctx.clearRect(0,0,W,H);
+        dots.forEach(d=>{
+          d.x += d.vx; d.y += d.vy;
+          if(d.x<0) d.x=W; if(d.x>W) d.x=0;
+          if(d.y<0) d.y=H; if(d.y>H) d.y=0;
+          ctx.globalAlpha = d.a;
+          ctx.fillStyle = color;
+          ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    });
+    const segs = [...progressHost.querySelectorAll('.seg')];
+
+    let cineIndex = -1;
+    let cineTimer = null;
+    function goToSlide(i){
+      slides.forEach((s,idx) => s.classList.toggle('active', idx===i));
+      segs.forEach((seg,idx) => {
+        seg.classList.toggle('done', idx < i);
+        const fill = seg.querySelector('.fill');
+        if(idx === i){
+          fill.style.transition = 'none';
+          fill.style.width = '0%';
+          requestAnimationFrame(() => {
+            fill.style.transition = `width ${SLIDE_MS}ms linear`;
+            fill.style.width = '100%';
+          });
+        } else if(idx > i){
+          fill.style.transition = 'none';
+          fill.style.width = '0%';
+        }
+      });
+    }
+    function nextSlide(){
+      cineIndex++;
+      if(cineIndex >= slides.length){ finishIntro(); return; }
+      goToSlide(cineIndex);
+      cineTimer = setTimeout(nextSlide, SLIDE_MS);
+    }
+    function startCinematic(){
+      stageTuning.classList.remove('active');
+      stageCinematic.classList.add('active');
+      cineIndex = -1;
+      nextSlide();
+    }
+
+    function finishIntro(){
+      staticRunning = false;
+      introActive = false;
+      clearTimeout(cineTimer);
+      sessionStorage.setItem('sdt_intro_played','1');
+      intro.classList.add('locking');
+      setTimeout(()=>{ intro.classList.add('hide'); }, 260);
+    }
+
+    if(played || reduced){
+      staticRunning = false;
+      introActive = false;
+      intro.style.transition = 'none';
+      intro.classList.add('hide');
+    } else {
+      const statusEl = document.getElementById('introStatus');
+      const statuses = ['TUNING', 'SCANNING FREQUENCY', 'LOCKING SIGNAL', 'CALIBRATING', 'ALMOST THERE'];
+      let statusIdx = 0;
+      const statusTimer = setInterval(() => {
+        statusIdx = (statusIdx + 1) % statuses.length;
+        if(statusEl) statusEl.textContent = statuses[statusIdx];
+      }, 900);
+      let pct = 0;
+      const pctTimer = setInterval(()=>{
+        pct += Math.random()*5 + 2;
+        if(pct>=100){
+          pct=100;
+          clearInterval(pctTimer);
+          clearInterval(statusTimer);
+          if(statusEl) statusEl.textContent = 'SIGNAL LOCKED';
+          setTimeout(startCinematic, 550);
+        }
+        pctEl.textContent = Math.floor(pct)+'%';
+      }, 220);
+    }
+    skipBtn.addEventListener('click', finishIntro);
+    // fix: if the browser restores this page from bfcache mid-sequence
+    // (e.g. hitting back after the intro already played), force it closed.
+    window.addEventListener('pageshow', () => {
+      if(sessionStorage.getItem('sdt_intro_played')){
+        staticRunning = false;
+        introActive = false;
+        intro.style.transition = 'none';
+        intro.classList.add('hide');
+      }
+    });
+  })();
+</script>
+</body>
+</html>

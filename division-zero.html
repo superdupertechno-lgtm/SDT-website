@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050607">
+<title>SD?? — Classified</title>
+<meta name="description" content="You shouldn't be here. Well — you should. Come on in.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="css/base.css">
+<style>
+  body{background:#050607;}
+  .dz-shell{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:calc(110px + env(safe-area-inset-top,0)) 24px 60px;position:relative;overflow:hidden;}
+  .dz-shell canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+  .dz-content{position:relative;z-index:2;max-width:640px;}
+  .dz-stamp{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:0.2em;color:var(--hot);border:1px solid rgba(255,51,72,0.4);
+    padding:8px 18px;border-radius:99px;display:inline-block;margin-bottom:26px;}
+  .dz-content h1{font-size:clamp(34px,7vw,64px);margin-bottom:20px;}
+  .dz-content p{font-size:15px;margin-bottom:16px;}
+  .dz-file{text-align:left;border:1px solid var(--line-strong);background:var(--panel);border-radius:var(--radius);
+    padding:26px;margin-top:30px;font-family:'IBM Plex Mono';font-size:12.5px;color:var(--dim);line-height:2;}
+  .dz-file .row{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:8px 0;}
+  .dz-file .row:last-child{border-bottom:none;}
+  .dz-file .redacted{background:var(--paper);color:var(--paper);border-radius:2px;padding:0 6px;}
+  .dz-back{margin-top:34px;display:inline-flex;}
+  .dz-foot{margin-top:40px;font-family:'IBM Plex Mono';font-size:10.5px;color:var(--dim-2);}
+</style>
+</head>
+<body data-theme="division-zero">
+
+<div class="dz-shell">
+  <canvas id="dzCanvas"></canvas>
+  <div class="dz-content">
+    <span class="dz-stamp reveal in">SD?? · CLEARANCE UNKNOWN</span>
+    <h1 class="reveal in">Division Zero.</h1>
+    <p class="reveal in">There isn't a real ninth division. There's no secret product, no hidden roadmap, no conspiracy under the floorboards.</p>
+    <p class="reveal in">There's just this: a page we built for the one or two people who'd actually go looking — Konami-code it, click a logo five times, type the wrong right word. If you're reading this, that was you. Thanks for poking around.</p>
+
+    <div class="dz-file reveal">
+      <div class="row"><span>DIVISION CODE</span><span>SD??</span></div>
+      <div class="row"><span>ACTUAL PURPOSE</span><span>none. it's a joke.</span></div>
+      <div class="row"><span>FOUNDER'S NOTE</span><span class="redacted">nice job finding this</span></div>
+      <div class="row"><span>STATUS</span><span>permanently "for now"</span></div>
+      <div class="row"><span>NEXT EASTER EGG</span><span class="redacted">not telling you</span></div>
+    </div>
+
+    <div class="dz-back">
+      <a class="btn ghost" href="index.html">← Back to the actual site</a>
+    </div>
+    <p class="dz-foot">— Hardhip</p>
+  </div>
+</div>
+
+<script src="js/shared.js"></script>
+<script>
+  (function(){
+    const canvas = document.getElementById('dzCanvas');
+    const ctx = canvas.getContext('2d');
+    let W,H,dpr;
+    function size(){
+      dpr = Math.min(window.devicePixelRatio||1,2);
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width = W*dpr; canvas.height = H*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    size(); window.addEventListener('resize', size);
+    const dots = Array.from({length:50}, ()=>({
+      x:Math.random()*1400, y:Math.random()*900, r:0.7+Math.random()*1.8,
+      vy:-(0.05+Math.random()*0.14), color: Math.random()>0.5 ? '#ff3348' : '#eef1ee', a:0.08+Math.random()*0.3
+    }));
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      dots.forEach(d=>{
+        d.y += d.vy;
+        if(d.y<-10){ d.y=H+10; d.x=Math.random()*W; }
+        ctx.globalAlpha = d.a;
+        ctx.fillStyle = d.color;
+        ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050607">
+<title>The Work — Super Duper Techno</title>
+<meta name="description" content="Every SDT division — why it exists, what it's building, and how — from THROWN and Golden Star to SDT Game OS, VibeMesh, and the Volta assistant.">
+<link rel="stylesheet" href="css/base.css">
+<style>
+  header.hero{min-height:46vh;display:flex;flex-direction:column;justify-content:center;padding:140px 0 50px;}
+  .hero h1{font-size:clamp(38px,7vw,66px);max-width:820px;}
+  .hero p.tagline{font-size:16px;max-width:640px;margin-top:18px;color:var(--dim);}
+
+  .status-key{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
+  .status-key span{font-family:'IBM Plex Mono';font-size:10.5px;padding:6px 12px;border-radius:99px;border:1px solid var(--line-strong);}
+
+  /* division jump nav */
+  .jumpnav{display:flex;flex-wrap:wrap;gap:8px;position:sticky;top:calc(76px + env(safe-area-inset-top,0));z-index:40;background:var(--void);
+    padding:14px 0;border-bottom:1px solid var(--line);margin-bottom:8px;}
+  .jumpnav a{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.03em;border:1px solid var(--line-strong);
+    padding:7px 12px;border-radius:99px;color:var(--dim);transition:.2s;}
+  .jumpnav a:hover{color:var(--dcolor, var(--paper));border-color:var(--dcolor, var(--paper));}
+
+  /* division block */
+  .division{padding:70px 0 70px 28px;border-bottom:1px solid var(--line);scroll-margin-top:150px;
+    border-left:3px solid var(--dcolor, var(--line-strong));transition:border-color .3s;}
+  .division:last-child{border-bottom:none;}
+  .div-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:8px;}
+  .div-code{font-family:'IBM Plex Mono';font-size:13px;font-weight:600;letter-spacing:0.06em;padding:6px 14px;
+    border-radius:99px;display:inline-block;margin-bottom:14px;}
+  .div-head h2{font-size:clamp(26px,4vw,40px);text-shadow:3px 3px 0 var(--dcolor, rgba(0,0,0,0.4));}
+  .div-sub{font-size:14.5px;color:var(--dim);max-width:640px;margin-top:10px;}
+
+  .div-cols{display:grid;grid-template-columns:1fr;gap:3px;background:var(--line);border:1px solid var(--line);margin-top:32px;}
+  @media(min-width:860px){.div-cols{grid-template-columns:repeat(3,1fr);}}
+  .div-col{background:color-mix(in srgb, var(--dcolor, var(--panel)) 24%, var(--panel));
+    box-shadow:inset 0 0 0 var(--dcolor, transparent);transition:box-shadow .25s, background .25s;padding:24px;}
+  .div-col:hover{background:color-mix(in srgb, var(--dcolor, var(--panel)) 38%, var(--panel));
+    box-shadow:inset 0 3px 0 var(--dcolor, var(--line-strong));}
+  .div-col .lbl{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.08em;color:var(--dcolor, var(--dim-2));margin-bottom:12px;display:block;font-weight:700;}
+  .div-col p{font-size:13.5px;color:var(--paper);}
+  .div-col ul{margin:12px 0 0;padding-left:18px;font-size:13px;line-height:1.85;color:rgba(238,241,238,0.82);}
+
+  .live-strip{margin-top:1px;background:var(--panel);border:1px solid var(--line);border-top:none;padding:22px 24px;}
+  .live-strip .row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);}
+  .live-strip .row:last-child{border-bottom:none;padding-bottom:0;}
+  .live-strip .row:first-child{padding-top:0;}
+  .live-strip .proj-name{font-weight:600;font-size:14.5px;}
+  .live-strip .proj-desc{font-size:12.5px;color:var(--dim);margin-top:4px;max-width:520px;}
+  .status-badge{font-family:'IBM Plex Mono';font-size:9.5px;text-transform:uppercase;padding:4px 10px;border-radius:6px;font-weight:600;white-space:nowrap;}
+  .status-badge.active{background:rgba(63,224,138,0.15);color:var(--charge);}
+  .status-badge.dev{background:rgba(255,194,51,0.15);color:var(--volt);}
+  .status-badge.concept{background:rgba(46,168,255,0.15);color:var(--cool);}
+
+  .more-toggle{margin-top:16px;font-family:'IBM Plex Mono';font-size:11px;letter-spacing:0.03em;
+    border:1px solid var(--line-strong);border-radius:99px;padding:8px 16px;color:var(--dcolor, var(--cool));transition:.2s;}
+  .more-toggle:hover{border-color:var(--dcolor, var(--cool));}
+  .more-panel{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+  .more-panel.open{max-height:1200px;}
+  .more-panel .inner{margin-top:20px;padding-top:20px;border-top:1px dashed var(--line);}
+  .more-panel h5{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:var(--dcolor, var(--volt));margin-bottom:10px;}
+  .more-panel ul{margin:0 0 14px;padding-left:18px;font-size:13px;line-height:1.85;color:var(--dim);}
+  .more-panel p.note{font-size:12px;color:var(--dim-2);font-style:italic;margin-top:6px;}
+  .concept-flag{display:inline-block;font-family:'IBM Plex Mono';font-size:10px;text-transform:uppercase;letter-spacing:0.05em;
+    background:var(--hot);color:var(--void);padding:4px 10px;border-radius:6px;margin-bottom:12px;font-weight:700;}
+
+  .division-zero-card{opacity:0;transform:scale(0.85);pointer-events:none;transition:opacity .4s ease, transform .4s ease;
+    padding:50px 0;border-bottom:1px solid var(--line);}
+  .division-zero-card.show{opacity:1;transform:scale(1);pointer-events:all;}
+  .dz-inner{border:1px dashed rgba(255,51,72,0.4);background:rgba(255,51,72,0.03);padding:28px;border-radius:var(--radius);}
+  .reveal-hint{text-align:center;padding:30px 0 10px;font-family:'IBM Plex Mono';font-size:11px;color:var(--dim-2);}
+</style>
+</head>
+<body data-theme="work">
+
+<main>
+<header class="hero">
+  <div class="wrap">
+    <span class="freq-num reveal in">EVERY CHANNEL, EXPLAINED</span>
+    <h1 class="reveal in">The Work.</h1>
+    <p class="tagline reveal in">Eight divisions. Not a slide deck — the actual reasoning behind each one: why it exists, what it's building, and how. Want to know what's live right now instead? <a href="onair.html" style="color:var(--cool);text-decoration:underline;">Check On Air →</a></p>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="jumpnav">
+    <a href="#sdg" style="--dcolor:var(--volt);">SDG</a><a href="#sds" style="--dcolor:var(--cool);">SDS</a><a href="#sdn" style="--dcolor:var(--charge);">SDN</a><a href="#sdpd" style="--dcolor:var(--hot);">SDPD</a>
+    <a href="#sdsm" style="--dcolor:var(--deep);">SDSM</a><a href="#sdai" style="--dcolor:var(--amber);">SDAI</a><a href="#sde" style="--dcolor:var(--rose);">SDE</a><a href="#sdrd" style="--dcolor:var(--teal);">SDRD</a>
+  </nav>
+</div>
+
+<div class="wrap">
+
+  <!-- SDG -->
+  <section class="division" id="sdg" style="--dcolor:var(--volt);">
+    <div class="div-head">
+      <div>
+        <span class="div-code mono" style="background:var(--volt);color:var(--void);">SDG — SUPER DUPER GAMING</span>
+        <h2>The reason SDT exists in the first place.</h2>
+        <p class="div-sub">SDT started as a channel talking about other people's games. Gaming was always going to be the first thing it built for itself — everything else grew out from here.</p>
+      </div>
+    </div>
+    <div class="div-cols reveal">
+      <div class="div-col">
+        <span class="lbl">WHY</span>
+        <p>Games are the clearest way to actually live inside an idea instead of just describing it. SDG exists because talking about worlds stopped being enough — the studio wanted to build ones players could stand inside.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">WHAT</span>
+        <p>Three titles in motion, all connected by Volta Chronicles, each built for a completely different kind of player:</p>
+        <ul>
+          <li><strong>THROWN</strong> — free-to-play competitive Rock Paper Scissors, built to fund everything else <span style="color:var(--charge);">· active</span></li>
+          <li><strong>For the Volta</strong> — 2D co-op action/stealth, 4 players, one-hit-lethal <span style="color:var(--charge);">· active</span></li>
+          <li><strong>Golden Star</strong> — open-world superhero origin story, solo dev, PS2/PS3-soul <span style="color:var(--volt);">· early dev</span></li>
+        </ul>
+      </div>
+      <div class="div-col">
+        <span class="lbl">HOW</span>
+        <p>Cross-platform builds — PC, console, mobile, and future SDPD devices. THROWN is browser-first and self-funding by design, so the bigger, slower titles never have to compromise for revenue.</p>
+      </div>
+    </div>
+    
+    <button class="more-toggle" data-target="sdg-more">Full vision for SDG ↓</button>
+    <div class="more-panel" id="sdg-more"><div class="inner">
+      <h5>Where this goes</h5>
+      <ul>
+        <li>Cross-platform multiplayer across every current and future title</li>
+        <li>Original franchises entirely outside Volta Chronicles</li>
+        <li>Publishing support for outside indie developers</li>
+        <li>Cloud gaming integration</li>
+        <li>Exclusive experiences built specifically for SDT's own future hardware</li>
+      </ul>
+      <p class="note">THROWN ships first and funds the rest — that ordering is deliberate, not accidental.</p>
+    </div></div>
+  </section>
+
+  <!-- SDS -->
+  <section class="division" id="sds" style="--dcolor:var(--cool);">
+    <div class="div-head">
+      <div>
+        <span class="div-code mono" style="background:var(--cool);color:var(--void);">SDS — SUPER DUPER SOFTWARES</span>
+        <h2>Tools built to actually get used.</h2>
+        <p class="div-sub">SDS exists because most software gets designed for a demo, not for daily use. Everything here is built around one test: would we actually keep using this ourselves?</p>
+      </div>
+    </div>
+    <div class="div-cols reveal">
+      <div class="div-col">
+        <span class="lbl">WHY</span>
+        <p>Generic Linux distros feel like generic Linux distros — even the gaming-focused ones. SDS exists to give SDT (and eventually its own hardware) an operating system with an actual identity, not a reskinned desktop.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">WHAT</span>
+        <p>SDT Game OS — an Arch Linux-based system that boots straight into a Godot-powered console dashboard, with a full customizable desktop one toggle away.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">HOW</span>
+        <p>PipeWire for low-latency audio, Proton + community runners for compatibility, and an A/B immutable partition layout so a bad update can never brick the system — it just falls back automatically.</p>
+      </div>
+    </div>
+    
+    <button class="more-toggle" data-target="sds-more">More on Game OS ↓</button>
+    <div class="more-panel" id="sds-more"><div class="inner">
+      <h5>Built on Arch, tuned for gaming</h5>
+      <ul>
+        <li>Godot-powered console dashboard — under 10 seconds boot on an SSD</li>
+        <li>One toggle away from a full customizable desktop</li>
+        <li>PipeWire audio — low-latency, automatic Bluetooth handling</li>
+        <li>Proton + community runners built in</li>
+        <li>A/B immutable partitions — a bad update falls back safely, never bricks</li>
+        <li>Flatpak support for regular desktop apps too</li>
+      </ul>
+      <p class="note">Long-term goal: the OS that eventually runs on SDT's own hardware.</p>
+    </div></div>
+  </section>
+
+  <!-- SDN -->
+  <section class="division" id="sdn" style="--dcolor:var(--charge);">
+    <div class="div-head">
+      <div>
+        <span class="div-code mono" style="background:var(--charge);color:var(--void);">SDN — SUPER DUPER NETWORKS</span>
+        <h2>Everything that has to talk to everything else.</h2>
+        <p class="div-sub">Every game, every device, every assistant eventually needs to send data somewhere. SDN is the plumbing — plus outside client work that keeps the lights on.</p>
+      </div>
+    </div>
+    <div class="div-cols reveal">
+      <div class="div-col">
+        <span class="lbl">WHY</span>
+        <p>Cloud infrastructure and networking aren't glamorous, but nothing else works without them — and SDN also takes on outside client work, which funds internal R&amp;D without SDT needing outside investors.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">WHAT</span>
+        <p>VibeMesh — offline mesh messaging and file transfer — plus full client website builds, including company sites and quote-cart systems for Shiraa Global.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">HOW</span>
+        <p>VibeMesh routes over Bluetooth LE, Wi-Fi Direct, and Wi-Fi Aware simultaneously — a custom SDN-style control layer decides the path data takes with zero cell towers or routers involved.</p>
+      </div>
+    </div>
+    
+    <button class="more-toggle" data-target="sdn-more">More on VibeMesh ↓</button>
+    <div class="more-panel" id="sdn-more"><div class="inner">
+      <h5>Phones talking directly to phones</h5>
+      <ul>
+        <li>Routes over Bluetooth LE, Wi-Fi Direct, and Wi-Fi Aware — no towers, no router, no internet</li>
+        <li>Android and iOS mesh directly with each other</li>
+        <li>Chunked transfer pulled from multiple nearby devices at once — no real file-size ceiling</li>
+        <li>Walk out of range and it pauses; cross paths again and it resumes automatically</li>
+        <li>Emergency messages jump every queue instantly</li>
+      </ul>
+      <p class="note">Built for the places where the network just isn't there.</p>
+    </div></div>
+  </section>
+
+  <!-- SDPD -->
+  <section class="division" id="sdpd" style="--dcolor:var(--hot);">
+    <div class="div-head">
+      <div>
+        <span class="div-code mono" style="background:var(--hot);color:var(--void);">SDPD — PRODUCT DEVELOPMENT</span>
+        <h2>Ambition, made physical. Eventually.</h2>
+        <p class="div-sub">SDT's hardware arm. Big ideas here aren't dismissed as "too ambitious for a studio this size" — they're treated as the actual plan, on an honest timeline.</p>
+      </div>
+    </div>
+    <div class="div-cols reveal">
+      <div class="div-col">
+        <span class="lbl">WHY</span>
+        <p>Every SDT division eventually wants its own hardware to run on — SDT Game OS, the Volta assistant, SDT's games. SDPD exists to make that a real destination instead of a permanent someday.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">WHAT</span>
+        <p>SD Console, SD Portable, and the flagship concept: SD Mark I — a compact phone built around "purpose over hype," no Pro/Plus/Ultra tiers, one flagship a year.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">HOW</span>
+        <p>Concept-first. Every feature has to justify itself functionally before it earns a place — no decorative hardware. Realistic timeline: years out, not a promise.</p>
+      </div>
+    </div>
+    
+    <button class="more-toggle" data-target="sdpd-more">Concept peek: SD Mark I ↓</button>
+    <div class="more-panel" id="sdpd-more"><div class="inner">
+      <span class="concept-flag">Concept — not in production</span>
+      <h5>One flagship. Once a year.</h5>
+      <p style="font-size:12.5px;line-height:1.6;color:var(--dim);margin:0 0 12px;">No Pro, Plus, or Ultra versions. Just one compact flagship, designed around "purpose over hype" — every hardware feature has to have a practical use, no decoration without function.</p>
+      <ul>
+        <li>A rotating Smart Dial — remappable to zoom, brightness, scrubbing, or gaming controls</li>
+        <li>A touch-enabled rear display for glanceable info without unlocking the phone</li>
+        <li>Alert slider, dedicated camera button, programmable action button</li>
+        <li>3.5&nbsp;mm headphone jack, still included, on purpose</li>
+      </ul>
+      <p class="note">Honest timeline: realistically 10–25 years out for a studio our size. A concept we love, not a promise we're making.</p>
+    </div></div>
+  </section>
+
+  <!-- SDSM -->
+  <section class="division" id="sdsm" style="--dcolor:var(--deep);">
+    <div class="div-head">
+      <div>
+        <span class="div-code mono" style="background:var(--deep);color:var(--void);">SDSM — STUDIOS &amp; MEDIA</span>
+        <h2>Wherever Volta Chronicles needs to jump formats.</h2>
+        <p class="div-sub">Some of this story wants to be played. Some of it wants to be watched, or heard. SDSM exists so nothing gets forced into the wrong medium just because it's convenient.</p>
+      </div>
+    </div>
+    <div class="div-cols reveal">
+      <div class="div-col">
+        <span class="lbl">WHY</span>
+        <p>A universe this size deserves more than one format. Games can't hold everything — some character beats and some music need film, animation, or a soundtrack to land properly.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">WHAT</span>
+        <p>An animated Volta Chronicles series in early development, alongside original soundtracks and standalone music releases tied to the universe.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">HOW</span>
+        <p>Starting small — short films and cinematic trailers for SDT's own games first, building toward the full animated series as the universe's audience grows alongside it.</p>
+      </div>
+    </div>
+    
+    <button class="more-toggle" data-target="sdsm-more">Future vision ↓</button>
+    <div class="more-panel" id="sdsm-more"><div class="inner"><ul>
+      <li>Full animated series set in Volta Chronicles</li>
+      <li>Short films &amp; cinematic trailers for SDT's games</li>
+      <li>Original soundtracks and standalone music releases</li>
+      <li>Original digital content beyond the main universe</li>
+    </ul></div></div>
+  </section>
+
+  <!-- SDAI -->
+  <section class="division" id="sdai" style="--dcolor:var(--amber);">
+    <div class="div-head">
+      <div>
+        <span class="div-code mono" style="background:var(--amber);color:var(--void);">SDAI — SUPER DUPER AI</span>
+        <h2>Intelligence, not bolted on afterward.</h2>
+        <p class="div-sub">SDAI exists because assistants that get added after a product ships always feel added after a product ships. This one's being built into the OS from day one.</p>
+      </div>
+    </div>
+    <div class="div-cols reveal">
+      <div class="div-col">
+        <span class="lbl">WHY</span>
+        <p>Most AI features feel like a layer on top of a product instead of part of it. SDAI is designed in parallel with SDT Game OS specifically so it never feels like an afterthought.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">WHAT</span>
+        <p>Volta — a context-aware assistant built directly into SDT Game OS, handling voice control, automation, and system management.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">HOW</span>
+        <p>Built with architectural hooks from the start rather than retrofitted — the OS itself ships with the communication pipes Volta needs already in place.</p>
+      </div>
+    </div>
+    
+    <button class="more-toggle" data-target="sdai-more">More on Volta ↓</button>
+    <div class="more-panel" id="sdai-more"><div class="inner">
+      <h5>Meet Volta</h5>
+      <p style="font-size:12.5px;line-height:1.6;color:var(--dim);margin:0 0 10px;">SDT's planned assistant, named after the universe it grew up alongside.</p>
+      <ul>
+        <li>Voice assistant &amp; smart automation</li>
+        <li>Device &amp; system management</li>
+        <li>Context-aware — adjusts to what you're actually doing</li>
+        <li>Planned to eventually reach across every SDT product</li>
+      </ul>
+    </div></div>
+  </section>
+
+  <!-- SDE -->
+  <section class="division" id="sde" style="--dcolor:var(--rose);">
+    <div class="div-head">
+      <div>
+        <span class="div-code mono" style="background:var(--rose);color:var(--void);">SDE — SUPER DUPER ENTERTAINMENT</span>
+        <h2>Home of every world SDT has ever made up.</h2>
+        <p class="div-sub">Volta Chronicles lives here, but so does everything unrelated to it — SDE exists so original storytelling never has to compete for space with product roadmaps.</p>
+      </div>
+    </div>
+    <div class="div-cols reveal">
+      <div class="div-col">
+        <span class="lbl">WHY</span>
+        <p>Characters and lore need somewhere to grow that isn't tied to a single game's release schedule. SDE holds the IP so it can expand independently of whatever ships next.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">WHAT</span>
+        <p>Volta Chronicles' lore and novel (Subject Zero) — the connective tissue behind every SDT game — plus several original book titles with no connection to it at all.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">HOW</span>
+        <p>Print, games, and animation all draw from the same lore bible so nothing contradicts across formats — a single source of truth the whole studio writes against.</p>
+      </div>
+    </div>
+    
+    <button class="more-toggle" data-target="sde-more">Future vision ↓</button>
+    <div class="more-panel" id="sde-more"><div class="inner"><ul>
+      <li>Volta Chronicles expanding across games, animation, and print</li>
+      <li>Original book titles unrelated to Volta Chronicles</li>
+      <li>Graphic novels &amp; comics</li>
+      <li>Merchandise tied to SDT's original characters</li>
+    </ul></div></div>
+  </section>
+
+  <!-- SDRD -->
+  <section class="division" id="sdrd" style="--dcolor:var(--teal);">
+    <div class="div-head">
+      <div>
+        <span class="div-code mono" style="background:var(--teal);color:var(--void);">SDRD — RESEARCH &amp; DEVELOPMENT</span>
+        <h2>Where the next thing starts, before it has a home.</h2>
+        <p class="div-sub">Not every idea belongs to a division yet. SDRD exists to let things fail fast, on purpose, before they cost the rest of the studio anything.</p>
+      </div>
+    </div>
+    <div class="div-cols reveal">
+      <div class="div-col">
+        <span class="lbl">WHY</span>
+        <p>Early-stage experiments need a place that isn't judged by shipping deadlines. SDRD is deliberately the division most likely to try something that doesn't work — that's the job description.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">WHAT</span>
+        <p>Early groundwork for an in-house game engine, built specifically around the kind of games SDT actually wants to make instead of ones a general engine happens to support well.</p>
+      </div>
+      <div class="div-col">
+        <span class="lbl">HOW</span>
+        <p>Validated ideas get fed forward into SDG, SDS, and SDAI once they prove out — SDRD is the filter, not the final destination.</p>
+      </div>
+    </div>
+    
+    <button class="more-toggle" data-target="sdrd-more">Future vision ↓</button>
+    <div class="more-panel" id="sdrd-more"><div class="inner"><ul>
+      <li>An in-house engine built specifically around the kind of games SDT wants to make</li>
+      <li>Early hardware sensor &amp; input experiments for future SDPD devices</li>
+      <li>Feeding validated ideas forward into SDG, SDS, and SDAI</li>
+    </ul>
+    <p class="note">This is the division most likely to fail fast on purpose — that's the job.</p></div></div>
+  </section>
+
+  <div class="division-zero-card" id="divisionZeroCard">
+    <div class="dz-inner">
+      <span class="div-code mono" style="background:var(--hot);color:var(--void);">SD?? — DIVISION ZERO</span>
+      <h2>Access supposedly restricted.</h2>
+      <p style="font-size:13.5px;color:var(--dim);max-width:520px;margin-top:10px;">You found it. There isn't a real 9th division here — we just liked the idea of somebody clicking around enough to actually find this card.</p>
+      <a class="btn ghost sm" href="division-zero.html" style="margin-top:18px;border-color:rgba(255,51,72,0.4);">Open the file anyway →</a>
+    </div>
+  </div>
+
+  <div class="reveal-hint mono">psst — click the SDT logo in the nav a few times.</div>
+</div>
+
+<div class="cta-band">
+  <div class="wrap">
+    <h2 class="reveal">Want the deeper story behind any of it?</h2>
+    <a class="btn pri" href="universe.html">Step into Volta Chronicles →</a>
+  </div>
+</div>
+</main>
+
+<script src="js/shared.js"></script>
+<script>
+  document.querySelectorAll('.more-toggle').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const panel = document.getElementById(btn.dataset.target);
+      const opening = !panel.classList.contains('open');
+      panel.classList.toggle('open');
+      btn.textContent = btn.textContent.replace(opening ? '↓' : '↑', opening ? '↑' : '↓');
+    });
+  });
+</script>
+</body>
+</html>

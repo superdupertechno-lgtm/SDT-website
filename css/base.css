@@ -1,0 +1,228 @@
+/* =========================================================
+   SDT — SIGNAL IDENTITY
+   Concept: this whole site is a frequency you've tuned into.
+   SDT began as a channel broadcasting about other people's
+   worlds before building its own — and "Volta," the studio's
+   own universe, is literally a unit of electrical potential.
+   Every recurring motif (waveform, tuner, static, channels)
+   comes from that: broadcast + voltage, not generic sci-fi HUD.
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Rajdhani:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --void:#050607;
+  --panel:#0d1012;
+  --panel-2:#12161a;
+  --paper:#eef1ee;
+  --dim:rgba(238,241,238,0.58);
+  --dim-2:rgba(238,241,238,0.36);
+  --line:rgba(238,241,238,0.09);
+  --line-strong:rgba(238,241,238,0.18);
+
+  --hot:#ff3348;    /* live / urgent / hostile */
+  --cool:#2ea8ff;   /* system / info / ally */
+  --charge:#3fe08a; /* active / go / stable */
+  --volt:#ffc233;   /* power / energy / Volta */
+  --deep:#7c6bff;   /* Volta Chronicles' own frequency — used only there */
+  --amber:#ff9d5c;  /* division accent — SDAI */
+  --rose:#ff77c9;   /* division accent — SDE */
+  --teal:#22d3c8;   /* division accent — SDR&D */
+
+  --max:1200px;
+  --radius:3px;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--void);
+  color:var(--paper);
+  font-family:'Manrope',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  touch-action:manipulation;
+}
+h1,h2,h3,h4{font-family:'Bangers',cursive,sans-serif;font-weight:400;margin:0;line-height:1.08;letter-spacing:0.015em;
+  text-shadow:3px 3px 0 rgba(0,0,0,0.4);}
+h3,h4{text-shadow:2px 2px 0 rgba(0,0,0,0.35);}
+.mono{font-family:'IBM Plex Mono',monospace;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+p{line-height:1.7;color:var(--dim);margin:0;}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 26px;}
+::selection{background:var(--hot);color:var(--void);}
+button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+}
+
+/* ============ STATIC NOISE (ambient texture, very faint) ============ */
+.static-veil{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+#bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%;}
+main{position:relative;z-index:2;}
+
+/* ============ BRIGHT LIVE BACKGROUND BLOBS (CSS-driven, GPU-cheap) ============ */
+.bg-blobs{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.bg-blob{position:absolute;width:400px;height:400px;border-radius:50%;filter:blur(85px);
+  opacity:0.6;mix-blend-mode:screen;transform:translate(-50%,-50%);will-change:transform;}
+@keyframes blobDrift1{0%{transform:translate(-50%,-50%) translate(0,0);}50%{transform:translate(-50%,-50%) translate(7vw,9vh);}100%{transform:translate(-50%,-50%) translate(-5vw,-6vh);}}
+@keyframes blobDrift2{0%{transform:translate(-50%,-50%) translate(0,0);}50%{transform:translate(-50%,-50%) translate(-9vw,6vh);}100%{transform:translate(-50%,-50%) translate(6vw,-8vh);}}
+@keyframes blobDrift3{0%{transform:translate(-50%,-50%) translate(0,0);}50%{transform:translate(-50%,-50%) translate(5vw,-10vh);}100%{transform:translate(-50%,-50%) translate(-8vw,5vh);}}
+
+/* ============ CHANNEL SWITCH TRANSITION (page nav) ============ */
+#channelSwitch{position:fixed;inset:0;z-index:9998;background:var(--void);opacity:0;pointer-events:none;}
+#channelSwitch.active{opacity:1;pointer-events:all;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:staticFlicker .32s steps(2) forwards;}
+@keyframes staticFlicker{0%{opacity:0;}20%{opacity:1;}70%{opacity:1;}100%{opacity:1;}}
+
+/* ============ TUNER STRIP (nav) ============ */
+.tuner{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:env(safe-area-inset-top,0) calc(22px + env(safe-area-inset-right,0)) 0 calc(22px + env(safe-area-inset-left,0));
+  height:calc(64px + env(safe-area-inset-top,0));background:rgba(5,6,7,0.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.tuner .call-sign{display:flex;align-items:center;gap:10px;font-family:'Rajdhani';font-weight:700;font-size:16px;letter-spacing:0.02em;}
+.tuner .call-sign .mark{width:38px;height:38px;flex:none;animation:navMarkPulse 3.4s ease-in-out infinite;}
+@keyframes navMarkPulse{0%,100%{filter:drop-shadow(0 0 0 rgba(255,51,72,0));}50%{filter:drop-shadow(0 0 8px rgba(255,51,72,0.55));}}
+.tuner .freq{font-family:'IBM Plex Mono';font-size:10.5px;color:var(--dim-2);letter-spacing:0.06em;}
+.presets{display:none;gap:2px;}
+@media(min-width:900px){.presets{display:flex;}}
+.presets a{position:relative;padding:10px 16px;font-family:'IBM Plex Mono';font-size:11px;letter-spacing:0.05em;
+  color:var(--dim);transition:color .2s, text-shadow .15s;}
+.presets a .num{color:var(--dim-2);margin-right:7px;}
+.presets a:hover{color:var(--paper);text-shadow:1.5px 0 rgba(255,51,72,0.7), -1.5px 0 rgba(46,168,255,0.7);}
+.presets a.current{color:var(--paper);}
+.presets a.current::after{content:'';position:absolute;left:16px;right:16px;bottom:6px;height:2px;background:var(--hot);}
+.tuner-controls{display:flex;align-items:center;gap:0;}
+.tuner-cta{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:0.05em;border:1px solid var(--line-strong);
+  padding:9px 16px;border-radius:var(--radius);transition:.2s;}
+.tuner-cta:hover{border-color:var(--hot);color:var(--hot);}
+.sound-toggle{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--line-strong);
+  border-radius:var(--radius);color:var(--dim);margin-left:10px;transition:.2s;flex:none;}
+.sound-toggle:hover{color:var(--paper);border-color:var(--paper);}
+.sound-toggle.muted{color:var(--dim-2);}
+.sound-toggle.muted .wav1, .sound-toggle.muted .wav2{opacity:0.15;}
+.tuner-menu-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:none;border:1px solid var(--line-strong);border-radius:var(--radius);}
+@media(min-width:900px){.tuner-menu-btn{display:none;}}
+.tuner-menu-btn span{display:block;width:16px;height:1.5px;background:var(--paper);margin:3px 0;}
+#mobileMenu{position:fixed;top:calc(64px + env(safe-area-inset-top,0));left:0;right:0;bottom:0;background:var(--void);
+  z-index:99;display:none;flex-direction:column;padding:20px calc(26px + env(safe-area-inset-right,0)) calc(20px + env(safe-area-inset-bottom,0)) calc(26px + env(safe-area-inset-left,0));overflow-y:auto;}
+#mobileMenu.open{display:flex;}
+#mobileMenu a{padding:16px 0;border-bottom:1px solid var(--line);font-family:'IBM Plex Mono';font-size:14px;letter-spacing:0.04em;}
+#mobileMenu a .num{color:var(--dim-2);margin-right:10px;}
+
+/* ============ WAVEFORM DIVIDER (signature element) ============ */
+.waveform-wrap{position:relative;height:64px;margin:0;overflow:hidden;}
+.waveform-wrap canvas{width:100%;height:100%;display:block;}
+.waveform-label{position:absolute;top:50%;left:26px;transform:translateY(-50%);font-family:'IBM Plex Mono';
+  font-size:10px;letter-spacing:0.08em;color:var(--dim-2);background:var(--void);padding:0 10px;z-index:2;}
+
+/* ============ BUTTONS & CHIPS ============ */
+.btn{position:relative;display:inline-flex;align-items:center;gap:9px;padding:14px 24px;border-radius:var(--radius);
+  font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:0.04em;border:1px solid var(--line-strong);
+  transition:transform .15s cubic-bezier(.34,1.56,.64,1), border-color .15s, background .15s;}
+.btn.pri{background:var(--paper);color:var(--void);border-color:var(--paper);font-weight:600;}
+.btn.pri:hover{transform:translateY(-2px) scale(1.03);background:var(--hot);border-color:var(--hot);color:var(--void);
+  text-shadow:1px 0 rgba(46,168,255,0.5), -1px 0 rgba(63,224,138,0.5);}
+.btn.pri:active,.btn.ghost:active{transform:scale(0.94);}
+.btn.ghost:hover{border-color:var(--paper);transform:translateY(-2px) scale(1.03);}
+.btn.sm{padding:10px 16px;font-size:11px;}
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.06em;
+  color:var(--dim);border:1px solid var(--line-strong);border-radius:99px;padding:5px 12px;}
+.tag .dot{width:6px;height:6px;border-radius:50%;background:var(--charge);}
+
+/* ============ SECTION SHELL ============ */
+section{padding:88px 0;position:relative;}
+.head{max-width:680px;margin-bottom:44px;}
+.head .freq-num{font-family:'IBM Plex Mono';font-size:11px;color:var(--hot);letter-spacing:0.08em;margin-bottom:12px;display:block;}
+.head h2{font-size:clamp(28px,4.4vw,44px);}
+.head p.lede{font-size:15.5px;margin-top:14px;max-width:600px;}
+
+/* ============ CARD ============ */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;
+  position:relative;overflow:hidden;transition:border-color .2s, transform .25s ease;}
+.panel:hover{border-color:var(--line-strong);transform:translateY(-3px);}
+.panel::before{content:'';position:absolute;top:0;left:0;width:22px;height:2px;background:var(--hot);opacity:0;transition:opacity .2s;z-index:2;}
+.panel:hover::before{opacity:1;}
+.panel::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
+  background:linear-gradient(115deg, transparent, rgba(255,255,255,0.08), transparent);
+  transform:skewX(-20deg);transition:left .6s ease;pointer-events:none;}
+.panel:hover::after{left:120%;}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--line);padding:56px 0 26px;position:relative;z-index:2;background:var(--void);}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:32px;margin-bottom:40px;}
+@media(min-width:760px){.foot-grid{grid-template-columns:1.3fr 1fr 1fr;}}
+.foot-brand p{max-width:280px;margin-top:12px;font-size:13px;}
+.foot-col h4{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim-2);margin-bottom:14px;}
+.foot-col a{display:block;font-size:13.5px;margin-bottom:10px;color:var(--dim);transition:.2s;}
+.foot-col a:hover{color:var(--paper);}
+.wa-link{display:flex;align-items:center;color:var(--charge) !important;}
+.wa-link:hover{color:var(--paper) !important;}
+.social-row{display:flex;gap:10px;margin-top:2px;flex-wrap:wrap;}
+.social-icon{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--line-strong);
+  border-radius:var(--radius);color:var(--dim);transition:.2s;}
+.social-icon:hover{color:var(--paper);border-color:var(--paper);transform:translateY(-2px);}
+.social-pop-wrap{position:relative;display:inline-block;}
+.social-pop{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);
+  background:var(--panel);border:1px solid var(--line-strong);
+  color:var(--paper);font-family:'IBM Plex Mono';font-size:11px;padding:9px 14px;border-radius:8px;
+  white-space:normal;max-width:min(240px, 80vw);width:max-content;text-align:center;
+  opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;z-index:20;}
+.social-pop::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--panel);}
+.social-pop-wrap:hover .social-pop, .social-pop-wrap.tapped .social-pop{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-family:'IBM Plex Mono';
+  font-size:10.5px;color:var(--dim-2);border-top:1px solid var(--line);padding-top:18px;}
+
+/* ============ SCROLLBAR PROGRESS ============ */
+#sigBar{position:fixed;top:0;left:0;height:2px;width:0%;z-index:200;background:var(--hot);}
+
+/* ============ EASTER EGGS ============ */
+.egg-sticker{
+  position:absolute;z-index:500;font-family:'IBM Plex Mono';font-weight:600;font-size:12px;letter-spacing:0.02em;
+  background:var(--volt);color:var(--void);padding:6px 13px;border-radius:6px;white-space:nowrap;
+  box-shadow:0 4px 14px rgba(0,0,0,0.4);animation:eggPop .4s cubic-bezier(.2,1.7,.4,1) forwards;
+  transition:opacity .5s ease;
+}
+@keyframes eggPop{0%{transform:scale(0.3) rotate(-8deg);opacity:0;}60%{transform:scale(1.1) rotate(3deg);opacity:1;}100%{transform:scale(1) rotate(-1deg);opacity:1;}}
+
+.egg-override{position:fixed;inset:0;z-index:9997;pointer-events:none;overflow:hidden;background:var(--void);
+  display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity .5s ease;}
+.egg-override.fade{opacity:0;}
+.egg-noise{position:absolute;inset:0;opacity:0.16;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:eggNoiseFlicker .12s steps(2) infinite;}
+@keyframes eggNoiseFlicker{0%,100%{opacity:0.1;}50%{opacity:0.22;}}
+.egg-msg{position:relative;z-index:2;text-align:center;padding:24px;}
+.egg-glitch{position:relative;display:inline-block;font-size:clamp(24px,5vw,44px);font-weight:700;letter-spacing:0.06em;color:var(--paper);}
+.egg-glitch::before,.egg-glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;overflow:hidden;}
+.egg-glitch::before{color:var(--hot);animation:eggGlitchA 0.5s infinite linear alternate-reverse;clip-path:inset(0 0 55% 0);}
+.egg-glitch::after{color:var(--cool);animation:eggGlitchB 0.4s infinite linear alternate-reverse;clip-path:inset(55% 0 0 0);}
+@keyframes eggGlitchA{0%{transform:translate(0,0);}20%{transform:translate(-3px,1px);}40%{transform:translate(3px,-1px);}60%{transform:translate(-2px,0);}100%{transform:translate(2px,1px);}}
+@keyframes eggGlitchB{0%{transform:translate(0,0);}25%{transform:translate(3px,-1px);}50%{transform:translate(-3px,1px);}75%{transform:translate(2px,0);}100%{transform:translate(-2px,-1px);}}
+.egg-msg p{margin-top:18px;font-family:'IBM Plex Mono';font-size:12.5px;color:var(--dim);max-width:420px;}
+.egg-pulse{position:absolute;top:-6vh;width:5px;height:5px;border-radius:50%;animation:eggPulseFall linear forwards;}
+@keyframes eggPulseFall{to{transform:translateY(112vh);opacity:0.1;}}
+
+.egg-toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-14px);z-index:600;
+  background:var(--panel);border:1px solid var(--volt);color:var(--volt);font-size:11.5px;letter-spacing:0.06em;
+  padding:10px 18px;border-radius:99px;opacity:0;transition:opacity .3s ease, transform .3s ease;}
+.egg-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+body.volt-glitch{animation:voltShake .55s;}
+body.volt-glitch::after{
+  content:'';position:fixed;inset:0;z-index:590;pointer-events:none;background:rgba(255,194,51,0.08);
+  animation:voltFlash .55s;
+}
+@keyframes voltShake{
+  0%,100%{transform:translate(0,0);} 15%{transform:translate(-2px,1px);} 30%{transform:translate(2px,-1px);}
+  45%{transform:translate(-3px,0);} 60%{transform:translate(3px,1px);} 75%{transform:translate(-1px,-1px);} 90%{transform:translate(1px,0);}
+}
+@keyframes voltFlash{0%{opacity:0;}10%{opacity:1;}100%{opacity:0;}}
