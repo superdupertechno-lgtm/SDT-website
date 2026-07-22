@@ -6,54 +6,19 @@
 <meta name="theme-color" content="#050607">
 <title>Super Duper Techno — You're Tuned In</title>
 <meta name="description" content="Super Duper Techno (SDT) — an independent studio broadcasting games, software, hardware, and AI, anchored by an original universe called Volta Chronicles.">
-<link rel="stylesheet" href="css/base.css">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
-<link rel="manifest" href="/assets/site.webmanifest">
-<meta property="og:title" content="SUPER DUPER TECHNO">
-<meta property="og:description" content="You're Tuned In. Games, Software, Hardware, Networks, AI, and Original Storytelling.">
-<meta property="og:image" content="https://superdupertechno.com/assets/og-image.jpg">
-<meta property="og:url" content="https://superdupertechno.com">
+<link rel="canonical" href="https://superdupertechno.com/">
+<link rel="icon" type="image/png" href="assets/sdt-color.png">
 <meta property="og:type" content="website">
-
+<meta property="og:site_name" content="Super Duper Techno">
+<meta property="og:title" content="Super Duper Techno — You're Tuned In">
+<meta property="og:description" content="Super Duper Techno (SDT) — an independent studio broadcasting games, software, hardware, and AI, anchored by an original universe called Volta Chronicles.">
+<meta property="og:url" content="https://superdupertechno.com/">
+<meta property="og:image" content="https://superdupertechno.com/assets/sdt-color.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://superdupertechno.com/assets/og-image.jpg">
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Organization",
-  "name":"Super Duper Techno",
-  "alternateName":"SDT",
-  "url":"https://superdupertechno.com",
-  "logo":"https://superdupertechno.com/assets/logo.png",
-  "description":"Independent founder-led studio working across games, software, hardware, networks, AI and original storytelling.",
-  "founder":{
-    "@type":"Person",
-    "name":"Hardhip G"
-  },
-  "sameAs":[
-    "https://github.com/superdupertechno-lgtm/SDT-website"
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"WebSite",
- "name":"Super Duper Techno",
- "url":"https://superdupertechno.com"
-}
-</script>
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"WebPage",
- "name":"Super Duper Techno — You're Tuned In",
- "url":"https://superdupertechno.com",
- "description":"Independent founder-led studio creating games, software, AI, hardware, networking and original stories."
-}
-</script>
+<meta name="twitter:title" content="Super Duper Techno — You're Tuned In">
+<meta name="twitter:description" content="Super Duper Techno (SDT) — an independent studio broadcasting games, software, hardware, and AI, anchored by an original universe called Volta Chronicles.">
+<meta name="twitter:image" content="https://superdupertechno.com/assets/sdt-color.png">
+<link rel="stylesheet" href="css/base.css">
 <style>
   header.hero{min-height:94vh;min-height:94svh;display:flex;flex-direction:column;justify-content:center;padding:130px 0 50px;position:relative;overflow:hidden;}
   .hero-bg{position:absolute;inset:0;z-index:0;}
@@ -98,8 +63,8 @@
   /* doors grid */
   .doors{display:grid;grid-template-columns:1fr;gap:14px;}
   @media(min-width:700px){.doors{grid-template-columns:repeat(2,1fr);}}
-  @media(min-width:1040px){.doors{grid-template-columns:repeat(3,1fr);}}
   @media(min-width:1280px){.doors{grid-template-columns:repeat(5,1fr);}}
+  @media(min-width:700px) and (max-width:1279px){.doors > a:last-child{grid-column:1 / -1;}}
   .door{padding:26px 22px;min-height:170px;display:flex;flex-direction:column;justify-content:space-between;}
   .door h3{font-size:18px;margin-bottom:8px;}
   .door p{font-size:12.5px;}
@@ -190,6 +155,27 @@
   .cine-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:6;font-family:'IBM Plex Mono';
     font-size:10.5px;color:var(--dim-2);letter-spacing:0.06em;}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Super Duper Techno",
+  "alternateName": "SDT",
+  "url": "https://superdupertechno.com",
+  "logo": "https://superdupertechno.com/assets/sdt-color.png",
+  "foundingDate": "2016",
+  "description": "Super Duper Techno (SDT) is an independent studio building games, software, hardware, networks, AI, and original storytelling — including the Volta Chronicles universe.",
+  "email": "superdupertechno@gmail.com",
+  "sameAs": [
+    "https://www.youtube.com/@SuperDuperTechno-sdgamer",
+    "https://instagram.com/super.duper.techno",
+    "https://x.com/Superduper26319",
+    "https://linkedin.com/company/super-duper-techno",
+    "https://discord.gg/QkQP4ntBXq",
+    "https://www.reddit.com/r/Super_Duper_Techno/"
+  ]
+}
+</script>
 </head>
 <body data-theme="home">
 
@@ -394,7 +380,7 @@
     const progressHost = document.getElementById('cineProgress');
     const played = sessionStorage.getItem('sdt_intro_played');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const SLIDE_MS = 2800;
+    const SLIDE_MS = 1300;
 
     function sizeStatic(){ staticCanvas.width = window.innerWidth; staticCanvas.height = window.innerHeight; }
     sizeStatic(); window.addEventListener('resize', sizeStatic);
@@ -502,24 +488,24 @@
       intro.classList.add('hide');
     } else {
       const statusEl = document.getElementById('introStatus');
-      const statuses = ['TUNING', 'SCANNING FREQUENCY', 'LOCKING SIGNAL', 'CALIBRATING', 'ALMOST THERE'];
+      const statuses = ['TUNING', 'LOCKING SIGNAL', 'ALMOST THERE'];
       let statusIdx = 0;
       const statusTimer = setInterval(() => {
         statusIdx = (statusIdx + 1) % statuses.length;
         if(statusEl) statusEl.textContent = statuses[statusIdx];
-      }, 900);
+      }, 380);
       let pct = 0;
       const pctTimer = setInterval(()=>{
-        pct += Math.random()*5 + 2;
+        pct += Math.random()*22 + 14;
         if(pct>=100){
           pct=100;
           clearInterval(pctTimer);
           clearInterval(statusTimer);
           if(statusEl) statusEl.textContent = 'SIGNAL LOCKED';
-          setTimeout(startCinematic, 550);
+          setTimeout(startCinematic, 300);
         }
         pctEl.textContent = Math.floor(pct)+'%';
-      }, 220);
+      }, 140);
     }
     skipBtn.addEventListener('click', finishIntro);
     // fix: if the browser restores this page from bfcache mid-sequence

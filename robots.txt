@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /division-zero.html
 
 Sitemap: https://superdupertechno.com/sitemap.xml
