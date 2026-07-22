@@ -65,39 +65,42 @@
      base with two slow-drifting aurora sheets and a fine circuit-grid overlay,
      built entirely from gradients/SVG so it stays GPU-cheap. */
   body[data-theme="universe"]{
-    --u-glow: rgba(124,107,255,0.16);
+    --u-glow: rgba(90,80,150,0.14);
     background:
-      radial-gradient(ellipse 80% 55% at 18% -6%, rgba(124,107,255,0.22), transparent 60%),
-      radial-gradient(ellipse 70% 50% at 88% 8%, rgba(46,168,255,0.14), transparent 58%),
-      radial-gradient(ellipse 90% 60% at 50% 108%, rgba(124,107,255,0.10), transparent 65%),
-      linear-gradient(180deg, #07050f 0%, #0a0716 38%, #050607 100%);
+      radial-gradient(ellipse 80% 55% at 18% -6%, rgba(90,80,150,0.16), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 88% 8%, rgba(46,90,120,0.10), transparent 58%),
+      radial-gradient(ellipse 90% 60% at 50% 108%, rgba(90,80,150,0.08), transparent 65%),
+      linear-gradient(180deg, #0a0a10 0%, #0b0b14 38%, #050607 100%);
     background-attachment:fixed;
   }
   body[data-theme="universe"] .bg-blobs{mix-blend-mode:screen;}
-  .u-circuit{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.5;}
+  .u-circuit{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.3;}
   .u-circuit svg{width:100%;height:100%;}
   .u-aurora{position:fixed;inset:-10% -10%;z-index:0;pointer-events:none;
-    background:conic-gradient(from 210deg at 30% 20%, rgba(124,107,255,0.16), transparent 26%, transparent 74%, rgba(46,168,255,0.12));
-    filter:blur(60px);animation:auroraDrift 34s ease-in-out infinite alternate;mix-blend-mode:screen;}
+    background:conic-gradient(from 210deg at 30% 20%, rgba(90,80,150,0.10), transparent 26%, transparent 74%, rgba(46,90,120,0.08));
+    filter:blur(70px);animation:auroraDrift 40s ease-in-out infinite alternate;mix-blend-mode:screen;}
   @keyframes auroraDrift{
-    0%{transform:rotate(0deg) scale(1);opacity:0.7;}
-    50%{transform:rotate(8deg) scale(1.08);opacity:1;}
-    100%{transform:rotate(-6deg) scale(1.02);opacity:0.8;}
+    0%{transform:rotate(0deg) scale(1);opacity:0.6;}
+    50%{transform:rotate(6deg) scale(1.05);opacity:0.85;}
+    100%{transform:rotate(-4deg) scale(1.01);opacity:0.7;}
   }
 
   header.hero{min-height:74vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
     padding:140px 24px 50px;text-align:center;position:relative;overflow:hidden;}
-  .hero-bolts{position:absolute;inset:0;z-index:0;opacity:0.85;pointer-events:none;}
+  .hero-bolts{position:absolute;inset:0;z-index:0;opacity:0.55;pointer-events:none;}
   .hero-bolts svg{width:100%;height:100%;display:block;}
-  .hero-bolts path{fill:none;stroke:var(--deep);stroke-width:1.4;opacity:0.55;
-    stroke-dasharray:8 10;animation:boltFlow 5.5s linear infinite;filter:drop-shadow(0 0 4px rgba(124,107,255,0.6));}
-  .hero-bolts path:nth-child(2){stroke:var(--cool);animation-duration:7s;animation-direction:reverse;opacity:0.4;}
-  .hero-bolts path:nth-child(3){stroke:var(--volt);animation-duration:6.2s;opacity:0.3;}
+  .hero-bolts path{fill:none;stroke:var(--deep);stroke-width:1.2;opacity:0.32;
+    stroke-dasharray:8 10;animation:boltFlow 6.5s linear infinite;filter:drop-shadow(0 0 3px rgba(90,80,150,0.4));}
+  .hero-bolts path:nth-child(2){stroke:var(--cool);animation-duration:8s;animation-direction:reverse;opacity:0.2;}
+  .hero-bolts path:nth-child(3){stroke:var(--volt);animation-duration:7.2s;opacity:0.16;}
   @keyframes boltFlow{to{stroke-dashoffset:-180;}}
   .hero > *{position:relative;z-index:1;}
-  .hero .mark{width:88px;height:auto;margin:0 auto 22px;filter:drop-shadow(0 0 22px rgba(124,107,255,0.55));
-    animation:markPulse 3.6s ease-in-out infinite;cursor:pointer;-webkit-user-select:none;user-select:none;}
-  @keyframes markPulse{0%,100%{filter:drop-shadow(0 0 16px rgba(124,107,255,0.45));}50%{filter:drop-shadow(0 0 30px rgba(124,107,255,0.85));}}
+  .mark-wrap{width:88px;height:88px;margin:0 auto 22px;cursor:pointer;
+    -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation;
+    animation:markPulse 3.6s ease-in-out infinite;}
+  .mark-wrap .mark{width:100%;height:100%;pointer-events:none;-webkit-user-drag:none;
+    -webkit-touch-callout:none;user-select:none;}
+  @keyframes markPulse{0%,100%{filter:drop-shadow(0 0 12px rgba(90,80,150,0.4));}50%{filter:drop-shadow(0 0 22px rgba(90,80,150,0.7));}}
   .hero .eyebrow{font-family:'IBM Plex Mono';font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--deep);margin-bottom:14px;}
   .hero h1{font-size:clamp(42px,7.6vw,80px);margin-bottom:16px;
     background:linear-gradient(90deg,var(--deep),var(--paper) 45%,var(--volt));
@@ -196,6 +199,27 @@
     .cast-grid > .dossier:last-child{grid-column:unset;flex:0 0 78vw;}
     .cast-grid > .dossier:last-child .portrait-wrap{height:250px;}
   }
+
+  /* ============ EASTER EGG — "The Artist" case file, unlocked by tapping
+     the classified dossier 3+3 times ============ */
+  #classifiedDossier{transition:transform .15s ease;}
+  #classifiedDossier:active{transform:scale(0.97);}
+  .artist-reveal{max-height:0;opacity:0;overflow:hidden;transition:max-height .7s ease, opacity .5s ease;}
+  .artist-reveal.show{max-height:5000px;opacity:1;margin-top:26px;}
+  .artist-card{border:1px solid rgba(255,51,72,0.35);background:rgba(255,51,72,0.035);border-radius:var(--radius);
+    padding:32px;position:relative;overflow:hidden;}
+  .artist-card::before{content:'UNSEALED';position:absolute;top:16px;right:-34px;transform:rotate(35deg);
+    background:var(--hot);color:var(--void);font-family:'IBM Plex Mono';font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 40px;}
+  .artist-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin-bottom:6px;}
+  .artist-head h3{font-size:clamp(26px,4.4vw,40px);color:var(--hot);}
+  .artist-alias{font-family:'IBM Plex Mono';font-size:11px;color:var(--dim-2);}
+  .artist-meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 26px;}
+  .artist-meta span{font-family:'IBM Plex Mono';font-size:10px;padding:5px 11px;border:1px solid var(--line-strong);border-radius:99px;color:var(--dim);}
+  .artist-section{margin-bottom:22px;}
+  .artist-section:last-child{margin-bottom:0;}
+  .artist-section h4{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--hot);margin-bottom:10px;font-weight:700;}
+  .artist-section p{font-size:13.5px;margin-bottom:8px;}
+  .artist-section p:last-child{margin-bottom:0;}
   .dossier{background:var(--void);padding:0 0 22px;position:relative;overflow:hidden;}
   .dossier-placeholder{border:1px dashed rgba(255,51,72,0.4);}
   .dossier-placeholder .portrait-wrap img{filter:grayscale(0.3) brightness(0.85);}
@@ -224,13 +248,13 @@
 <div class="u-aurora"></div>
 <div class="u-circuit" aria-hidden="true">
   <svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
-    <g stroke="rgba(124,107,255,0.35)" stroke-width="1" fill="none">
+    <g stroke="rgba(90,80,150,0.28)" stroke-width="1" fill="none">
       <path d="M0 60 H120 V160 H260 V40 H400"/>
       <path d="M0 260 H80 V340 H220 V420 H400"/>
       <path d="M0 480 H160 V560 H320 V640 H400"/>
       <path d="M0 700 H100 V760 H400"/>
     </g>
-    <g fill="rgba(124,107,255,0.5)">
+    <g fill="rgba(90,80,150,0.4)">
       <circle cx="120" cy="60" r="2.5"/><circle cx="260" cy="160" r="2.5"/>
       <circle cx="80" cy="260" r="2.5"/><circle cx="220" cy="340" r="2.5"/>
       <circle cx="160" cy="480" r="2.5"/><circle cx="320" cy="560" r="2.5"/>
@@ -248,7 +272,9 @@
       <path d="M-20 250 C 200 220, 300 300, 460 230 S 700 260, 820 220"/>
     </svg>
   </div>
-  <img class="mark reveal in" id="voltaMark" src="assets/chronicles-mark.png" alt="Volta Chronicles mark" title="Hold me...">
+  <div class="mark-wrap reveal in" id="voltaMark" role="button" aria-label="Hold for a surprise" tabindex="0">
+    <img class="mark" src="assets/chronicles-mark.png" alt="Volta Chronicles mark" draggable="false">
+  </div>
   <span class="touch-hint mono">⚡ hold the mark</span>
   <div class="eyebrow reveal in">Original IP · Two centuries of history</div>
   <h1 class="reveal in">Volta Chronicles</h1>
@@ -447,7 +473,7 @@
           <div class="hook">CURRENT STATUS: <span class="redacted">friend or enemy — undetermined</span></div>
         </div>
       </div>
-      <div class="dossier reveal dossier-placeholder">
+      <div class="dossier reveal dossier-placeholder" id="classifiedDossier" style="cursor:pointer;">
         <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="File pending"></div>
         <span class="stamp" style="background:var(--hot);">CLASSIFIED</span>
         <div class="body">
@@ -459,6 +485,69 @@
       </div>
     </div>
     <div class="cast-dots" id="castDots"></div>
+
+    <div class="artist-reveal" id="artistReveal">
+      <div class="artist-card">
+        <div class="artist-head">
+          <h3>The Artist</h3>
+          <span class="artist-alias">Real name: Unknown</span>
+        </div>
+        <div class="artist-meta mono">
+          <span>ALIASES: The Artist</span>
+          <span>AFFILIATION: None</span>
+          <span>ALIGNMENT: Chaotic Evil</span>
+          <span>STATUS: Active</span>
+        </div>
+
+        <div class="artist-section">
+          <h4>Overview</h4>
+          <p>The Artist is one of the most feared serial killers in modern history. He has no political beliefs. He has no interest in changing the world. He has no loyalty to AFP. He simply enjoys hunting superhumans.</p>
+          <p>To him, every powerful opponent is a blank canvas. Every fight is a performance. Every kill is a work of art.</p>
+        </div>
+
+        <div class="artist-section">
+          <h4>Connection to AFP</h4>
+          <p>The Artist never founded AFP. He never joined AFP. He never attended a meeting. But AFP supporters began idolizing him — videos of his attacks spread across underground networks, and ordinary people saw a single powerless human defeating superhumans. He unintentionally became the symbol of resistance. AFP eventually adopted his image and philosophy without his permission. He couldn't care less.</p>
+        </div>
+
+        <div class="artist-section">
+          <h4>Personality</h4>
+          <p>The Artist never speaks. Not because he can't — because he doesn't think anyone deserves to hear his voice. He laughs silently. Tilts his head. Claps after a good fight. Leaves paintings made from blood.</p>
+          <p>He enjoys making powerful people feel helpless. If someone is weaker than him, he usually ignores them. If someone is stronger, he becomes excited.</p>
+        </div>
+
+        <div class="artist-section">
+          <h4>Appearance</h4>
+          <p>Bright, colorful bomber jacket. Blue jeans. Sneakers. A plastic shopping bag over his head with one eye hole cut into it — never removed in public. His childish appearance makes him even more unsettling.</p>
+        </div>
+
+        <div class="artist-section">
+          <h4>Weapons</h4>
+          <p><strong>Blue Crowbar</strong> — his signature weapon, covered in blue paint instead of blood. Every scratch tells a story.</p>
+          <p><strong>Compact Handgun</strong> — used only when necessary. He considers guns "boring" and prefers getting close enough to hear fear.</p>
+        </div>
+
+        <div class="artist-section">
+          <h4>Fighting Style</h4>
+          <p>No armor. No powers. No enhancements. Just incredible reflexes, creativity, and unpredictability. He fights like someone improvising a painting — every movement looks chaotic, and every movement has purpose.</p>
+        </div>
+
+        <div class="artist-section">
+          <h4>Philosophy</h4>
+          <p>He doesn't hate superhumans. He loves hunting them. The stronger they are, the more beautiful the hunt becomes. Winning is satisfying. Losing would be exciting too.</p>
+        </div>
+
+        <div class="artist-section">
+          <h4>Relationship with AFP</h4>
+          <p>AFP members call him "The First Hunter," "The People's Hero," "The Symbol." He hates every title. If someone follows him, he walks away. If they keep following, he might kill them too.</p>
+        </div>
+
+        <div class="artist-section">
+          <h4>Reputation</h4>
+          <p>Even Volta agents become nervous when his symbol appears — not because he's the strongest person alive, but because he cannot be predicted. He has no demands, no hostage situations, no negotiations, no speeches. Only violence.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -526,6 +615,7 @@
 
     function startHold(e){
       if(holding) return;
+      if(e.cancelable) e.preventDefault();
       holding = true;
       mark.style.animation = 'none';
       mark.style.transition = `filter ${HOLD_MS}ms ease, transform ${HOLD_MS}ms ease`;
@@ -557,14 +647,53 @@
       mark.style.transform = '';
       mark.style.animation = '';
     }
-    mark.addEventListener('touchstart', startHold, { passive:true });
+    mark.addEventListener('touchstart', startHold, { passive:false });
     mark.addEventListener('touchend', cancelHold);
     mark.addEventListener('touchcancel', cancelHold);
     mark.addEventListener('touchmove', cancelHold);
+    mark.addEventListener('contextmenu', (e) => e.preventDefault());
     // also works with a mouse press-and-hold, for desktop parity
     mark.addEventListener('mousedown', startHold);
     mark.addEventListener('mouseup', cancelHold);
     mark.addEventListener('mouseleave', cancelHold);
+  })();
+
+  /* ============ EASTER EGG — tap "??? ???" 3 times, confirm with 3 more ============ */
+  (function(){
+    const card = document.getElementById('classifiedDossier');
+    const panel = document.getElementById('artistReveal');
+    if(!card || !panel) return;
+
+    function toast(text){
+      const t = document.createElement('div');
+      t.className = 'egg-toast mono';
+      t.textContent = text;
+      document.body.appendChild(t);
+      setTimeout(() => t.classList.add('show'), 10);
+      setTimeout(() => t.classList.remove('show'), 1900);
+      setTimeout(() => t.remove(), 2400);
+    }
+
+    let taps = 0, phase = 0, timer; // phase 0: waiting for first 3, 1: waiting for confirm, 2: revealed
+    card.addEventListener('click', () => {
+      if(phase === 2) return;
+      taps++;
+      clearTimeout(timer);
+      timer = setTimeout(() => { taps = 0; }, 2000);
+
+      if(phase === 0 && taps === 3){
+        taps = 0; phase = 1;
+        if(window.SFX) SFX.blip();
+        toast('Really?');
+      } else if(phase === 1 && taps === 3){
+        taps = 0; phase = 2;
+        if(window.SFX) SFX.unlock();
+        card.querySelector('h3').textContent = 'FILE UNSEALED';
+        card.querySelector('.hook').innerHTML = 'FILE STATUS: <span class="redacted" style="background:var(--hot);color:var(--hot);">opened below</span>';
+        panel.classList.add('show');
+        setTimeout(() => panel.scrollIntoView({ behavior:'smooth', block:'center' }), 200);
+      }
+    });
   })();
 </script>
 </body>
