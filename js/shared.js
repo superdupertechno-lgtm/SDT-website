@@ -50,10 +50,12 @@ function buildNav(){
 }
 
 const ICONS = {
-  x: `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8.1-9.3L1 2h7l4.8 6.3L18.9 2zm-2.4 18h2L7.6 3.9h-2L16.5 20z"/></svg>`,
+  x: `<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8.1-9.3L1 2h7l4.8 6.3L18.9 2zm-2.4 18h2L7.6 3.9h-2L16.5 20z"/></svg>`,
   youtube: `<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M22.5 6.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C16.4 2.6 12 2.6 12 2.6h0s-4.4 0-7.3.3c-.4 0-1.4.1-2.3 1-.7.7-.9 2.3-.9 2.3S1.2 8 1.2 9.9v1.9c0 1.9.3 3.7.3 3.7s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.1.3 7.1.3s4.4 0 7.3-.3c.4 0 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.3-1.9.3-3.7V9.9c0-1.9-.3-3.7-.3-3.7zM9.7 14.1V7.7l6.1 3.2-6.1 3.2z"/></svg>`,
-  instagram: `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/></svg>`,
-  linkedin: `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="7.2" cy="8" r="1.3"/><rect x="6" y="10.5" width="2.4" height="7.3"/><path d="M11 10.5h2.3v1.2c.5-.8 1.4-1.4 2.6-1.4 2 0 3.1 1.3 3.1 3.9v4.6h-2.4v-4.1c0-1.2-.4-2-1.5-2-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v4.2H11V10.5z"/></svg>`,
+  instagram: `<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/></svg>`,
+  linkedin: `<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="7.2" cy="8" r="1.3"/><rect x="6" y="10.5" width="2.4" height="7.3"/><path d="M11 10.5h2.3v1.2c.5-.8 1.4-1.4 2.6-1.4 2 0 3.1 1.3 3.1 3.9v4.6h-2.4v-4.1c0-1.2-.4-2-1.5-2-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v4.2H11V10.5z"/></svg>`,
+  discord: `<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M18.9 5.3A18 18 0 0 0 14.6 4l-.3.6a15 15 0 0 1 3.8 1.2 12.7 12.7 0 0 0-12.2 0A15 15 0 0 1 9.7 4.6L9.4 4a18 18 0 0 0-4.3 1.3C2.7 8.6 2 11.9 2.3 15.1a17.9 17.9 0 0 0 5.3 2.7l.7-1.1a11.9 11.9 0 0 1-1.9-.9c.16-.1.32-.24.47-.35a12.9 12.9 0 0 0 10.4 0c.15.12.31.24.47.35-.6.35-1.24.65-1.9.9l.7 1.1a17.9 17.9 0 0 0 5.3-2.7c.4-3.7-.5-6.9-2.9-9.8zM8.9 13.6c-.8 0-1.4-.7-1.4-1.6s.6-1.6 1.4-1.6c.8 0 1.5.7 1.4 1.6 0 .9-.6 1.6-1.4 1.6zm6.2 0c-.8 0-1.4-.7-1.4-1.6s.6-1.6 1.4-1.6c.8 0 1.5.7 1.4 1.6 0 .9-.6 1.6-1.4 1.6z"/></svg>`,
+  reddit: `<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><circle cx="12" cy="13.2" r="7.3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="9.2" cy="13" r="1.1"/><circle cx="14.8" cy="13" r="1.1"/><path d="M8.6 16.2c1 .8 2.2 1 3.4 1s2.4-.2 3.4-1" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M12 5.9l.9-3 2.7.6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="16.2" cy="3.3" r="1.1"/></svg>`,
   whatsapp: `<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" style="vertical-align:-2px;margin-right:6px;"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.6.1-.2.2-.3.1-.6-.1-.2-.7-1.7-1-2.3-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2 0 1.3 1 2.6 1.1 2.8.1.2 1.9 3 4.6 4.1 2.7 1.1 2.7.7 3.2.7.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>`,
 };
 
@@ -90,6 +92,8 @@ function buildFooter(){
             </div>
             <a href="https://x.com/Superduper26319" target="_blank" rel="noopener" class="social-icon" aria-label="X">${ICONS.x}</a>
             <a href="https://linkedin.com/company/super-duper-techno" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">${ICONS.linkedin}</a>
+            <a href="https://discord.gg/QkQP4ntBXq" target="_blank" rel="noopener" class="social-icon" aria-label="Discord">${ICONS.discord}</a>
+            <a href="https://www.reddit.com/r/Super_Duper_Techno/" target="_blank" rel="noopener" class="social-icon" aria-label="Reddit">${ICONS.reddit}</a>
           </div>
         </div>
       </div>
@@ -219,9 +223,12 @@ function scrambleText(el){
 }
 
 /* ============ SOUND ENGINE — synthesized, no audio files ============ */
+/* Off by default — audio should be opt-in for a professional site, not
+   something that surprises a first-time visitor. Used only for the arcade
+   game and hidden easter eggs; the toggle in the nav lets people turn it on. */
 const SFX = (function(){
   let ctx = null;
-  let muted = localStorage.getItem('sdt_muted') === '1';
+  let muted = localStorage.getItem('sdt_muted') !== '0';
   function getCtx(){
     if(!ctx){ ctx = new (window.AudioContext || window.webkitAudioContext)(); }
     if(ctx.state === 'suspended') ctx.resume();
@@ -284,10 +291,6 @@ function initSoundToggle(){
     SFX.setMuted(!SFX.isMuted());
     if(!SFX.isMuted()) SFX.blip();
     render();
-  });
-  document.querySelectorAll('.btn, .presets a, .door, .panel').forEach(el => {
-    el.addEventListener('mouseenter', () => SFX.hover());
-    el.addEventListener('click', () => SFX.click());
   });
 }
 
@@ -438,27 +441,27 @@ function initSecretDivision(){
    allocation — that was the main source of lag in the previous version. */
 const BG_THEMES = {
   home: {
-    colors:['#ff3348','#2ea8ff','#3fe08a','#ffc233'], count:34, shooters:true, speed:0.24,
-    blobs:['#ff3348','#2ea8ff','#ffc233']
+    colors:['#eef1ee','#eef1ee','#ff3348'], count:22, shooters:false, speed:0.16,
+    blobs:['#ff3348','#2ea8ff']
   },
   work: {
-    colors:['#ffc233','#2ea8ff','#3fe08a','#ff3348','#7c6bff','#ff77c9'], count:36, shooters:false, speed:0.16,
-    blobs:['#ffc233','#2ea8ff','#3fe08a','#ff3348','#7c6bff','#ff77c9']
+    colors:['#eef1ee','#eef1ee','#ffc233'], count:22, shooters:false, speed:0.14,
+    blobs:['#2ea8ff','#ffc233']
   },
   universe: {
-    colors:['#7c6bff','#c4a9ff','#ffc233','#ffffff'], count:55, shooters:true, speed:0.07, twinkle:true,
-    blobs:['#7c6bff','#c4a9ff','#ffc233']
+    colors:['#eef1ee','#c4a9ff'], count:30, shooters:false, speed:0.06, twinkle:true,
+    blobs:['#7c6bff']
   },
   onair: {
-    colors:['#3fe08a','#2ea8ff','#ffc233'], count:30, shooters:false, speed:0.14, blink:true,
-    blobs:['#3fe08a','#2ea8ff']
+    colors:['#eef1ee','#3fe08a'], count:20, shooters:false, speed:0.12,
+    blobs:['#3fe08a']
   },
   studio: {
-    colors:['#ffc233','#ff3348','#ff9d5c'], count:30, shooters:false, speed:0.13,
-    blobs:['#ff9d5c','#ffc233','#ff3348']
+    colors:['#eef1ee','#ffc233'], count:20, shooters:false, speed:0.11,
+    blobs:['#ff9d5c']
   },
   'division-zero': {
-    colors:['#ff3348','#ff8a80'], count:20, shooters:false, speed:0.1, blink:true,
+    colors:['#eef1ee','#ff8a80'], count:14, shooters:false, speed:0.09, blink:true,
     blobs:['#ff3348']
   },
 };
@@ -517,7 +520,7 @@ function initBgParticles(){
       vx: (Math.random()-0.5)*cfg.speed*0.5,
       color: cfg.colors[Math.floor(Math.random()*cfg.colors.length)],
       phase: Math.random()*Math.PI*2,
-      baseAlpha: 0.45 + Math.random()*0.5
+      baseAlpha: 0.12 + Math.random()*0.22
     };
   }
   const particleCount = isMobile ? Math.round(cfg.count * 0.5) : cfg.count;
