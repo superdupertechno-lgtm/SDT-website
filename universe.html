@@ -73,16 +73,18 @@
       linear-gradient(180deg, #0a0a10 0%, #0b0b14 38%, #050607 100%);
     background-attachment:fixed;
   }
-  body[data-theme="universe"] .bg-blobs{mix-blend-mode:screen;}
+  body[data-theme="universe"] .bg-blobs{opacity:0.85;}
   .u-circuit{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.3;}
   .u-circuit svg{width:100%;height:100%;}
   .u-aurora{position:fixed;inset:-10% -10%;z-index:0;pointer-events:none;
     background:conic-gradient(from 210deg at 30% 20%, rgba(90,80,150,0.10), transparent 26%, transparent 74%, rgba(46,90,120,0.08));
-    filter:blur(70px);animation:auroraDrift 40s ease-in-out infinite alternate;mix-blend-mode:screen;}
+    filter:blur(44px);animation:auroraDrift 46s linear infinite;will-change:transform;}
   @keyframes auroraDrift{
-    0%{transform:rotate(0deg) scale(1);opacity:0.6;}
-    50%{transform:rotate(6deg) scale(1.05);opacity:0.85;}
-    100%{transform:rotate(-4deg) scale(1.01);opacity:0.7;}
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+  }
+  @media(max-width:768px){
+    .u-aurora{display:none;} /* blur+animation on a full-viewport layer is the biggest perf cost on phones */
   }
 
   header.hero{min-height:74vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -90,23 +92,24 @@
   .hero-bolts{position:absolute;inset:0;z-index:0;opacity:0.55;pointer-events:none;}
   .hero-bolts svg{width:100%;height:100%;display:block;}
   .hero-bolts path{fill:none;stroke:var(--deep);stroke-width:1.2;opacity:0.32;
-    stroke-dasharray:8 10;animation:boltFlow 6.5s linear infinite;filter:drop-shadow(0 0 3px rgba(90,80,150,0.4));}
+    stroke-dasharray:8 10;animation:boltFlow 6.5s linear infinite;}
   .hero-bolts path:nth-child(2){stroke:var(--cool);animation-duration:8s;animation-direction:reverse;opacity:0.2;}
   .hero-bolts path:nth-child(3){stroke:var(--volt);animation-duration:7.2s;opacity:0.16;}
   @keyframes boltFlow{to{stroke-dashoffset:-180;}}
   .hero > *{position:relative;z-index:1;}
   .mark-wrap{width:88px;height:88px;margin:0 auto 22px;cursor:pointer;
     -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation;
-    animation:markPulse 3.6s ease-in-out infinite;}
+    filter:drop-shadow(0 0 16px rgba(90,80,150,0.55));
+    animation:markPulse 3.6s ease-in-out infinite;will-change:transform,opacity;}
   .mark-wrap .mark{width:100%;height:100%;pointer-events:none;-webkit-user-drag:none;
     -webkit-touch-callout:none;user-select:none;}
-  @keyframes markPulse{0%,100%{filter:drop-shadow(0 0 12px rgba(90,80,150,0.4));}50%{filter:drop-shadow(0 0 22px rgba(90,80,150,0.7));}}
+  @keyframes markPulse{0%,100%{opacity:0.82;transform:scale(1);}50%{opacity:1;transform:scale(1.05);}}
   .hero .eyebrow{font-family:'IBM Plex Mono';font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--deep);margin-bottom:14px;}
   .hero h1{font-size:clamp(42px,7.6vw,80px);margin-bottom:16px;
     background:linear-gradient(90deg,var(--deep),var(--paper) 45%,var(--volt));
     -webkit-background-clip:text;background-clip:text;color:transparent;
-    background-size:200% auto;animation:hueTravel 7s ease-in-out infinite;}
-  @keyframes hueTravel{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+    background-size:200% auto;animation:hueTravel 2.6s ease-in-out 1 forwards;}
+  @keyframes hueTravel{0%{background-position:0% 50%;}100%{background-position:100% 50%;}}
   .hero p.lede{max-width:640px;margin:0 auto 10px;font-size:16px;line-height:1.75;color:var(--dim);}
   .names-cycle{font-family:'IBM Plex Mono';font-size:15px;color:var(--volt);margin-top:18px;min-height:22px;}
   .rebrand-note{margin-top:28px;display:inline-flex;align-items:center;gap:12px;font-family:'IBM Plex Mono';font-size:12px;color:var(--dim);
@@ -122,8 +125,10 @@
     transition:border-color .3s;position:relative;}
   .era-block::before{content:'';position:absolute;left:-4.5px;top:0;width:6px;height:6px;border-radius:50%;
     background:var(--ecolor, var(--volt));box-shadow:0 0 10px 2px var(--ecolor, var(--volt));
-    animation:sparkTravel 3.4s cubic-bezier(.4,0,.2,1) infinite;}
-  @keyframes sparkTravel{0%{top:0;opacity:0;}8%{opacity:1;}92%{opacity:1;}100%{top:100%;opacity:0;}}
+    animation:sparkTravel 3.4s cubic-bezier(.4,0,.2,1) infinite;animation-play-state:paused;
+    transform:translateY(0);will-change:transform;}
+  .era-block.anim-live::before{animation-play-state:running;}
+  @keyframes sparkTravel{0%{transform:translateY(0);opacity:0;}8%{opacity:1;}92%{opacity:1;}100%{transform:translateY(var(--eh,320px));opacity:0;}}
   .era-block .yr-big{font-family:'IBM Plex Mono';font-size:13px;color:var(--ecolor, var(--volt));letter-spacing:0.06em;display:block;margin-bottom:10px;font-weight:700;}
   .era-block h3{font-size:clamp(24px,3.6vw,34px);margin-bottom:18px;}
   .era-grid{display:grid;grid-template-columns:1fr;gap:28px;}
@@ -137,9 +142,12 @@
 
   /* despair era — sealed treatment, purple ties it to Volta Chronicles' own cosmic identity */
   .despair{padding:76px 0;background:linear-gradient(180deg, rgba(124,107,255,0.05), transparent);border-bottom:1px solid var(--line);}
-  .despair-panel{border:1px solid rgba(124,107,255,0.28);background:rgba(124,107,255,0.04);border-radius:var(--radius);padding:36px;position:relative;overflow:hidden;
-    animation:despairBreathe 4.5s ease-in-out infinite;}
-  @keyframes despairBreathe{0%,100%{box-shadow:0 0 0 rgba(124,107,255,0);}50%{box-shadow:0 0 46px rgba(124,107,255,0.16) inset, 0 0 30px rgba(124,107,255,0.08);}}
+  .despair-panel{border:1px solid rgba(124,107,255,0.28);background:rgba(124,107,255,0.04);border-radius:var(--radius);padding:36px;position:relative;overflow:hidden;}
+  .despair-panel::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+    box-shadow:0 0 46px rgba(124,107,255,0.16) inset, 0 0 30px rgba(124,107,255,0.08);
+    opacity:0;animation:despairBreathe 4.5s ease-in-out infinite;animation-play-state:paused;}
+  .despair-panel.anim-live::after{animation-play-state:running;}
+  @keyframes despairBreathe{0%,100%{opacity:0;}50%{opacity:1;}}
   .despair-panel::before{content:'SEALED';position:absolute;top:16px;right:-34px;transform:rotate(35deg);
     background:var(--deep);color:var(--void);font-family:'IBM Plex Mono';font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 40px;}
   .despair-panel h3{font-size:clamp(24px,3.6vw,32px);color:var(--deep);margin-bottom:16px;}
@@ -573,6 +581,29 @@
 
 <script src="js/shared.js"></script>
 <script>
+  /* ============ PERF — only animate what's on screen ============
+     era-block spark and the despair-panel glow both used to run
+     continuously even scrolled far out of view. Now they're paused by
+     default and an IntersectionObserver flips them on only while visible. */
+  (function(){
+    const eraBlocks = document.querySelectorAll('.era-block');
+    function setHeights(){
+      eraBlocks.forEach(el => el.style.setProperty('--eh', el.offsetHeight + 'px'));
+    }
+    setHeights();
+    window.addEventListener('resize', setHeights, { passive:true });
+
+    const animTargets = document.querySelectorAll('.era-block, .despair-panel');
+    if('IntersectionObserver' in window && animTargets.length){
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(en => en.target.classList.toggle('anim-live', en.isIntersecting));
+      }, { threshold: 0.05 });
+      animTargets.forEach(t => io.observe(t));
+    } else {
+      animTargets.forEach(t => t.classList.add('anim-live'));
+    }
+  })();
+
   const names = ['Flying Queen', '→ Sister Justice', '→ Lady Liberty', '→ Golden Star', "\"I don't get a vote.\""];
   let ni = 0;
   const cycleEl = document.getElementById('namesCycle');
