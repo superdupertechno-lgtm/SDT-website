@@ -11,14 +11,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root{
-  --void:#050607;
-  --panel:#0d1012;
-  --panel-2:#12161a;
-  --paper:#eef1ee;
-  --dim:rgba(238,241,238,0.68);
-  --dim-2:rgba(238,241,238,0.44);
-  --line:rgba(238,241,238,0.09);
-  --line-strong:rgba(238,241,238,0.18);
+  --void:#0b0e14;
+  --panel:#131722;
+  --panel-2:#181d2a;
+  --paper:#f3f5f3;
+  --dim:rgba(243,245,243,0.76);
+  --dim-2:rgba(243,245,243,0.52);
+  --line:rgba(243,245,243,0.11);
+  --line-strong:rgba(243,245,243,0.22);
 
   --hot:#ff3348;    /* live / urgent / hostile */
   --cool:#2ea8ff;   /* system / info / ally */
@@ -45,7 +45,7 @@ body[data-theme="home"]{
     radial-gradient(ellipse 70% 48% at 14% -8%, rgba(255,51,72,0.11), transparent 60%),
     radial-gradient(ellipse 62% 44% at 92% 6%, rgba(46,168,255,0.08), transparent 58%),
     radial-gradient(ellipse 80% 55% at 50% 106%, rgba(255,51,72,0.06), transparent 62%),
-    linear-gradient(180deg, #0a0708 0%, #08090b 42%, #050607 100%);
+    linear-gradient(180deg, #12100f 0%, #0e1015 42%, #0b0e14 100%);
   background-attachment:fixed;
 }
 body[data-theme="work"]{
@@ -53,7 +53,7 @@ body[data-theme="work"]{
     radial-gradient(ellipse 74% 50% at 12% -6%, rgba(255,194,51,0.09), transparent 60%),
     radial-gradient(ellipse 68% 46% at 92% 10%, rgba(46,168,255,0.10), transparent 58%),
     radial-gradient(ellipse 84% 55% at 50% 108%, rgba(34,211,200,0.05), transparent 62%),
-    linear-gradient(180deg, #08090a 0%, #090a0c 42%, #050607 100%);
+    linear-gradient(180deg, #0e1013 0%, #0f1218 42%, #0b0e14 100%);
   background-attachment:fixed;
 }
 body[data-theme="onair"]{
@@ -61,7 +61,7 @@ body[data-theme="onair"]{
     radial-gradient(ellipse 70% 48% at 20% -8%, rgba(63,224,138,0.11), transparent 60%),
     radial-gradient(ellipse 62% 44% at 88% 8%, rgba(46,168,255,0.06), transparent 58%),
     radial-gradient(ellipse 80% 55% at 50% 106%, rgba(63,224,138,0.06), transparent 62%),
-    linear-gradient(180deg, #070a08 0%, #08090a 42%, #050607 100%);
+    linear-gradient(180deg, #0d1210 0%, #0e1116 42%, #0b0e14 100%);
   background-attachment:fixed;
 }
 body[data-theme="studio"]{
@@ -69,14 +69,14 @@ body[data-theme="studio"]{
     radial-gradient(ellipse 72% 50% at 18% -6%, rgba(255,157,92,0.11), transparent 60%),
     radial-gradient(ellipse 62% 44% at 90% 8%, rgba(255,119,201,0.06), transparent 58%),
     radial-gradient(ellipse 82% 55% at 50% 106%, rgba(255,194,51,0.05), transparent 62%),
-    linear-gradient(180deg, #0a0807 0%, #09080a 42%, #050607 100%);
+    linear-gradient(180deg, #12100e 0%, #100f15 42%, #0b0e14 100%);
   background-attachment:fixed;
 }
 body[data-theme="division-zero"]{
   background:
     radial-gradient(ellipse 55% 38% at 50% -10%, rgba(255,51,72,0.10), transparent 62%),
     radial-gradient(ellipse 90% 70% at 50% 55%, rgba(255,51,72,0.03), transparent 70%),
-    linear-gradient(180deg, #060506 0%, #050607 55%, #050607 100%);
+    linear-gradient(180deg, #0a0c10 0%, #0b0e14 55%, #0b0e14 100%);
   background-attachment:fixed;
 }
 /* universe already has its own richer treatment set directly in universe.html —
@@ -133,9 +133,9 @@ main{position:relative;z-index:2;}
 /* ============ TUNER STRIP (nav) ============ */
 .tuner{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
   padding:env(safe-area-inset-top,0) calc(22px + env(safe-area-inset-right,0)) 0 calc(22px + env(safe-area-inset-left,0));
-  height:calc(64px + env(safe-area-inset-top,0));background:rgba(5,6,7,0.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  height:calc(64px + env(safe-area-inset-top,0));background:rgba(11,14,20,0.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
 .tuner .call-sign{display:flex;align-items:center;gap:10px;font-family:'Rajdhani';font-weight:700;font-size:16px;letter-spacing:0.02em;}
-.tuner .call-sign .mark{width:36px;height:36px;flex:none;}
+.tuner .call-sign .mark{width:48px;height:48px;flex:none;}
 .tuner .freq{font-family:'IBM Plex Mono';font-size:10.5px;color:var(--dim-2);letter-spacing:0.06em;}
 .presets{display:none;gap:2px;}
 @media(min-width:900px){.presets{display:flex;}}
@@ -199,6 +199,14 @@ section{padding:88px 0;position:relative;}
 /* ============ REVEAL ============ */
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;}
 .reveal.in{opacity:1;transform:translateY(0);}
+
+/* ============ MINI EQUALIZER — reusable "live" indicator ============ */
+.eq-mini{display:inline-flex;align-items:flex-end;gap:2px;height:11px;margin-left:6px;vertical-align:middle;}
+.eq-mini span{width:2.5px;background:currentColor;border-radius:1px;transform-origin:bottom;animation:eqBarMini 1s ease-in-out infinite;}
+.eq-mini span:nth-child(1){height:40%;animation-delay:-0.9s;}
+.eq-mini span:nth-child(2){height:100%;animation-delay:-0.5s;}
+.eq-mini span:nth-child(3){height:65%;animation-delay:-0.2s;}
+@keyframes eqBarMini{0%,100%{transform:scaleY(0.35);}50%{transform:scaleY(1);}}
 
 /* ============ MOBILE SWIPE DECK — shared across every page ============
    Opt-in utility: add class="deck-mobile" to any card grid and on phones
@@ -307,7 +315,7 @@ body.volt-glitch::after{
 @keyframes voltFlash{0%{opacity:0;}10%{opacity:1;}100%{opacity:0;}}
 
 /* ============ TERMINAL MODE — press ~ anywhere on the site ============ */
-#sdtTerminal{position:fixed;inset:0;z-index:9990;background:rgba(5,6,7,0.86);backdrop-filter:blur(6px);
+#sdtTerminal{position:fixed;inset:0;z-index:9990;background:rgba(11,14,20,0.86);backdrop-filter:blur(6px);
   display:none;align-items:center;justify-content:center;padding:20px;}
 #sdtTerminal.open{display:flex;}
 .term-window{width:100%;max-width:640px;max-height:76vh;background:var(--panel);border:1px solid var(--line-strong);
