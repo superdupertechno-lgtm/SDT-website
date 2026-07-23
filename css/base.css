@@ -48,6 +48,21 @@ body[data-theme="home"]{
     linear-gradient(180deg, #12100f 0%, #0e1015 42%, #0b0e14 100%);
   background-attachment:fixed;
 }
+/* Mobile gets its own pass instead of the desktop gradient squeezed into a
+   tall narrow viewport — the wide ellipses above were tuned for a landscape
+   canvas and end up as one flat smear on a phone. This version uses gradients
+   shaped for a tall aspect ratio, and drops background-attachment:fixed
+   (a known scroll-jank cause on iOS Safari). Desktop above is untouched. */
+@media(max-width:760px){
+  body[data-theme="home"]{
+    background:
+      radial-gradient(ellipse 130% 22% at 50% 0%, rgba(255,51,72,0.13), transparent 58%),
+      radial-gradient(ellipse 110% 20% at 50% 100%, rgba(46,168,255,0.09), transparent 60%),
+      linear-gradient(180deg, #100d0c 0%, #0e1015 46%, #0b0e14 100%);
+    background-attachment:scroll;
+  }
+  body[data-theme="home"] .bg-blobs{opacity:0.55;}
+}
 body[data-theme="work"]{
   background:
     radial-gradient(ellipse 74% 50% at 12% -6%, rgba(255,194,51,0.09), transparent 60%),

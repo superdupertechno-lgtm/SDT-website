@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#050607">
+<meta name="theme-color" content="#0b0e14">
 <title>On Air — Super Duper Techno</title>
 <meta name="description" content="Everything Super Duper Techno is actively broadcasting right now — every live project, across every division.">
 <link rel="canonical" href="https://superdupertechno.com/onair.html">
@@ -46,23 +46,25 @@
 
   /* status filter pills — tap to filter the board */
   .status-key{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
-  .status-key button{font-family:'IBM Plex Mono';font-size:10.5px;padding:8px 14px;border-radius:99px;
+  .status-key button{font-family:'IBM Plex Mono';font-size:10.5px;padding:9px 14px;border-radius:99px;
     border:1px solid var(--line-strong);background:none;color:var(--dim);cursor:pointer;transition:.2s;
-    min-height:36px;}
+    min-height:40px;}
   .status-key button::before{content:'● ';}
   .status-key button[data-filter="active"]{color:var(--charge);}
   .status-key button[data-filter="dev"]{color:var(--volt);}
   .status-key button[data-filter="concept"]{color:var(--cool);}
   .status-key button.on{background:var(--panel-2);border-color:currentColor;}
-  .status-key .clear-filter{display:none;color:var(--dim-2);}
-  .status-key .clear-filter.show{display:inline-block;}
+  .status-key .clear-filter{display:none;color:var(--dim-2);font-size:10.5px;cursor:pointer;
+    padding:9px 4px;align-items:center;min-height:40px;}
+  .status-key .clear-filter.show{display:inline-flex;}
 
   .board{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
   @media(min-width:700px){.board{grid-template-columns:repeat(2,1fr);}}
   @media(min-width:1040px){.board{grid-template-columns:repeat(3,1fr);}}
   .proj-card{background:var(--void);padding:24px;transition:opacity .25s, transform .25s;}
   .proj-card.filtered-out{display:none;}
-  .proj-card .top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:10px;}
+  .proj-card .top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:10px;flex-wrap:wrap;}
+  .proj-card .tag-group{display:flex;flex-direction:column;gap:2px;}
   .proj-card .div-tag{font-family:'IBM Plex Mono';font-size:10.5px;font-weight:700;color:var(--volt);}
   .proj-card .freq{font-family:'IBM Plex Mono';font-size:9.5px;color:var(--dim-2);display:block;margin-top:3px;}
   .proj-card .status{font-family:'IBM Plex Mono';font-size:9.5px;text-transform:uppercase;padding:3px 9px;border-radius:6px;font-weight:700;
@@ -105,73 +107,73 @@
     <div class="deck-hint mono"><span class="arrow">←</span> swipe every live project <span class="arrow">→</span></div>
     <div class="board deck-mobile deck-wide" style="margin-top:10px;">
       <div class="proj-card reveal" data-status="active">
-        <div class="top"><span class="div-tag">SDG</span><span class="freq mono">90.1 FM</span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDG</span><span class="freq mono">90.1 FM</span></span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
         <h3>THROWN</h3>
         <p>Free-to-play competitive RPS with a live challenge system. SDT's front door — fast, sharp, fully web-based, and designed to fund everything else.</p>
         <a class="link" href="work.html#sdg">→ SDG detail</a>
       </div>
       <div class="proj-card reveal" data-status="active">
-        <div class="top"><span class="div-tag">SDG</span><span class="freq mono">90.1 FM</span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDG</span><span class="freq mono">90.1 FM</span></span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
         <h3>For the Volta</h3>
         <p>2D co-op action/stealth for up to 4 players. Destructible, one-hit-lethal, set inside Volta Chronicles, a year before Golden Star.</p>
         <a class="link" href="universe.html">→ Universe detail</a>
       </div>
       <div class="proj-card reveal" data-status="dev">
-        <div class="top"><span class="div-tag">SDG</span><span class="freq mono">90.1 FM</span><span class="status dev">Early dev</span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDG</span><span class="freq mono">90.1 FM</span></span><span class="status dev">Early dev</span></div>
         <h3>Golden Star</h3>
         <p>SDT's flagship open-world superhero origin story. Arken City, an identity being built in real time.</p>
         <a class="link" href="universe.html">→ Universe detail</a>
       </div>
       <div class="proj-card reveal" data-status="active">
-        <div class="top"><span class="div-tag">SDS</span><span class="freq mono">93.7 FM</span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDS</span><span class="freq mono">93.7 FM</span></span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
         <h3>SDT Game OS</h3>
         <p>An Arch Linux gaming OS with a Godot console shell, A/B immutable updates, and Proton built in.</p>
         <a class="link" href="work.html#sds">→ SDS detail</a>
       </div>
       <div class="proj-card reveal" data-status="active">
-        <div class="top"><span class="div-tag">SDN</span><span class="freq mono">95.2 FM</span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDN</span><span class="freq mono">95.2 FM</span></span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
         <h3>VibeMesh</h3>
         <p>Offline device-to-device messaging &amp; file transfer over Bluetooth mesh — no internet needed.</p>
         <a class="link" href="work.html#sdn">→ SDN detail</a>
       </div>
       <div class="proj-card reveal" data-status="active">
-        <div class="top"><span class="div-tag">SDN</span><span class="freq mono">95.2 FM</span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDN</span><span class="freq mono">95.2 FM</span></span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
         <h3>Client web development</h3>
         <p>Outside site work for clients, including full company sites and quote-cart systems for Shiraa Global.</p>
         <a class="link" href="work.html#sdn">→ SDN detail</a>
       </div>
       <div class="proj-card reveal" data-status="dev">
-        <div class="top"><span class="div-tag">SDSM</span><span class="freq mono">96.4 FM</span><span class="status dev">Early dev</span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDSM</span><span class="freq mono">96.4 FM</span></span><span class="status dev">Early dev</span></div>
         <h3>Volta Chronicles — animated series</h3>
         <p>An animated adaptation set inside the universe, plus original soundtracks and standalone music.</p>
         <a class="link" href="work.html#sdsm">→ SDSM detail</a>
       </div>
       <div class="proj-card reveal" data-status="dev">
-        <div class="top"><span class="div-tag">SDAI</span><span class="freq mono">92.3 FM</span><span class="status dev">Early dev</span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDAI</span><span class="freq mono">92.3 FM</span></span><span class="status dev">Early dev</span></div>
         <h3>Volta (assistant)</h3>
         <p>A context-aware AI assistant being built into SDT Game OS from the ground up.</p>
         <a class="link" href="work.html#sdai">→ SDAI detail</a>
       </div>
       <div class="proj-card reveal" data-status="active">
-        <div class="top"><span class="div-tag">SDE</span><span class="freq mono">97.1 FM</span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDE</span><span class="freq mono">97.1 FM</span></span><span class="status active">Active<span class="eq-mini" aria-hidden="true"><span></span><span></span><span></span></span></span></div>
         <h3>Volta Chronicles lore &amp; novel</h3>
         <p>The connective tissue behind every SDT game — expanding across print, games, and animation.</p>
         <a class="link" href="universe.html">→ Universe detail</a>
       </div>
       <div class="proj-card reveal" data-status="dev">
-        <div class="top"><span class="div-tag">SDE</span><span class="freq mono">97.1 FM</span><span class="status dev">Early dev</span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDE</span><span class="freq mono">97.1 FM</span></span><span class="status dev">Early dev</span></div>
         <h3>Original book titles</h3>
         <p>Several original titles entirely unrelated to Volta Chronicles, in early development.</p>
         <a class="link" href="work.html#sde">→ SDE detail</a>
       </div>
       <div class="proj-card reveal" data-status="concept">
-        <div class="top"><span class="div-tag">SDRD</span><span class="freq mono">98.5 FM</span><span class="status concept">Concept</span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDRD</span><span class="freq mono">98.5 FM</span></span><span class="status concept">Concept</span></div>
         <h3>In-house game engine</h3>
         <p>Early groundwork for an engine built specifically around the kind of games SDT wants to make.</p>
         <a class="link" href="work.html#sdrd">→ SDRD detail</a>
       </div>
       <div class="proj-card reveal" data-status="concept" style="position:relative;overflow:hidden;">
-        <div class="top"><span class="div-tag">SDPD</span><span class="freq mono">94.8 FM</span><span class="status concept">Concept</span></div>
+        <div class="top"><span class="tag-group"><span class="div-tag">SDPD</span><span class="freq mono">94.8 FM</span></span><span class="status concept">Concept</span></div>
         <h3>SD Mark I</h3>
         <p>A compact flagship phone concept — Smart Dial, rear display, one phone a year. Years out, not a promise.</p>
         <a class="link" href="work.html#sdpd">→ SDPD detail</a>

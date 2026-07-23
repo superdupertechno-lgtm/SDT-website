@@ -1,7 +1,7 @@
 // ============ SDT SIGNAL — SHARED SCRIPT ============
 
 console.log(
-  "%c SDT SIGNAL ", "background:#ff3348;color:#050607;font-weight:bold;padding:4px 10px;border-radius:3px;font-family:monospace;",
+  "%c SDT SIGNAL ", "background:#ff3348;color:#0b0e14;font-weight:bold;padding:4px 10px;border-radius:3px;font-family:monospace;",
   "\nYou're tuned in. Nothing else here yet — but thanks for checking the static.\nTry the Konami code. Try typing a word. Try clicking things three times.\n— Hardhip"
 );
 

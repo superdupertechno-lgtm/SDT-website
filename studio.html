@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#050607">
+<meta name="theme-color" content="#0b0e14">
 <title>The Studio — Super Duper Techno</title>
 <meta name="description" content="The crew behind Super Duper Techno — origin, values, and how to reach us.">
 <link rel="canonical" href="https://superdupertechno.com/studio.html">
@@ -30,8 +30,10 @@
   .hero h1{font-size:clamp(34px,6vw,58px);max-width:780px;}
   .hero p.tagline{font-size:15.5px;max-width:580px;margin-top:16px;color:var(--dim);}
   .transmit-badge{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono';font-size:11px;letter-spacing:0.08em;
-    color:var(--cool);border:1px solid rgba(46,168,255,0.35);padding:6px 14px;border-radius:99px;margin-bottom:22px;}
-  .transmit-badge .blink{width:6px;height:6px;border-radius:50%;background:var(--cool);animation:tbBlink 1.4s ease-in-out infinite;}
+    color:var(--cool);border:1px solid rgba(46,168,255,0.35);padding:8px 14px;border-radius:14px;margin-bottom:22px;
+    max-width:100%;white-space:normal;line-height:1.5;}
+  .transmit-badge .blink{width:6px;height:6px;border-radius:50%;background:var(--cool);animation:tbBlink 1.4s ease-in-out infinite;flex:none;margin-top:3px;align-self:flex-start;}
+  @media(max-width:420px){.transmit-badge{font-size:9.5px;letter-spacing:0.05em;}}
   @keyframes tbBlink{0%,100%{opacity:1;}50%{opacity:0.15;}}
 
   .val-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
@@ -73,7 +75,7 @@
   .game-shell{position:relative;border:1px solid var(--line-strong);border-radius:var(--radius);overflow:hidden;background:#020304;}
   .game-hud{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;
     font-family:'IBM Plex Mono';font-size:12px;border-bottom:1px solid var(--line);text-transform:uppercase;letter-spacing:0.04em;
-    background:rgba(13,16,18,0.9);position:relative;z-index:3;}
+    background:rgba(19,23,34,0.9);position:relative;z-index:3;}
   .game-hud .hp-bar{display:flex;gap:4px;}
   .game-hud .hp-bar span{width:16px;height:8px;background:var(--hot);border-radius:1px;}
   .game-hud .hp-bar span.lost{background:var(--line);}
@@ -94,7 +96,7 @@
 <main>
 <header class="hero">
   <div class="wrap">
-    <div class="transmit-badge reveal in"><span class="blink"></span>TRANSMITTING FROM COIMBATORE, INDIA</div>
+    <div class="transmit-badge reveal in"><span class="blink"></span>SIGNAL SOURCE — INDEPENDENT &amp; FOUNDER-LED</div>
     <span class="freq-num reveal in">FROM THE CHANNEL TO THE STUDIO</span>
     <h1 class="reveal in">The people actually doing this.</h1>
     <p class="tagline reveal in">Small crew, wide scope. Founder-led, independent, and still figuring plenty of it out in real time.</p>

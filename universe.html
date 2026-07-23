@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#050607">
+<meta name="theme-color" content="#0b0e14">
 <title>Volta Chronicles — Original Superhero Universe | Super Duper Techno</title>
 <meta name="description" content="Volta Chronicles: an original superhero universe spanning two centuries — the War, Hope, and New Eras, and the sealed present-day Despair Era. Games, novels, and animation from Super Duper Techno.">
 <meta name="keywords" content="Volta Chronicles, Volta Accord, Super Duper Techno, SDT, original superhero universe, Golden Star, indie game studio universe, superhero novel, Subject Zero, K-Gene, GDA, D.Dogs, supes universe">
@@ -36,16 +36,8 @@
   "image": "https://superdupertechno.com/assets/chronicles-mark.png",
   "description": "Volta Chronicles is Super Duper Techno's original superhero universe, spanning the War Era, the Hope Era, the New Era, and the present-day Despair Era, told across games, novels, and animation.",
   "genre": ["Superhero fiction", "Science fiction"],
-  "creator": {
-    "@type": "Organization",
-    "name": "Super Duper Techno",
-    "url": "https://superdupertechno.com/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Super Duper Techno",
-    "url": "https://superdupertechno.com/"
-  }
+  "creator": { "@type": "Organization", "name": "Super Duper Techno", "url": "https://superdupertechno.com/" },
+  "publisher": { "@type": "Organization", "name": "Super Duper Techno", "url": "https://superdupertechno.com/" }
 }
 </script>
 <script type="application/ld+json">
@@ -60,212 +52,223 @@
 </script>
 <link rel="stylesheet" href="css/base.css">
 <style>
-  /* ============ UNIQUE UNIVERSE BACKGROUND — "Voltage Aurora" ============
-     Departs from the site's usual flat void + blob treatment. Deep space-violet
-     base with two slow-drifting aurora sheets and a fine circuit-grid overlay,
-     built entirely from gradients/SVG so it stays GPU-cheap. */
+  /* =========================================================
+     UNIVERSE — "THE ARCHIVE"
+     Every other page on this site is a broadcast: cold void,
+     tech-sans type, blue/green signal colors. Volta Chronicles
+     is the opposite motion — a sealed case file being slowly
+     declassified. Warm brass + ink instead of cold void, a
+     condensed stamp face + literary serif instead of tech-sans,
+     and one cold violet "signal" color bleeding through the
+     archive as the one thing that ties it back to the rest of
+     the site. That contrast IS the identity.
+  ========================================================= */
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
   body[data-theme="universe"]{
+    --v-ink1:#171009; --v-ink2:#0e0a06;
+    --v-brass:#b98b46; --v-brass-dim:rgba(185,139,70,0.32); --v-brass-glow:rgba(185,139,70,0.14);
     --u-glow: rgba(90,80,150,0.14);
     background:
-      radial-gradient(ellipse 80% 55% at 18% -6%, rgba(90,80,150,0.16), transparent 60%),
-      radial-gradient(ellipse 70% 50% at 88% 8%, rgba(46,90,120,0.10), transparent 58%),
-      radial-gradient(ellipse 90% 60% at 50% 108%, rgba(90,80,150,0.08), transparent 65%),
-      linear-gradient(180deg, #0a0a10 0%, #0b0b14 38%, #050607 100%);
+      radial-gradient(ellipse 80% 55% at 18% -6%, rgba(90,80,150,0.15), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 88% 8%, rgba(185,139,70,0.07), transparent 58%),
+      radial-gradient(ellipse 90% 60% at 50% 108%, rgba(90,80,150,0.07), transparent 65%),
+      linear-gradient(180deg, #0a0906 0%, #0b0a0c 38%, #0b0e14 100%);
     background-attachment:fixed;
   }
-  body[data-theme="universe"] .bg-blobs{opacity:0.85;}
-  .u-circuit{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.3;}
+  body[data-theme="universe"] .bg-blobs{opacity:0.7;}
+  .u-circuit{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.22;}
   .u-circuit svg{width:100%;height:100%;}
   .u-aurora{position:fixed;inset:-10% -10%;z-index:0;pointer-events:none;
-    background:conic-gradient(from 210deg at 30% 20%, rgba(90,80,150,0.10), transparent 26%, transparent 74%, rgba(46,90,120,0.08));
+    background:conic-gradient(from 210deg at 30% 20%, rgba(90,80,150,0.09), transparent 26%, transparent 74%, rgba(185,139,70,0.06));
     filter:blur(44px);animation:auroraDrift 46s linear infinite;will-change:transform;}
-  @keyframes auroraDrift{
-    0%{transform:rotate(0deg);}
-    100%{transform:rotate(360deg);}
-  }
-  @media(max-width:768px){
-    .u-aurora{display:none;} /* blur+animation on a full-viewport layer is the biggest perf cost on phones */
-  }
+  @keyframes auroraDrift{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+  @media(max-width:768px){.u-aurora{display:none;}}
 
-  header.hero{min-height:74vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:140px 24px 50px;text-align:center;position:relative;overflow:hidden;}
-  .hero-bolts{position:absolute;inset:0;z-index:0;opacity:0.55;pointer-events:none;}
+  body[data-theme="universe"] main h1,
+  body[data-theme="universe"] main h2,
+  body[data-theme="universe"] main h3{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:0.01em;}
+  body[data-theme="universe"] main p{font-family:'Newsreader',Georgia,serif;font-weight:400;line-height:1.75;}
+  body[data-theme="universe"] main .lede{font-style:italic;font-size:17px;}
+
+  /* grain — a single static (non-animated) noise layer standing in for
+     "old paper," reused on every case-file surface. No blur, no per-frame
+     repaint: it's a background-image, cheap on any device. */
+  .case-grain{position:relative;}
+  .case-grain::before{content:'';position:absolute;inset:0;z-index:0;opacity:0.05;pointer-events:none;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .case-grain > *{position:relative;z-index:1;}
+
+  header.hero{min-height:76vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:150px 24px 46px;text-align:center;position:relative;overflow:hidden;}
+  .hero-bolts{position:absolute;inset:0;z-index:0;opacity:0.5;pointer-events:none;}
   .hero-bolts svg{width:100%;height:100%;display:block;}
-  .hero-bolts path{fill:none;stroke:var(--deep);stroke-width:1.2;opacity:0.32;
-    stroke-dasharray:8 10;animation:boltFlow 6.5s linear infinite;}
-  .hero-bolts path:nth-child(2){stroke:var(--cool);animation-duration:8s;animation-direction:reverse;opacity:0.2;}
-  .hero-bolts path:nth-child(3){stroke:var(--volt);animation-duration:7.2s;opacity:0.16;}
+  .hero-bolts path{fill:none;stroke:var(--deep);stroke-width:1.2;opacity:0.3;stroke-dasharray:8 10;animation:boltFlow 6.5s linear infinite;}
+  .hero-bolts path:nth-child(2){stroke:var(--v-brass);animation-duration:8s;animation-direction:reverse;opacity:0.22;}
+  .hero-bolts path:nth-child(3){stroke:var(--volt);animation-duration:7.2s;opacity:0.14;}
   @keyframes boltFlow{to{stroke-dashoffset:-180;}}
   .hero > *{position:relative;z-index:1;}
-  .mark-wrap{width:88px;height:88px;margin:0 auto 22px;cursor:pointer;
+
+  .case-tab{display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--v-brass);border:1px solid var(--v-brass-dim);background:rgba(185,139,70,0.06);
+    padding:7px 16px 7px 12px;border-radius:2px;margin-bottom:22px;}
+  .case-tab .tab-dot{width:5px;height:5px;border-radius:50%;background:var(--deep);box-shadow:0 0 6px 1px var(--deep);flex:none;}
+
+  .mark-wrap{width:88px;height:88px;margin:0 auto 20px;cursor:pointer;
     -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation;
-    filter:drop-shadow(0 0 16px rgba(90,80,150,0.55));
-    animation:markPulse 3.6s ease-in-out infinite;will-change:transform,opacity;}
-  .mark-wrap .mark{width:100%;height:100%;pointer-events:none;-webkit-user-drag:none;
-    -webkit-touch-callout:none;user-select:none;}
+    filter:drop-shadow(0 0 16px rgba(90,80,150,0.5));animation:markPulse 3.6s ease-in-out infinite;will-change:transform,opacity;}
+  .mark-wrap .mark{width:100%;height:100%;pointer-events:none;-webkit-user-drag:none;-webkit-touch-callout:none;user-select:none;}
   @keyframes markPulse{0%,100%{opacity:0.82;transform:scale(1);}50%{opacity:1;transform:scale(1.05);}}
-  .hero .eyebrow{font-family:'IBM Plex Mono';font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--deep);margin-bottom:14px;}
-  .hero h1{font-size:clamp(42px,7.6vw,80px);margin-bottom:16px;
-    background:linear-gradient(90deg,var(--deep),var(--paper) 45%,var(--volt));
+  .hero h1{font-size:clamp(46px,9vw,92px);margin-bottom:14px;text-transform:uppercase;
+    background:linear-gradient(90deg,var(--deep),var(--paper) 45%,var(--v-brass));
     -webkit-background-clip:text;background-clip:text;color:transparent;
     background-size:200% auto;animation:hueTravel 2.6s ease-in-out 1 forwards;}
   @keyframes hueTravel{0%{background-position:0% 50%;}100%{background-position:100% 50%;}}
-  .hero p.lede{max-width:640px;margin:0 auto 10px;font-size:16px;line-height:1.75;color:var(--dim);}
-  .names-cycle{font-family:'IBM Plex Mono';font-size:15px;color:var(--volt);margin-top:18px;min-height:22px;}
-  .rebrand-note{margin-top:28px;display:inline-flex;align-items:center;gap:12px;font-family:'IBM Plex Mono';font-size:12px;color:var(--dim);
-    border:1px dashed var(--line-strong);padding:11px 20px;border-radius:99px;max-width:90%;}
+  .hero p.lede{max-width:620px;margin:0 auto 8px;color:var(--dim);}
+  .names-cycle{font-family:'IBM Plex Mono';font-size:14px;color:var(--v-brass);margin-top:16px;min-height:22px;}
+  .rebrand-note{margin-top:26px;display:inline-flex;align-items:center;gap:12px;font-family:'IBM Plex Mono';font-size:12px;color:var(--dim);
+    border:1px dashed var(--v-brass-dim);padding:11px 20px;border-radius:2px;max-width:90%;}
 
-  /* touch easter-egg hint — only shown on touch devices, next to the mark */
   .touch-hint{display:none;font-family:'IBM Plex Mono';font-size:9.5px;color:var(--dim-2);letter-spacing:0.04em;margin-bottom:10px;opacity:0.7;}
   @media(hover:none) and (pointer:coarse){.touch-hint{display:block;}}
 
-  /* signal-detected transmission panel */
-  .signal-detect{margin:0 auto 30px;max-width:320px;border:1px solid rgba(90,80,150,0.35);
-    background:rgba(90,80,150,0.05);border-radius:8px;padding:18px 22px;text-align:left;}
-  .sd-line{font-size:10.5px;letter-spacing:0.1em;color:var(--deep);margin-bottom:12px;text-transform:uppercase;}
+  .signal-detect{margin:0 auto 28px;max-width:320px;border:1px solid rgba(90,80,150,0.35);
+    background:rgba(90,80,150,0.05);border-radius:3px;padding:18px 22px;text-align:left;}
+  .sd-line{font-size:10.5px;letter-spacing:0.1em;color:var(--deep);margin-bottom:12px;text-transform:uppercase;font-family:'IBM Plex Mono';}
   .sd-dots{display:inline-block;width:1.4em;animation:sdDots 1.3s steps(4) infinite;overflow:hidden;}
   @keyframes sdDots{0%{opacity:0.15;}100%{opacity:1;}}
-  .sd-row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:10.5px;color:var(--dim-2);
-    border-top:1px solid rgba(90,80,150,0.15);opacity:0;transform:translateX(-6px);
-    animation:sdRowIn .5s ease forwards;}
+  .sd-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;padding:6px 0;font-size:10.5px;color:var(--dim-2);
+    font-family:'IBM Plex Mono';border-top:1px solid rgba(90,80,150,0.15);opacity:0;transform:translateX(-6px);animation:sdRowIn .5s ease forwards;}
   .sd-row:first-child{border-top:none;}
   .sd-row .v{color:var(--paper);font-weight:600;letter-spacing:0.03em;}
-  .sd-row:nth-child(1){animation-delay:.25s;}
-  .sd-row:nth-child(2){animation-delay:.42s;}
-  .sd-row:nth-child(3){animation-delay:.59s;}
-  .sd-row:nth-child(4){animation-delay:.76s;}
+  .sd-row:nth-child(1){animation-delay:.25s;} .sd-row:nth-child(2){animation-delay:.42s;}
+  .sd-row:nth-child(3){animation-delay:.59s;} .sd-row:nth-child(4){animation-delay:.76s;}
   @keyframes sdRowIn{to{opacity:1;transform:translateX(0);}}
 
-  /* era timeline — full detail, each era gets its own subtle color identity */
-  .era-block{padding:56px 0 56px 26px;border-bottom:1px solid var(--line);
-    border-left:3px solid var(--ecolor, var(--line-strong));
-    transition:border-color .3s;position:relative;}
+  /* ============ CASE INDEX — sticky jump nav ============
+     Desktop: a slim rail under the site nav, tabs read like folder tabs.
+     Mobile: the SAME markup becomes a horizontal scrollable strip —
+     tap to jump instead of scrolling five sections by hand. This is the
+     one piece of chrome that's genuinely different by breakpoint, not
+     just resized. */
+  .case-index{position:sticky;top:calc(64px + env(safe-area-inset-top,0));z-index:40;
+    display:flex;gap:2px;background:rgba(14,10,6,0.86);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--v-brass-dim);border-top:1px solid var(--v-brass-dim);
+    padding:0 calc(20px + env(safe-area-inset-left,0));overflow-x:auto;scrollbar-width:none;}
+  .case-index::-webkit-scrollbar{display:none;}
+  .ci-tab{flex:none;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 16px;
+    font-family:'IBM Plex Mono';font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim-2);
+    border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;}
+  .ci-tab .ci-yr{font-size:8.5px;color:var(--dim-2);opacity:0.7;letter-spacing:0.03em;}
+  .ci-tab:hover{color:var(--paper);}
+  .ci-tab.on{color:var(--ci-color, var(--v-brass));border-color:var(--ci-color, var(--v-brass));}
+
+  #era-war,#era-hope,#era-new,#era-despair,#factions,#cast{scroll-margin-top:112px;}
+
+  section{padding:88px 0;}
+  .head h2{font-size:clamp(30px,4.8vw,50px);}
+
+  /* era timeline — each entry now reads like a page pulled from the file,
+     warm ink wash instead of sitting flat on the page background */
+  .era-block{padding:52px 30px 52px 30px;border-bottom:1px solid var(--v-brass-dim);
+    border-left:3px solid var(--ecolor, var(--v-brass));position:relative;
+    background:linear-gradient(100deg, rgba(0,0,0,0.22), transparent 55%);}
   .era-block::before{content:'';position:absolute;left:-4.5px;top:0;width:6px;height:6px;border-radius:50%;
     background:var(--ecolor, var(--volt));box-shadow:0 0 10px 2px var(--ecolor, var(--volt));
-    animation:sparkTravel 3.4s cubic-bezier(.4,0,.2,1) infinite;animation-play-state:paused;
-    transform:translateY(0);will-change:transform;}
+    animation:sparkTravel 3.4s cubic-bezier(.4,0,.2,1) infinite;animation-play-state:paused;will-change:transform;}
   .era-block.anim-live::before{animation-play-state:running;}
   @keyframes sparkTravel{0%{transform:translateY(0);opacity:0;}8%{opacity:1;}92%{opacity:1;}100%{transform:translateY(var(--eh,320px));opacity:0;}}
-  .era-block .yr-big{font-family:'IBM Plex Mono';font-size:13px;color:var(--ecolor, var(--volt));letter-spacing:0.06em;display:block;margin-bottom:10px;font-weight:700;}
-  .era-block h3{font-size:clamp(24px,3.6vw,34px);margin-bottom:18px;}
+  .era-block .yr-big{font-family:'IBM Plex Mono';font-size:13px;color:var(--ecolor, var(--volt));letter-spacing:0.06em;display:block;margin-bottom:8px;font-weight:700;}
+  .era-block h3{font-size:clamp(30px,4.6vw,46px);margin-bottom:18px;text-transform:uppercase;letter-spacing:0.02em;}
   .era-grid{display:grid;grid-template-columns:1fr;gap:28px;}
-  @media(min-width:860px){.era-grid{grid-template-columns:1fr 1fr;}}
-  .era-grid p{font-size:14.5px;margin-bottom:14px;}
+  @media(min-width:860px){.era-grid{grid-template-columns:1.3fr 1fr;}}
+  .era-grid p{font-size:15.5px;margin-bottom:14px;color:var(--dim);}
   .era-grid p:last-child{margin-bottom:0;}
-  .era-side{border-left:2px solid var(--ecolor, var(--line-strong));padding-left:22px;}
-  .era-side .fact{margin-bottom:16px;}
-  .era-side .fact .k{font-family:'IBM Plex Mono';font-size:10px;letter-spacing:0.06em;color:var(--ecolor, var(--dim-2));text-transform:uppercase;display:block;margin-bottom:4px;font-weight:700;}
-  .era-side .fact .v{font-size:13.5px;}
+  .era-side{border-left:2px solid var(--ecolor, var(--v-brass-dim));padding-left:20px;}
+  .era-side .fact{margin-bottom:15px;}
+  .era-side .fact .k{font-family:'IBM Plex Mono';font-size:9.5px;letter-spacing:0.06em;color:var(--ecolor, var(--dim-2));text-transform:uppercase;display:block;margin-bottom:4px;font-weight:700;}
+  .era-side .fact .v{font-size:13px;font-family:'IBM Plex Mono';color:var(--paper);}
 
-  /* despair era — sealed treatment, purple ties it to Volta Chronicles' own cosmic identity */
-  .despair{padding:76px 0;background:linear-gradient(180deg, rgba(124,107,255,0.05), transparent);border-bottom:1px solid var(--line);}
-  .despair-panel{border:1px solid rgba(124,107,255,0.28);background:rgba(124,107,255,0.04);border-radius:var(--radius);padding:36px;position:relative;overflow:hidden;}
+  /* despair era — sealed treatment */
+  .despair{padding:76px 0;background:linear-gradient(180deg, rgba(124,107,255,0.06), transparent);border-bottom:1px solid var(--v-brass-dim);}
+  .despair-panel{border:1px solid rgba(124,107,255,0.3);background:linear-gradient(165deg, rgba(124,107,255,0.06), var(--v-ink2));
+    border-radius:3px;padding:38px;position:relative;overflow:hidden;}
   .despair-panel::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-    box-shadow:0 0 46px rgba(124,107,255,0.16) inset, 0 0 30px rgba(124,107,255,0.08);
-    opacity:0;animation:despairBreathe 4.5s ease-in-out infinite;animation-play-state:paused;}
+    box-shadow:0 0 46px rgba(124,107,255,0.16) inset,0 0 30px rgba(124,107,255,0.08);opacity:0;
+    animation:despairBreathe 4.5s ease-in-out infinite;animation-play-state:paused;}
   .despair-panel.anim-live::after{animation-play-state:running;}
   @keyframes despairBreathe{0%,100%{opacity:0;}50%{opacity:1;}}
   .despair-panel::before{content:'SEALED';position:absolute;top:16px;right:-34px;transform:rotate(35deg);
     background:var(--deep);color:var(--void);font-family:'IBM Plex Mono';font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 40px;}
-  .despair-panel h3{font-size:clamp(24px,3.6vw,32px);color:var(--deep);margin-bottom:16px;}
-  .despair-panel p{font-size:14.5px;max-width:680px;}
+  .despair-panel h3{font-size:clamp(28px,4vw,40px);color:var(--deep);margin-bottom:16px;text-transform:none;}
+  .despair-panel p{font-size:15.5px;max-width:680px;color:var(--dim);}
   .despair-fade{margin-top:20px;font-family:'IBM Plex Mono';font-size:11px;color:var(--dim-2);letter-spacing:0.04em;}
 
-  /* factions */
-  .world-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  /* factions — four folders, genuinely numbered because they ARE a fixed set of four */
+  .world-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--v-brass-dim);border:1px solid var(--v-brass-dim);}
   @media(min-width:640px){.world-grid{grid-template-columns:repeat(2,1fr);}}
   @media(min-width:1020px){.world-grid{grid-template-columns:repeat(4,1fr);}}
-  .world-card{background:var(--void);padding:26px;}
-  .world-card h3{font-size:18px;margin-bottom:10px;}
-  .world-card p{font-size:13px;}
-  .world-card .bar{width:30px;height:3px;border-radius:2px;margin-bottom:16px;}
+  .world-card{background:linear-gradient(165deg,var(--v-ink1),var(--v-ink2));padding:28px 26px;}
+  .world-card .fnum{font-family:'IBM Plex Mono';font-size:10px;color:var(--dim-2);letter-spacing:0.1em;display:block;margin-bottom:14px;}
+  .world-card h3{font-size:19px;margin-bottom:10px;text-transform:uppercase;}
+  .world-card p{font-size:13.5px;color:var(--dim);}
+  .world-card .bar{width:30px;height:3px;border-radius:2px;margin-bottom:14px;}
 
-  /* cast */
-  .cast-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  /* cast — dossier now sits on brass-edged warm ink instead of flat void */
+  .dossier{background:linear-gradient(165deg,var(--v-ink1),var(--v-ink2));padding:0 0 22px;position:relative;overflow:hidden;
+    border:1px solid var(--v-brass-dim);}
+  .cast-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--v-brass-dim);border:1px solid var(--v-brass-dim);}
   @media(min-width:640px){.cast-grid{grid-template-columns:repeat(2,1fr);}}
   @media(min-width:980px){.cast-grid{grid-template-columns:repeat(4,1fr);}}
   .cast-grid > .dossier:last-child{grid-column:1 / -1;}
   .cast-grid > .dossier:last-child .portrait-wrap{height:180px;}
 
-  /* ============ MOBILE — dossiers become a side-scrolling deck instead of a
-     stacked grid. Each card snaps into view like flipping through a card file;
-     the rest of the page keeps its normal vertical scroll. ============ */
   .cast-swipe-hint{display:none;align-items:center;justify-content:center;gap:8px;
     font-family:'IBM Plex Mono';font-size:10.5px;color:var(--dim-2);letter-spacing:0.05em;margin-bottom:16px;}
   .cast-swipe-hint .arrow{display:inline-block;animation:swipeNudge 1.6s ease-in-out infinite;}
   @keyframes swipeNudge{0%,100%{transform:translateX(0);opacity:0.5;}50%{transform:translateX(6px);opacity:1;}}
   .cast-dots{display:none;justify-content:center;gap:7px;margin-top:16px;}
-  .cast-dots .dot{width:6px;height:6px;border-radius:50%;background:var(--line-strong);transition:background .25s,transform .25s;}
+  .cast-dots .dot{width:6px;height:6px;border-radius:50%;background:var(--v-brass-dim);transition:background .25s,transform .25s;}
   .cast-dots .dot.on{background:var(--deep);transform:scale(1.3);}
 
   @media(max-width:639px){
-    .cast-swipe-hint, .cast-dots{display:flex;}
-    .cast-grid{
-      display:flex;
-      grid-template-columns:unset;
-      overflow-x:auto;
-      scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch;
-      gap:14px;
-      background:none;
-      border:none;
-      padding:6px 26px 10px;
-      margin:0 -26px;
-      scrollbar-width:none;
-    }
+    .cast-swipe-hint,.cast-dots{display:flex;}
+    .cast-grid{display:flex;grid-template-columns:unset;overflow-x:auto;scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;gap:14px;background:none;border:none;padding:6px 26px 10px;margin:0 -26px;scrollbar-width:none;}
     .cast-grid::-webkit-scrollbar{display:none;}
-    .cast-grid > .dossier{
-      flex:0 0 78vw;
-      scroll-snap-align:center;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:var(--panel);
-    }
+    .cast-grid > .dossier{flex:0 0 78vw;scroll-snap-align:center;border-radius:3px;}
     .cast-grid > .dossier:last-child{grid-column:unset;flex:0 0 78vw;}
     .cast-grid > .dossier:last-child .portrait-wrap{height:250px;}
   }
 
-  /* ============ EASTER EGG — "The Artist" case file, unlocked by tapping
-     the classified dossier 3+3 times ============ */
   #classifiedDossier{transition:transform .15s ease;}
   #classifiedDossier:active{transform:scale(0.97);}
-  .artist-reveal{max-height:0;opacity:0;overflow:hidden;transition:max-height .7s ease, opacity .5s ease;}
-  .artist-reveal.show{max-height:5000px;opacity:1;margin-top:26px;}
-  .artist-card{border:1px solid rgba(255,51,72,0.35);background:rgba(255,51,72,0.035);border-radius:var(--radius);
-    padding:32px;position:relative;overflow:hidden;}
-  .artist-card::before{content:'UNSEALED';position:absolute;top:16px;right:-34px;transform:rotate(35deg);
-    background:var(--hot);color:var(--void);font-family:'IBM Plex Mono';font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 40px;}
-  .artist-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin-bottom:6px;}
-  .artist-head h3{font-size:clamp(26px,4.4vw,40px);color:var(--hot);}
-  .artist-alias{font-family:'IBM Plex Mono';font-size:11px;color:var(--dim-2);}
-  .artist-meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 26px;}
-  .artist-meta span{font-family:'IBM Plex Mono';font-size:10px;padding:5px 11px;border:1px solid var(--line-strong);border-radius:99px;color:var(--dim);}
-  .artist-section{margin-bottom:22px;}
-  .artist-section:last-child{margin-bottom:0;}
-  .artist-section h4{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--hot);margin-bottom:10px;font-weight:700;}
-  .artist-section p{font-size:13.5px;margin-bottom:8px;}
-  .artist-section p:last-child{margin-bottom:0;}
-  .dossier{background:var(--void);padding:0 0 22px;position:relative;overflow:hidden;}
-  .dossier-placeholder{border:1px dashed rgba(255,51,72,0.4);}
+  .artist-reveal{max-height:0;opacity:0;overflow:hidden;transition:max-height .8s ease, opacity .5s ease;}
+  .artist-reveal.show{max-height:900px;opacity:1;margin-top:30px;}
+  /* the unsealed file — same dossier card shape as everyone else, just
+     lit up in hot red to mark it as the one you had to earn */
+  .artist-final{border:1px solid rgba(255,51,72,0.5);box-shadow:0 0 32px rgba(255,51,72,0.12);}
+  .artist-final h3{color:var(--hot);}
+
+  .dossier-placeholder{border:1px dashed rgba(255,51,72,0.45);}
   .dossier-placeholder .portrait-wrap img{filter:grayscale(0.3) brightness(0.85);}
   .dossier-placeholder h3{color:var(--dim);}
   .dossier .portrait-wrap{position:relative;width:100%;height:250px;overflow:hidden;background:var(--panel);}
   .dossier .portrait-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
     filter:saturate(1.05);transition:transform .4s ease;}
   .dossier:hover .portrait-wrap img{transform:scale(1.05);}
-  .dossier .portrait-wrap::after{content:'';position:absolute;inset:0;
-    background:linear-gradient(to bottom, transparent 35%, var(--void) 94%);}
+  .dossier .portrait-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom, transparent 35%, var(--v-ink2) 96%);}
   .dossier .body{padding:16px 22px 0;}
   .dossier .stamp{position:absolute;top:14px;right:-30px;transform:rotate(35deg);background:var(--deep);color:var(--void);
     font-family:'IBM Plex Mono';font-size:9px;letter-spacing:0.08em;padding:3px 34px;font-weight:700;z-index:3;}
-  .dossier h3{font-size:16.5px;margin-bottom:4px;}
+  .dossier h3{font-size:17px;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.01em;}
   .dossier .alias{font-family:'IBM Plex Mono';font-size:10px;color:var(--dim-2);margin-bottom:10px;}
-  .dossier p{font-size:12.5px;margin:0 0 10px;}
+  .dossier p{font-size:13px;margin:0 0 10px;color:var(--dim);}
   .redacted{background:var(--paper);color:var(--paper);border-radius:3px;padding:0 4px;user-select:none;cursor:not-allowed;}
-  .dossier .hook{font-family:'IBM Plex Mono';font-size:10.5px;color:var(--hot);border-top:1px dashed var(--line);padding-top:10px;margin-top:10px;}
+  .dossier .hook{font-family:'IBM Plex Mono';font-size:10.5px;color:var(--hot);border-top:1px dashed var(--v-brass-dim);padding-top:10px;margin-top:10px;}
 
   .format-list{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px;}
-  .format-list span{font-family:'IBM Plex Mono';font-size:12px;padding:9px 16px;border:1px solid var(--line-strong);border-radius:99px;}
+  .format-list span{font-family:'IBM Plex Mono';font-size:12px;padding:9px 16px;border:1px solid var(--v-brass-dim);border-radius:99px;}
 </style>
 </head>
 <body data-theme="universe">
@@ -273,7 +276,7 @@
 <div class="u-aurora"></div>
 <div class="u-circuit" aria-hidden="true">
   <svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
-    <g stroke="rgba(90,80,150,0.28)" stroke-width="1" fill="none">
+    <g stroke="rgba(185,139,70,0.22)" stroke-width="1" fill="none">
       <path d="M0 60 H120 V160 H260 V40 H400"/>
       <path d="M0 260 H80 V340 H220 V420 H400"/>
       <path d="M0 480 H160 V560 H320 V640 H400"/>
@@ -297,26 +300,35 @@
       <path d="M-20 250 C 200 220, 300 300, 460 230 S 700 260, 820 220"/>
     </svg>
   </div>
+  <div class="case-tab"><span class="tab-dot"></span>CASE FILE VC—1798 / STATUS: OPEN</div>
   <div class="signal-detect reveal in" id="signalDetect">
-    <div class="sd-line mono">SIGNAL DETECTED<span class="sd-dots">...</span></div>
+    <div class="sd-line">SIGNAL DETECTED<span class="sd-dots">...</span></div>
     <div class="sd-rows">
-      <div class="sd-row mono"><span>ORIGIN</span><span class="v">VOLTA CHRONICLES</span></div>
-      <div class="sd-row mono"><span>STATUS</span><span class="v" style="color:var(--charge);">CONNECTED</span></div>
-      <div class="sd-row mono"><span>TIMELINE</span><span class="v" style="color:var(--charge);">ACTIVE</span></div>
-      <div class="sd-row mono"><span>ACCESS</span><span class="v" style="color:var(--charge);">AUTHORIZED</span></div>
+      <div class="sd-row"><span>ORIGIN</span><span class="v">VOLTA CHRONICLES</span></div>
+      <div class="sd-row"><span>STATUS</span><span class="v" style="color:var(--charge);">CONNECTED</span></div>
+      <div class="sd-row"><span>TIMELINE</span><span class="v" style="color:var(--charge);">ACTIVE</span></div>
+      <div class="sd-row"><span>ACCESS</span><span class="v" style="color:var(--charge);">AUTHORIZED</span></div>
     </div>
   </div>
   <div class="mark-wrap reveal in" id="voltaMark" role="button" aria-label="Hold for a surprise" tabindex="0">
     <img class="mark" src="assets/chronicles-mark.png" alt="Volta Chronicles mark" draggable="false">
   </div>
   <span class="touch-hint mono">⚡ hold the mark</span>
-  <div class="eyebrow reveal in">Original IP · Two centuries of history</div>
   <h1 class="reveal in">Volta Chronicles</h1>
   <p class="lede reveal in">SDT's connected superhero universe. A world rebuilt from the ashes of a tragedy nobody meant to cause — and quietly, slowly, becoming something its founders might not recognize.</p>
-  <p class="lede reveal in" style="font-size:14px;opacity:0.65;">In this world, superhumans are called <strong>supes</strong> — public, branded, impossible to ignore.</p>
+  <p class="lede reveal in" style="font-size:14.5px;opacity:0.65;">In this world, superhumans are called <strong>supes</strong> — public, branded, impossible to ignore.</p>
   <div class="names-cycle mono" id="namesCycle"></div>
   <div class="rebrand-note reveal in"><img src="assets/accord-mark.png" alt="Volta Accord seal" style="width:26px;height:26px;flex:none;">It used to be called Chronicles. It rebranded for public view as <strong>&nbsp;The Volta Accord.</strong></div>
 </header>
+
+<nav class="case-index mono" id="caseIndex" aria-label="Jump to a section of the file">
+  <a href="#era-war" class="ci-tab" style="--ci-color:var(--hot);">War Era<span class="ci-yr">1798–1907</span></a>
+  <a href="#era-hope" class="ci-tab" style="--ci-color:var(--charge);">Hope Era<span class="ci-yr">1907–1972</span></a>
+  <a href="#era-new" class="ci-tab" style="--ci-color:var(--cool);">New Era<span class="ci-yr">1973–2006</span></a>
+  <a href="#era-despair" class="ci-tab" style="--ci-color:var(--deep);">Despair Era<span class="ci-yr">2006—present</span></a>
+  <a href="#factions" class="ci-tab" style="--ci-color:var(--volt);">Factions<span class="ci-yr">four sides</span></a>
+  <a href="#cast" class="ci-tab" style="--ci-color:var(--v-brass);">Cast<span class="ci-yr">partial file</span></a>
+</nav>
 
 <section style="padding-bottom:0;">
   <div class="wrap">
@@ -330,7 +342,7 @@
 </section>
 
 <!-- WAR ERA -->
-<div class="wrap"><div class="era-block reveal" style="--ecolor:var(--hot);">
+<div class="wrap"><div class="era-block case-grain reveal" id="era-war" style="--ecolor:var(--hot);">
   <span class="yr-big mono">1798 – 1907</span>
   <h3>The War Era</h3>
   <div class="era-grid">
@@ -350,7 +362,7 @@
 </div></div>
 
 <!-- HOPE ERA -->
-<div class="wrap"><div class="era-block reveal" style="--ecolor:var(--charge);">
+<div class="wrap"><div class="era-block case-grain reveal" id="era-hope" style="--ecolor:var(--charge);">
   <span class="yr-big mono">1907 – 1972</span>
   <h3>The Hope Era</h3>
   <div class="era-grid">
@@ -370,7 +382,7 @@
 </div></div>
 
 <!-- NEW ERA -->
-<div class="wrap"><div class="era-block reveal" style="--ecolor:var(--cool);">
+<div class="wrap"><div class="era-block case-grain reveal" id="era-new" style="--ecolor:var(--cool);">
   <span class="yr-big mono">1973 – 2006</span>
   <h3>The New Era</h3>
   <div class="era-grid">
@@ -390,9 +402,9 @@
 </div></div>
 
 <!-- DESPAIR ERA — SEALED -->
-<section class="despair">
+<section class="despair" id="era-despair">
   <div class="wrap">
-    <div class="despair-panel reveal">
+    <div class="despair-panel case-grain reveal">
       <span class="freq-num" style="color:var(--deep);">2006 — PRESENT</span>
       <h3>The Despair Era.</h3>
       <p>Tamara becomes <strong>Golden Star</strong>. On the surface, the modern world looks peaceful. Underneath, every major institution is fractured — and this is the era almost everything SDT is currently making is set inside.</p>
@@ -402,7 +414,7 @@
   </div>
 </section>
 
-<section>
+<section id="factions">
   <div class="wrap">
     <div class="head reveal">
       <span class="freq-num" style="color:var(--volt);">THE FACTIONS</span>
@@ -410,15 +422,15 @@
       <p class="lede">No heroes, no villains — just power, and what it costs whoever's holding it.</p>
     </div>
     <div class="world-grid">
-      <div class="world-card reveal"><div class="bar" style="background:var(--volt);"></div><h3><img src="assets/accord-mark.png" alt="" style="width:18px;height:18px;display:inline-block;vertical-align:-3px;margin-right:6px;opacity:0.9;">The Volta Accord</h3><p>Once just called Chronicles — rebranded for public view. Controls much of the world's technology and hero infrastructure now. Impossible to opt out of.</p></div>
-      <div class="world-card reveal"><div class="bar" style="background:#c9c9d8;"></div><h3>The GDA</h3><p>The Global Defense Agency. Founded to regulate superhumans. Once respected. Increasingly, quietly, something else.</p></div>
-      <div class="world-card reveal"><div class="bar" style="background:var(--cool);"></div><h3>D.Dogs</h3><p>Founded by a GDA commander who walked away from the politics. One of the few organizations ordinary people still trust.</p></div>
-      <div class="world-card reveal"><div class="bar" style="background:var(--hot);"></div><h3>AFP</h3><p>The anti-superhuman movement. Rose in response to everything above. If power like this can't be trusted with anyone, why let anyone keep it?</p></div>
+      <div class="world-card case-grain reveal"><span class="fnum">FOLDER 01 / 04</span><div class="bar" style="background:var(--volt);"></div><h3><img src="assets/accord-mark.png" alt="" style="width:16px;height:16px;display:inline-block;vertical-align:-2px;margin-right:6px;opacity:0.9;">The Volta Accord</h3><p>Once just called Chronicles — rebranded for public view. Controls much of the world's technology and hero infrastructure now. Impossible to opt out of.</p></div>
+      <div class="world-card case-grain reveal"><span class="fnum">FOLDER 02 / 04</span><div class="bar" style="background:#c9c9d8;"></div><h3>The GDA</h3><p>The Global Defense Agency. Founded to regulate superhumans. Once respected. Increasingly, quietly, something else.</p></div>
+      <div class="world-card case-grain reveal"><span class="fnum">FOLDER 03 / 04</span><div class="bar" style="background:var(--cool);"></div><h3>D.Dogs</h3><p>Founded by a GDA commander who walked away from the politics. One of the few organizations ordinary people still trust.</p></div>
+      <div class="world-card case-grain reveal"><span class="fnum">FOLDER 04 / 04</span><div class="bar" style="background:var(--hot);"></div><h3>AFP</h3><p>The anti-superhuman movement. Rose in response to everything above. If power like this can't be trusted with anyone, why let anyone keep it?</p></div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="cast">
   <div class="wrap">
     <div class="head reveal">
       <span class="freq-num" style="color:var(--hot);">CLASSIFIED · PARTIAL FILE</span>
@@ -428,7 +440,7 @@
     <div class="cast-swipe-hint mono"><span class="arrow">←</span> swipe through the dossiers <span class="arrow">→</span></div>
     <div class="cast-grid" id="castGrid">
       <div class="dossier reveal">
-        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Golden Star" loading="lazy"></div>
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Golden Star — Volta Chronicles" loading="lazy"></div>
         <span class="stamp">ASSET</span>
         <div class="body">
           <h3>Golden Star</h3>
@@ -438,7 +450,7 @@
         </div>
       </div>
       <div class="dossier reveal">
-        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Richard Volta" loading="lazy"></div>
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Richard Volta — Volta Chronicles" loading="lazy"></div>
         <span class="stamp">HANDLER</span>
         <div class="body">
           <h3>Richard Volta</h3>
@@ -448,7 +460,7 @@
         </div>
       </div>
       <div class="dossier reveal">
-        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Madam Volta" loading="lazy"></div>
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Madam Volta — Volta Chronicles" loading="lazy"></div>
         <span class="stamp">???</span>
         <div class="body">
           <h3>Madam Volta</h3>
@@ -458,7 +470,7 @@
         </div>
       </div>
       <div class="dossier reveal">
-        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Ange" loading="lazy"></div>
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Ange — Volta Chronicles" loading="lazy"></div>
         <span class="stamp">OUTSIDER</span>
         <div class="body">
           <h3>Ange</h3>
@@ -468,7 +480,7 @@
         </div>
       </div>
       <div class="dossier reveal">
-        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Tiger Striker" loading="lazy"></div>
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Tiger Striker — Volta Chronicles" loading="lazy"></div>
         <span class="stamp">SHOWCASE</span>
         <div class="body">
           <h3>Tiger Striker</h3>
@@ -478,7 +490,7 @@
         </div>
       </div>
       <div class="dossier reveal">
-        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Boss" loading="lazy"></div>
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Boss — Volta Chronicles" loading="lazy"></div>
         <span class="stamp">FOUNDER</span>
         <div class="body">
           <h3>Boss</h3>
@@ -488,7 +500,7 @@
         </div>
       </div>
       <div class="dossier reveal">
-        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Vera" loading="lazy"></div>
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="Vera — Volta Chronicles" loading="lazy"></div>
         <span class="stamp">LEGACY</span>
         <div class="body">
           <h3>Vera</h3>
@@ -498,7 +510,7 @@
         </div>
       </div>
       <div class="dossier reveal">
-        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="D.M.W." loading="lazy"></div>
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="D.M.W. — Volta Chronicles" loading="lazy"></div>
         <span class="stamp">ANCIENT</span>
         <div class="body">
           <h3>D.M.W.</h3>
@@ -521,64 +533,14 @@
     <div class="cast-dots" id="castDots"></div>
 
     <div class="artist-reveal" id="artistReveal">
-      <div class="artist-card">
-        <div class="artist-head">
+      <div class="dossier case-grain artist-final" style="max-width:340px;margin:0 auto;">
+        <div class="portrait-wrap"><img src="assets/placeholders/character-placeholder.jpg" alt="The Artist — Volta Chronicles"></div>
+        <span class="stamp" style="background:var(--hot);">UNSEALED</span>
+        <div class="body">
           <h3>The Artist</h3>
-          <span class="artist-alias">Real name: Unknown</span>
-        </div>
-        <div class="artist-meta mono">
-          <span>ALIASES: The Artist</span>
-          <span>AFFILIATION: None</span>
-          <span>ALIGNMENT: Chaotic Evil</span>
-          <span>STATUS: Active</span>
-        </div>
-
-        <div class="artist-section">
-          <h4>Overview</h4>
-          <p>The Artist is one of the most feared serial killers in modern history. He has no political beliefs. He has no interest in changing the world. He has no loyalty to AFP. He simply enjoys hunting superhumans.</p>
-          <p>To him, every powerful opponent is a blank canvas. Every fight is a performance. Every kill is a work of art.</p>
-        </div>
-
-        <div class="artist-section">
-          <h4>Connection to AFP</h4>
-          <p>The Artist never founded AFP. He never joined AFP. He never attended a meeting. But AFP supporters began idolizing him — videos of his attacks spread across underground networks, and ordinary people saw a single powerless human defeating superhumans. He unintentionally became the symbol of resistance. AFP eventually adopted his image and philosophy without his permission. He couldn't care less.</p>
-        </div>
-
-        <div class="artist-section">
-          <h4>Personality</h4>
-          <p>The Artist never speaks. Not because he can't — because he doesn't think anyone deserves to hear his voice. He laughs silently. Tilts his head. Claps after a good fight. Leaves paintings made from blood.</p>
-          <p>He enjoys making powerful people feel helpless. If someone is weaker than him, he usually ignores them. If someone is stronger, he becomes excited.</p>
-        </div>
-
-        <div class="artist-section">
-          <h4>Appearance</h4>
-          <p>Bright, colorful bomber jacket. Blue jeans. Sneakers. A plastic shopping bag over his head with one eye hole cut into it — never removed in public. His childish appearance makes him even more unsettling.</p>
-        </div>
-
-        <div class="artist-section">
-          <h4>Weapons</h4>
-          <p><strong>Blue Crowbar</strong> — his signature weapon, covered in blue paint instead of blood. Every scratch tells a story.</p>
-          <p><strong>Compact Handgun</strong> — used only when necessary. He considers guns "boring" and prefers getting close enough to hear fear.</p>
-        </div>
-
-        <div class="artist-section">
-          <h4>Fighting Style</h4>
-          <p>No armor. No powers. No enhancements. Just incredible reflexes, creativity, and unpredictability. He fights like someone improvising a painting — every movement looks chaotic, and every movement has purpose.</p>
-        </div>
-
-        <div class="artist-section">
-          <h4>Philosophy</h4>
-          <p>He doesn't hate superhumans. He loves hunting them. The stronger they are, the more beautiful the hunt becomes. Winning is satisfying. Losing would be exciting too.</p>
-        </div>
-
-        <div class="artist-section">
-          <h4>Relationship with AFP</h4>
-          <p>AFP members call him "The First Hunter," "The People's Hero," "The Symbol." He hates every title. If someone follows him, he walks away. If they keep following, he might kill them too.</p>
-        </div>
-
-        <div class="artist-section">
-          <h4>Reputation</h4>
-          <p>Even Volta agents become nervous when his symbol appears — not because he's the strongest person alive, but because he cannot be predicted. He has no demands, no hostage situations, no negotiations, no speeches. Only violence.</p>
+          <div class="alias">Real name: Unknown · AFP's unclaimed symbol</div>
+          <p>No politics, no loyalty, no interest in the world he's tearing through — he just enjoys hunting superhumans. Never speaks. Never removes the plastic bag over his head. Fights with a blue-painted crowbar and treats every kill like a performance.</p>
+          <div class="hook">FILE STATUS: <span class="redacted">no demands, no warnings — only violence</span></div>
         </div>
       </div>
     </div>
@@ -607,15 +569,10 @@
 
 <script src="js/shared.js"></script>
 <script>
-  /* ============ PERF — only animate what's on screen ============
-     era-block spark and the despair-panel glow both used to run
-     continuously even scrolled far out of view. Now they're paused by
-     default and an IntersectionObserver flips them on only while visible. */
+  /* ============ PERF — only animate what's on screen ============ */
   (function(){
     const eraBlocks = document.querySelectorAll('.era-block');
-    function setHeights(){
-      eraBlocks.forEach(el => el.style.setProperty('--eh', el.offsetHeight + 'px'));
-    }
+    function setHeights(){ eraBlocks.forEach(el => el.style.setProperty('--eh', el.offsetHeight + 'px')); }
     setHeights();
     window.addEventListener('resize', setHeights, { passive:true });
 
@@ -628,6 +585,32 @@
     } else {
       animTargets.forEach(t => t.classList.add('anim-live'));
     }
+  })();
+
+  /* ============ CASE INDEX — highlight the tab for whatever's on screen ============
+     Same markup on phone and desktop; CSS alone turns it into a horizontal
+     strip on small screens. This just keeps the "current file" tab lit. */
+  (function(){
+    const tabs = Array.from(document.querySelectorAll('#caseIndex .ci-tab'));
+    if(!tabs.length) return;
+    const map = new Map(tabs.map(t => [t.getAttribute('href').slice(1), t]));
+    const targets = Array.from(map.keys()).map(id => document.getElementById(id)).filter(Boolean);
+    if(!('IntersectionObserver' in window) || !targets.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if(en.isIntersecting){
+          tabs.forEach(t => t.classList.remove('on'));
+          const tab = map.get(en.target.id);
+          if(tab){
+            tab.classList.add('on');
+            const strip = document.getElementById('caseIndex');
+            const left = tab.offsetLeft - strip.clientWidth/2 + tab.clientWidth/2;
+            strip.scrollTo({ left, behavior:'smooth' });
+          }
+        }
+      });
+    }, { threshold: 0.35, rootMargin:'-110px 0px -50% 0px' });
+    targets.forEach(t => io.observe(t));
   })();
 
   const names = ['Flying Queen', '→ Sister Justice', '→ Lady Liberty', '→ Golden Star', "\"I don't get a vote.\""];
@@ -660,16 +643,12 @@
     }, { passive:true });
   })();
 
-  /* ============ TOUCH EASTER EGG — hold the Chronicles mark ============
-     Konami code and the "type volta" trick both need a keyboard, so they're
-     invisible to anyone on a phone. This is the touch-native equivalent:
-     press and hold the hero mark for ~900ms to trip the voltage glitch. */
+  /* ============ TOUCH EASTER EGG — hold the Chronicles mark ============ */
   (function(){
     const mark = document.getElementById('voltaMark');
     if(!mark) return;
     let pressTimer = null, holding = false;
     const HOLD_MS = 900;
-
     function startHold(e){
       if(holding) return;
       if(e.cancelable) e.preventDefault();
@@ -709,7 +688,6 @@
     mark.addEventListener('touchcancel', cancelHold);
     mark.addEventListener('touchmove', cancelHold);
     mark.addEventListener('contextmenu', (e) => e.preventDefault());
-    // also works with a mouse press-and-hold, for desktop parity
     mark.addEventListener('mousedown', startHold);
     mark.addEventListener('mouseup', cancelHold);
     mark.addEventListener('mouseleave', cancelHold);
@@ -720,7 +698,6 @@
     const card = document.getElementById('classifiedDossier');
     const panel = document.getElementById('artistReveal');
     if(!card || !panel) return;
-
     function toast(text){
       const t = document.createElement('div');
       t.className = 'egg-toast mono';
@@ -730,14 +707,12 @@
       setTimeout(() => t.classList.remove('show'), 1900);
       setTimeout(() => t.remove(), 2400);
     }
-
-    let taps = 0, phase = 0, timer; // phase 0: waiting for first 3, 1: waiting for confirm, 2: revealed
+    let taps = 0, phase = 0, timer;
     card.addEventListener('click', () => {
       if(phase === 2) return;
       taps++;
       clearTimeout(timer);
       timer = setTimeout(() => { taps = 0; }, 2000);
-
       if(phase === 0 && taps === 3){
         taps = 0; phase = 1;
         if(window.SFX) SFX.blip();
