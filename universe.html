@@ -119,6 +119,23 @@
   .touch-hint{display:none;font-family:'IBM Plex Mono';font-size:9.5px;color:var(--dim-2);letter-spacing:0.04em;margin-bottom:10px;opacity:0.7;}
   @media(hover:none) and (pointer:coarse){.touch-hint{display:block;}}
 
+  /* signal-detected transmission panel */
+  .signal-detect{margin:0 auto 30px;max-width:320px;border:1px solid rgba(90,80,150,0.35);
+    background:rgba(90,80,150,0.05);border-radius:8px;padding:18px 22px;text-align:left;}
+  .sd-line{font-size:10.5px;letter-spacing:0.1em;color:var(--deep);margin-bottom:12px;text-transform:uppercase;}
+  .sd-dots{display:inline-block;width:1.4em;animation:sdDots 1.3s steps(4) infinite;overflow:hidden;}
+  @keyframes sdDots{0%{opacity:0.15;}100%{opacity:1;}}
+  .sd-row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:10.5px;color:var(--dim-2);
+    border-top:1px solid rgba(90,80,150,0.15);opacity:0;transform:translateX(-6px);
+    animation:sdRowIn .5s ease forwards;}
+  .sd-row:first-child{border-top:none;}
+  .sd-row .v{color:var(--paper);font-weight:600;letter-spacing:0.03em;}
+  .sd-row:nth-child(1){animation-delay:.25s;}
+  .sd-row:nth-child(2){animation-delay:.42s;}
+  .sd-row:nth-child(3){animation-delay:.59s;}
+  .sd-row:nth-child(4){animation-delay:.76s;}
+  @keyframes sdRowIn{to{opacity:1;transform:translateX(0);}}
+
   /* era timeline — full detail, each era gets its own subtle color identity */
   .era-block{padding:56px 0 56px 26px;border-bottom:1px solid var(--line);
     border-left:3px solid var(--ecolor, var(--line-strong));
@@ -279,6 +296,15 @@
       <path d="M-20 120 C 180 180, 260 60, 420 140 S 660 200, 820 100"/>
       <path d="M-20 250 C 200 220, 300 300, 460 230 S 700 260, 820 220"/>
     </svg>
+  </div>
+  <div class="signal-detect reveal in" id="signalDetect">
+    <div class="sd-line mono">SIGNAL DETECTED<span class="sd-dots">...</span></div>
+    <div class="sd-rows">
+      <div class="sd-row mono"><span>ORIGIN</span><span class="v">VOLTA CHRONICLES</span></div>
+      <div class="sd-row mono"><span>STATUS</span><span class="v" style="color:var(--charge);">CONNECTED</span></div>
+      <div class="sd-row mono"><span>TIMELINE</span><span class="v" style="color:var(--charge);">ACTIVE</span></div>
+      <div class="sd-row mono"><span>ACCESS</span><span class="v" style="color:var(--charge);">AUTHORIZED</span></div>
+    </div>
   </div>
   <div class="mark-wrap reveal in" id="voltaMark" role="button" aria-label="Hold for a surprise" tabindex="0">
     <img class="mark" src="assets/chronicles-mark.png" alt="Volta Chronicles mark" draggable="false">

@@ -294,6 +294,143 @@ function initSoundToggle(){
   });
 }
 
+/* ============ TERMINAL MODE — press ~ to open, works on every page ============ */
+function initTerminal(){
+  const host = document.createElement('div');
+  host.id = 'sdtTerminal';
+  host.innerHTML = `
+    <div class="term-window" role="dialog" aria-label="SDT Terminal">
+      <div class="term-titlebar">
+        <span class="term-dot" style="background:var(--hot);"></span>
+        <span class="term-dot" style="background:var(--volt);"></span>
+        <span class="term-dot" style="background:var(--charge);"></span>
+        <span class="term-title-txt">SDT TERMINAL — ~ or Esc to close</span>
+        <span class="term-close" id="termClose">✕</span>
+      </div>
+      <div class="term-body" id="termBody"></div>
+      <div class="term-inputrow">
+        <span class="term-prompt">❯</span>
+        <input class="term-input" id="termInput" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command input">
+      </div>
+    </div>`;
+  document.body.appendChild(host);
+  const body = host.querySelector('#termBody');
+  const input = host.querySelector('#termInput');
+
+  function printLine(text, cls){
+    const div = document.createElement('div');
+    div.className = 'term-line' + (cls ? ' ' + cls : '');
+    div.textContent = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+  function printBlock(lines, cls){ lines.forEach(l => printLine(l, cls)); }
+
+  const commands = {
+    help(){
+      printBlock([
+        'available commands:', '',
+        '  broadcast   — current signal status',
+        '  divisions   — every division & its frequency',
+        '  universe    — Volta Chronicles connection status',
+        '  projects    — what\'s actually live right now',
+        '  credits     — who built this',
+        '  clear       — clear the screen',
+        '  exit        — close the terminal',
+      ], 'dim');
+    },
+    broadcast(){
+      printBlock([
+        'BROADCAST STATUS   LIVE',
+        'SIGNAL STRENGTH    100%',
+        'ORIGIN             COIMBATORE, INDIA',
+        'TRANSMISSION       ACTIVE',
+      ]);
+    },
+    divisions(){
+      printBlock([
+        '90.1 FM   SDG    Gaming',
+        '91.6 FM   ----   SDT HQ (you are here)',
+        '92.3 FM   SDAI   Intelligence',
+        '93.7 FM   SDS    Software',
+        '94.8 FM   SDPD   Product Dev',
+        '95.2 FM   SDN    Networks',
+        '96.4 FM   SDSM   Studios & Media',
+        '97.1 FM   SDE    Entertainment',
+        '98.5 FM   SDRD   Research & Dev',
+        '97.8 FM   SD??   [ SIGNAL WEAK ]',
+      ]);
+    },
+    universe(){
+      printBlock([
+        'SIGNAL DETECTED...', '',
+        'ORIGIN      VOLTA CHRONICLES',
+        'STATUS      CONNECTED',
+        'TIMELINE    ACTIVE',
+        'ACCESS      AUTHORIZED',
+      ]);
+    },
+    projects(){
+      printBlock([
+        'THROWN            active     SDG',
+        'For the Volta     active     SDG',
+        'Golden Star       early dev  SDG',
+        'SDT Game OS       active     SDS',
+        'VibeMesh          active     SDN',
+        '(full list: onair.html)',
+      ], 'dim');
+    },
+    credits(){
+      printBlock([
+        'Super Duper Techno — founder-led, independent, since 2016.',
+        'Say hi: superdupertechno@gmail.com',
+        '— Hardhip',
+      ], 'dim');
+    },
+    clear(){ body.innerHTML = ''; },
+    exit(){ closeTerm(); },
+  };
+
+  function runCommand(raw){
+    const cmd = raw.trim().toLowerCase();
+    if(!cmd) return;
+    printLine(raw, 'cmd');
+    if(commands[cmd]){ commands[cmd](); }
+    else { printLine(`command not found: "${cmd}" — type 'help'`, 'err'); }
+  }
+
+  input.addEventListener('keydown', (e) => {
+    e.stopPropagation();
+    if(e.key === 'Enter'){ runCommand(input.value); input.value = ''; }
+    if(e.key === 'Escape'){ closeTerm(); }
+  });
+
+  function openTerm(){
+    host.classList.add('open');
+    if(!body.children.length){
+      printBlock(['SDT TERMINAL', "type 'help' to see available commands", ''], 'dim');
+    }
+    SFX.click();
+    setTimeout(() => input.focus(), 30);
+  }
+  function closeTerm(){ host.classList.remove('open'); }
+  function toggleTerm(){ host.classList.contains('open') ? closeTerm() : openTerm(); }
+
+  window.addEventListener('keydown', (e) => {
+    if(e.key === '`' || e.key === '~'){
+      const active = document.activeElement;
+      const tag = active ? active.tagName : '';
+      if((tag === 'INPUT' || tag === 'TEXTAREA') && active !== input) return;
+      e.preventDefault();
+      toggleTerm();
+    } else if(e.key === 'Escape' && host.classList.contains('open')){
+      closeTerm();
+    }
+  });
+  host.querySelector('#termClose').addEventListener('click', closeTerm);
+  host.addEventListener('click', (e) => { if(e.target === host) closeTerm(); });
+}
+
 function initSocialPops(){
   document.querySelectorAll('.social-pop-wrap').forEach(wrap => {
     const link = wrap.querySelector('a');
@@ -441,28 +578,28 @@ function initSecretDivision(){
    allocation — that was the main source of lag in the previous version. */
 const BG_THEMES = {
   home: {
-    colors:['#eef1ee','#eef1ee','#ff3348'], count:22, shooters:false, speed:0.16,
-    blobs:['#ff3348','#2ea8ff']
+    colors:['#eef1ee','#eef1ee','#c9636f'], count:18, shooters:false, speed:0.13,
+    blobs:['#7a3a41','#2f5872']
   },
   work: {
-    colors:['#eef1ee','#eef1ee','#ffc233'], count:22, shooters:false, speed:0.14,
-    blobs:['#2ea8ff','#ffc233']
+    colors:['#eef1ee','#eef1ee','#c7a15c'], count:18, shooters:false, speed:0.12,
+    blobs:['#2f5872','#8a6c34']
   },
   universe: {
-    colors:['#eef1ee','#c4a9ff'], count:30, shooters:false, speed:0.06, twinkle:true,
-    blobs:['#7c6bff']
+    colors:['#eef1ee','#a99bd1'], count:24, shooters:false, speed:0.05, twinkle:true,
+    blobs:['#564a8f']
   },
   onair: {
-    colors:['#eef1ee','#3fe08a'], count:20, shooters:false, speed:0.12,
-    blobs:['#3fe08a']
+    colors:['#eef1ee','#4f9c78'], count:16, shooters:false, speed:0.1,
+    blobs:['#2f6b4f']
   },
   studio: {
-    colors:['#eef1ee','#ffc233'], count:20, shooters:false, speed:0.11,
-    blobs:['#ff9d5c']
+    colors:['#eef1ee','#c7a15c'], count:16, shooters:false, speed:0.1,
+    blobs:['#8a5f3f']
   },
   'division-zero': {
-    colors:['#eef1ee','#ff8a80'], count:14, shooters:false, speed:0.09, blink:true,
-    blobs:['#ff3348']
+    colors:['#eef1ee','#b5726a'], count:12, shooters:false, speed:0.08, blink:true,
+    blobs:['#7a3a41']
   },
 };
 
@@ -598,4 +735,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initKonami();
   initSecretWord();
   initSecretDivision();
+  initTerminal();
 });
