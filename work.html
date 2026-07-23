@@ -106,7 +106,13 @@
     padding:50px 0;border-bottom:1px solid var(--line);}
   .division-zero-card.show{opacity:1;transform:scale(1);pointer-events:all;}
   .dz-inner{border:1px dashed rgba(255,51,72,0.4);background:rgba(255,51,72,0.03);padding:28px;border-radius:var(--radius);}
-  .reveal-hint{text-align:center;padding:30px 0 10px;font-family:'IBM Plex Mono';font-size:11px;color:var(--dim-2);}
+  .reveal-hint{text-align:center;padding:30px 0 10px;font-family:'IBM Plex Mono';font-size:11px;color:var(--dim-2);
+    display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
+  .konami-tap{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;
+    opacity:0.4;cursor:pointer;transition:opacity .25s ease, transform .25s ease;
+    -webkit-touch-callout:none;-webkit-user-select:none;user-select:none;touch-action:manipulation;}
+  .konami-tap img{width:100%;height:100%;pointer-events:none;-webkit-user-drag:none;}
+  .konami-tap:hover, .konami-tap:active{opacity:0.95;transform:scale(1.12) rotate(-6deg);}
 </style>
 </head>
 <body data-theme="work">
@@ -434,7 +440,12 @@
     </div>
   </div>
 
-  <div class="reveal-hint mono">psst — click the SDT logo in the nav a few times.</div>
+  <div class="reveal-hint mono">
+    psst — click the SDT logo in the nav a few times.
+    <span class="konami-tap" id="konamiTap" role="button" aria-label="Press for a surprise" tabindex="0">
+      <img src="assets/sdt-gray.svg" alt="" draggable="false">
+    </span>
+  </div>
 </div>
 
 <div class="cta-band">
@@ -455,6 +466,24 @@
       btn.textContent = btn.textContent.replace(opening ? '↓' : '↑', opening ? '↑' : '↓');
     });
   });
+
+  /* ============ EASTER EGG — tap this logo to fire the Konami effect ============
+     The real Konami code needs a keyboard, so it's invisible on phones. This
+     little ghost mark does the exact same thing (triggerSignalOverride, same
+     as shared.js's initKonami) but on a single tap — works everywhere. */
+  (function(){
+    const tap = document.getElementById('konamiTap');
+    if(!tap || typeof triggerSignalOverride !== 'function') return;
+    tap.addEventListener('click', () => {
+      tap.style.transition = 'transform .4s cubic-bezier(.2,1.8,.4,1)';
+      tap.style.transform = 'rotate(360deg) scale(1.3)';
+      setTimeout(() => { tap.style.transform = ''; }, 420);
+      triggerSignalOverride();
+    });
+    tap.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); tap.click(); }
+    });
+  })();
 </script>
 </body>
 </html>
