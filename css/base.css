@@ -178,6 +178,25 @@ main{position:relative;z-index:2;}
 #mobileMenu a{padding:16px 0;border-bottom:1px solid var(--line);font-family:'IBM Plex Mono';font-size:14px;letter-spacing:0.04em;}
 #mobileMenu a .num{color:var(--dim-2);margin-right:10px;}
 
+/* ============ TUNER — MOBILE ============
+   The desktop bar packs logo+freq+Contact+sound+menu into one row — on a
+   ~375px phone that's wider than the viewport, which is why it looked
+   oversized and crowded. Mobile drops the freq label and the Contact
+   button (still one tap away in the menu), shrinks the mark and the
+   two icon buttons, and tightens the bar height so it reads like a
+   compact app header instead of the desktop bar squeezed down. */
+@media(max-width:640px){
+  .tuner{height:calc(52px + env(safe-area-inset-top,0));
+    padding:env(safe-area-inset-top,0) calc(14px + env(safe-area-inset-right,0)) 0 calc(14px + env(safe-area-inset-left,0));}
+  .tuner .call-sign{gap:8px;font-size:14px;}
+  .tuner .call-sign .mark{width:28px;height:28px;}
+  .tuner .call-sign .freq{display:none;}
+  .tuner .tuner-cta{display:none;}
+  .sound-toggle{width:34px;height:34px;margin-left:6px;}
+  .tuner-menu-btn{width:34px;height:34px;margin-left:6px;}
+  #mobileMenu{top:calc(52px + env(safe-area-inset-top,0));}
+}
+
 /* ============ WAVEFORM DIVIDER (signature element) ============ */
 .waveform-wrap{position:relative;height:64px;margin:0;overflow:hidden;}
 .waveform-wrap canvas{width:100%;height:100%;display:block;}
