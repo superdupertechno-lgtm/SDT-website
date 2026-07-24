@@ -164,6 +164,10 @@
   .ci-tab.on{color:var(--ci-color, var(--v-brass));border-color:var(--ci-color, var(--v-brass));}
 
   #era-war,#era-hope,#era-new,#era-despair,#factions,#cast{scroll-margin-top:112px;}
+  @media(max-width:640px){
+    .case-index{top:calc(52px + env(safe-area-inset-top,0));}
+    #era-war,#era-hope,#era-new,#era-despair,#factions,#cast{scroll-margin-top:96px;}
+  }
 
   section{padding:88px 0;}
   .head h2{font-size:clamp(30px,4.8vw,50px);}

@@ -35,6 +35,20 @@
     background:linear-gradient(90deg,transparent,rgba(63,224,138,0.4),transparent);
     transform:translateY(-10px);opacity:0;animation:radarSweep 7s linear infinite;pointer-events:none;will-change:transform;}
   @keyframes radarSweep{0%{transform:translateY(-10px);opacity:0;}6%{opacity:0.8;}94%{opacity:0.8;}100%{transform:translateY(94vh);opacity:0;}}
+  /* Mobile hero: the desktop version is an animated green waveform +
+     a green radar sweep — on a phone that canvas redraw runs the whole
+     time the hero is on screen for no real payoff, and the green reads
+     oddly isolated with nothing else green nearby. Mobile swaps it for
+     one static, cheap, on-brand glow (hot/volt/cool, same palette as the
+     status panel's top bar) — no canvas, no rAF loop, nothing running. */
+  @media(max-width:760px){
+    .hero-bg canvas,.radar-sweep{display:none;}
+    .hero-bg::before{content:'';position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 100% 40% at 50% 6%, rgba(255,51,72,0.20), transparent 60%),
+        radial-gradient(ellipse 85% 36% at 12% 62%, rgba(255,194,51,0.12), transparent 58%),
+        radial-gradient(ellipse 85% 36% at 90% 88%, rgba(46,168,255,0.16), transparent 58%);}
+  }
   .hero-inner{position:relative;z-index:1;}
   .hero-grid{display:grid;grid-template-columns:1fr;gap:44px;align-items:center;}
   @media(min-width:960px){.hero-grid{grid-template-columns:1.3fr 0.9fr;}}
@@ -488,10 +502,11 @@
   const cycleEl = document.getElementById('namesCycle');
   if(cycleEl) setInterval(()=>{ cycleEl.textContent = names[ni % names.length]; ni++; }, 1700);
 
-  /* ============ MOUSE-REACTIVE WAVEFORM — hero background ============ */
+  /* ============ MOUSE-REACTIVE WAVEFORM — hero background (desktop only) ============ */
   (function(){
     const canvas = document.getElementById('waveCanvas');
     if(!canvas) return;
+    if(window.matchMedia('(max-width:760px)').matches) return; // mobile uses the static CSS glow instead — no canvas, no rAF loop
     const ctx = canvas.getContext('2d');
     let W,H,dpr;
     function size(){
